@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-	<title>Home Page</title>
+	<title>Help Page</title>
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
  	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -15,30 +15,25 @@
 	<script src="jquery.mobile-1.2.0.js"></script>
 </head>
 <body>
-	
+
 <div data-role="page">
+
 	<div data-role="header">
-		<h1>Motif</h1>
-		
+		<h1>Help</h1>
+
 	</div><!-- /header -->
+
+	<script>
+		function goBack() {
+		  window.history.go(-1)
+		}
+	</script>
 	
-	<div data-role="content">
-		<p>HOMIE PAGE</p>
-	</div><!-- /content -->
-		
-	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
-		<div data-role="navbar" class="menubar" data-grid="c">
-		
-		<ul>
-			<li><a href="art.html" id="art" data-icon="custom">Art</a></li>
-			<li><a href="favorites.html" id="favorites" data-icon="custom">Favorites</a></li>
-			<li><a href="help.html" id="help" data-icon="custom">Help</a></li>
-		</ul>
-		</div><!-- /navbar -->
-	</div><!-- /footer -->
 	
+	<input type="button" value="Go back" onclick="goBack()" />
+
+
 </div><!-- /page -->
 
 </body>
-
 </html>
