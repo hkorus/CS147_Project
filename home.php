@@ -23,7 +23,7 @@
 	</div><!-- /header -->
 	
 	<div data-role="content">
-		<p>HOMIE PAGE</p>
+		<p>HOME PAGE</p>
 
 	<div data-role="footer" data-id="samebar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" data-grid="c">
