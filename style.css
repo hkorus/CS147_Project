@@ -1,0 +1,12 @@
+		.menubar .ui-btn .ui-btn-inner { padding-top: 40px !important; }
+		.menubar .ui-btn .ui-icon { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
+		
+		#refresh .ui-icon { background:  url(icons/01-refresh.png) 50% 50% no-repeat; }
+		#search .ui-icon { background: url(icons/06-magnify.png) 50% 50% no-repeat; }
+		#favorites .ui-icon { background:  url(icons/29-heart.png) 50% 50% no-repeat; }
+		#comment .ui-icon { background:  url(icons/08-chat.png) 50% 50% no-repeat; }
+		#draw .ui-icon { background:  url(icons/187-pencil.png) 50% 50% no-repeat; }
+		#art .ui-icon { background:  url(icons/98-palette.png) 50% 50% no-repeat; }
+		#help .ui-icon { background: url(icons/______.png) 50% 50% no-repeat; }
+		#logout .ui-icon { background:  url(icons/54-lock.png) 50% 50% no-repeat; }
+		
