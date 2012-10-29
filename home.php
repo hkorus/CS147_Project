@@ -13,6 +13,18 @@
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
+	
+	<script>
+    	window.fbAsyncInit = function() {
+      		FB.init({ appId: '291103611004949',
+      		status: true,
+      		cookie: true,
+      		xfbml: true,
+      		oauth: true});
+ 
+      	FB.Event.subscribe('auth.statusChange', handleStatusChange);	
+    };
+  </script>
 </head>
 <body>
 	
