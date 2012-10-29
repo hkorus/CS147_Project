@@ -24,9 +24,10 @@
 	
 	<div data-role="content">
 		<p>Favorites Page</p>
-
-	<div data-role="footer" data-id="samebar" data-position="fixed" data-tap-toggle="false">
-		<div data-role="navbar" data-grid="c">
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
+		<div data-role="navbar" class="menubar" data-grid="c">
 					<ul>
 			<li><a href="./art.php" id="art" data-icon="custom">Art</a></li>
 			<li><a href="./comments.php" id="comments" data-icon="custom">Comments</a></li>
