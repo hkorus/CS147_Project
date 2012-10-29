@@ -22,9 +22,9 @@
       		xfbml: true,
       		oauth: true});
  
-      	FB.Event.subscribe('auth.statusChange', handleStatusChange);	
-    };
-  </script>
+      		FB.Event.subscribe('auth.statusChange', handleStatusChange);	
+    	};
+  	</script>
 </head>
 <body>
 	
