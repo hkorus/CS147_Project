@@ -13,6 +13,7 @@
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
+	
 </head>
 <body>
 	
@@ -29,21 +30,13 @@
 		<div data-role="navbar" data-grid="c">
 					<ul>
 			<li><a href="./art.php" id="art" data-icon="custom">Art</a></li>
-			<li><a href="./annotate.php" id="comments" data-icon="custom">Annotate</a></li>
+			<li><a href="./annotate.php" id="draw" data-icon="custom">Annotate</a></li>
 			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
 		</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
-	
-	
-	<script>
-		function goBack(){
-	  		window.history.go(-1)
-	  	}
-	</script>
-	
-	<input type="button" value="Go back" onclick="goBack()" />
+
 </div><!-- /page -->
 </body>
 
