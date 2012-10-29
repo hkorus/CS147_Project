@@ -18,19 +18,23 @@
 <body>
 	
 <div data-role="page">
-	<div data-role="header">
-		<h1>Art</h1>
+	<div data-role="header" data-id="samebar" class="headermenu" data-position="fixed" data-tap-toggle="false">
+				
+			<h1>Art</h1>
+			<a href="./comments.php" id="comments" data-icon="custom">Comments</a>
+			<a href="./annotate.php" id="annotate" data-icon="custom">Annotate</a>
 		
 	</div><!-- /header -->
 	
 	<div data-role="content">
 		<p>Art Page</p>
+	</div><!-- /content -->
 
-	<div data-role="footer" data-id="samebar" data-position="fixed" data-tap-toggle="false">
-		<div data-role="navbar" data-grid="c">
+	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
+		<div data-role="navbar" class="menubar" data-grid="c">
 					<ul>
-			<li><a href="./annotate.php" id="draw" data-icon="custom">Annotate</a></li>
-			<li><a href="./comments.php" id="comment" data-icon="custom">Comments</a></li>
+
+			<li><a href="./art.php" id="art" data-icon="custom">Art</a></li>
 			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
 		</ul>

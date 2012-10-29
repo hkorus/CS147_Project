@@ -35,11 +35,14 @@
 	</div><!-- /header -->
 	
 	<div data-role="content">
-		<p>HOME PAGE</p>
 
-	<div data-role="footer" data-id="samebar" data-position="fixed" data-tap-toggle="false">
-		<div data-role="navbar" data-grid="c">
-					<ul>
+		<p>HOMIE PAGE</p>
+	</div><!-- /content -->
+		
+	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
+		<div data-role="navbar" class="menubar" data-grid="c">
+		
+		<ul>
 			<li><a href="./art.php" id="art" data-icon="custom">Art</a></li>
 			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
