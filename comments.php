@@ -13,6 +13,7 @@
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
+	
 </head>
 <body>
 	
@@ -40,15 +41,7 @@
 		</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
-	
-	
-	<script>
-		function goBack(){
-	  		window.history.go(-1)
-	  	}
-	</script>
-	
-	<input type="button" value="Go back" onclick="goBack()" />
+
 </div><!-- /page -->
 </body>
 

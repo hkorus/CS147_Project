@@ -39,15 +39,7 @@
 		</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
-	
-	
-	<script>
-		function goBack(){
-	  		window.history.go(-1)
-	  	}
-	</script>
-	
-	<input type="button" value="Go back" onclick="goBack()" />
+
 </div><!-- /page -->
 </body>
 

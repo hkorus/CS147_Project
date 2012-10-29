@@ -23,6 +23,7 @@
 	</div><!-- /header -->
 	
 	<div data-role="content">
+
 		<p>HOMIE PAGE</p>
 	</div><!-- /content -->
 		
