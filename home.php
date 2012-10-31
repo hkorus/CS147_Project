@@ -25,6 +25,32 @@
       		FB.Event.subscribe('auth.statusChange', handleStatusChange);	
     	};
   	</script>
+  	
+  <script>
+  	function handleStatusChange(response) {
+     document.body.className = response.authResponse ? 'connected' : 'not_connected';
+    
+     if (response.authResponse) {
+       console.log(response);
+       updateUserInfo(response);
+     }
+   	}
+   </script>
+   
+   <div id="login">
+     <p><button onClick="loginUser();">Login</button></p>
+   </div>
+   <div id="logout">
+     <div id="user-info"></div>
+     <p><button  onClick="FB.logout();">Logout</button></p>
+   </div>
+   
+  <script>
+    function loginUser() {    
+      FB.login(function(response) { }, {scope:'email'});  	
+    }
+  </script>
+  
 </head>
 <body>
 	
