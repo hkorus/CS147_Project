@@ -13,6 +13,11 @@
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
+	<script>
+    $(function() {
+        $( "#tabs" ).tabs();
+    });
+    </script>
 
 </head>
 <body>
@@ -25,6 +30,23 @@
 			<a href="./annotate.php" id="annotate" data-icon="custom">Annotate</a>
 		
 	</div><!-- /header -->
+	
+	<div id="tabs">
+    <ul>
+        <li><a href="#tabs-art">Art</a></li>
+        <li><a href="#tabs-comments">Comments</a></li>
+        <li><a href="#tabs-annotate">Annotate</a></li>
+    </ul>
+    <div id="tabs-art">
+        <p>Art page</p>
+    </div>
+    <div id="tabs-comments">
+        <p>Comments Page</p>
+    </div>
+    <div id="tabs-annotate">
+        <p>Annotation Page</p>
+    </div>
+</div>
 	
 	<div data-role="content">
 		<p>Art Page</p>
