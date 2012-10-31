@@ -3,40 +3,93 @@
 	<title>Annotation Page</title>
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
- 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 
 	<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 	<link rel="stylesheet" href="style.css" />
 	<link rel="apple-touch-icon" href="appicon.png" />
 	<link rel="apple-touch-startup-image" href="startup.png">
-	
+
+	<?php
+
+include("config.php");
+$query = "SELECT * FROM art WHERE id = '$_GET[id]'";
+$result = mysql_query($query);
+if($result!=false){
+	$row = mysql_fetch_assoc($result);
+?>
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
+	<script type="text/javascript" src="drawing_canvas.js"></script>
+	<style type="text/css" media="screen">
+    	#canvas, img { display:block; border:1px solid black;}
+
+		<?php
+		
+		$size = getimagesize($row["image_url"]);
+		$width = $size[0];
+		$height = $size[1];
+		$newWidth = (500/$height)*$width;
+
+		echo "#canvas { background:url(".$row["image_url"]."); background-size:".$newWidth."px 500px}";
+
+		?>
+  	</style>
+
 </head>
 <body>
-	
-<div data-role="page">
-	<div data-role="header" data-id="samebar" class="headermenu" data-position="fixed" data-tap-toggle="false">
-				
-			<a href="./art.php" id="art" data-icon="custom">Art</a>
-			<a href="./comments.php" id="comments" data-icon="custom">Comments</a>
-			<h1>Annotation</h1>
+
+	<div data-role="page">
+		<div data-role="header" data-id="samebar" class="headermenu" data-position="fixed" data-tap-toggle="false">
 			
-		
+		<a href="./art.php?id=<?php echo $row["id"]?>" id="art" data-icon="custom">Art</a>
+		<a href="./comments.php" id="comments" data-icon="custom">Comments</a>
+		<h1>Annotation</h1>
+
+
 	</div><!-- /header -->
-	
+
 	<div data-role="content">
-		<p>Annotation Page</p>
+		
+					<canvas id="canvas"></canvas>
+				
+				<div style = " background-color:#E0E0E0;position: fixed; right:0; top: 40px">	
+					<p><canvas id="extralarge" height = "50" width = "80" onclick = "changeSize(50)"></canvas></p>
+					<p><canvas id="large" height = "50" width = "80" onclick = "changeSize(20)"></canvas></p>
+					<p><canvas id="medium" height = "50" width = "80" onclick = "changeSize(10)"></canvas></p>
+					<p><canvas id="small" height = "50" width = "80" onclick = "changeSize(3)"></canvas></p>
+					
+					
+					
+					<input type="button" value="undo" onclick="undo()" />
+					<input type="button" value="save" onclick="save()" />
+					
+				</div>
+			
+			<?php
+		echo "<p>".$row["title"]."</p>";
+		}	
+		?>
+
+		<script type="text/javascript"> 
+		$(document).ready(function() {
+			<?php
+
+			echo "prepareCanvas('".$row["image_url"]."')";
+
+			?>
+		});
+		</script>
 	</div><!-- /content -->
 
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" class="menubar" data-grid="c">
-					<ul>
-			<li><a href="./art.php" id="art" data-icon="custom">Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
-		</ul>
+			<ul>
+				<li><a href="./art.php" id="art" data-icon="custom">Art</a></li>
+				<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
+				<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
+			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
 

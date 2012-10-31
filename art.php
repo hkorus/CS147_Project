@@ -19,15 +19,36 @@
 	
 <div data-role="page">
 	<div data-role="header" data-id="samebar" class="headermenu" data-position="fixed" data-tap-toggle="false">
+				<?php
 				
+				include("config.php");
+				$query = "SELECT * FROM art";
+				if($_GET["id"] != NULL){
+					$query = "SELECT * FROM art WHERE id = $_GET[id]";
+				}
+				$result = mysql_query($query);
+				$numRows = mysql_num_rows($result);
+				$selectedRow = rand(0, $numRows-1);
+				while ($row = mysql_fetch_assoc($result)) {
+					if($selectedRow == 0){
+						
+						?>
 			<h1>Art</h1>
 			<a href="./comments.php" id="comments" data-icon="custom">Comments</a>
-			<a href="./annotate.php" id="annotate" data-icon="custom">Annotate</a>
+			<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom">Annotate</a>
 		
 	</div><!-- /header -->
 	
 	<div data-role="content">
-		<p>Art Page</p>
+		
+			<?php
+			    	echo "<img src='".$row["image_url"]."' alt = 'Image not found' height ='500px'>";
+					echo "<p>".$row["title"]."</p>";
+			
+				}
+				$selectedRow--;
+			}
+			?>
 	</div><!-- /content -->
 
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
