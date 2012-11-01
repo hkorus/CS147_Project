@@ -13,11 +13,9 @@
 
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
-	<script>
-    $(function() {
-        $( "#tabs" ).tabs();
-    });
-    </script>
+	<script type="text/javascript" src="drawing_canvas.js"></script>
+	
+
 
 </head>
 <body>
@@ -42,21 +40,19 @@
 
 						?>
 			<h1>Motif</h1>
-		
 
 	</div><!-- /header -->
 			
 	<div data-role="content">
 
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
-			<a href="./art.php" id="art" data-icon="custom" data-role="button" data-theme="a">Art</a></li>
-			<a href="./comments.php" id="comments" data-icon="custom" data-role="button" data-theme="a">Comments</a>
-			<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a">Annotate</a>
+			<a href="./art.php" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
+			<a href="./comments.php" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
+			<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button" rel="external" data-theme="a">Annotate</a>
 		</div><!-- /controlgroup -->
 		
 			<?php
 			    	echo "<img src='".$row["image_url"]."' alt = 'Image not found' width ='99%'>";
-					echo "<p>".$row["title"]."</p>";
 
 				}
 				$selectedRow--;
@@ -89,8 +85,8 @@
 					<ul>
 
 			<li><a onclick = "refresh()" id="art" data-icon="custom">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
+			<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
 		</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->

@@ -24,10 +24,9 @@
 			<?php
 				
 				include("config.php");
-				$query = "SELECT * FROM comments";
+				$query = "SELECT * FROM comments WHERE art_id = ".$_GET['id'];
 				$result = mysql_query($query);
-				$numRows = mysql_num_rows($result); 
-						
+				
 			?>				
 				
 			<h1>Comments</h1>
@@ -38,9 +37,9 @@
 	<div data-role="content">
 		
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
-			<a href="./art.php" id="art" data-icon="custom" data-role="button" data-theme="a">Art</a></li>
-			<a href="./comments.php" id="comments" data-icon="custom" data-role="button" data-theme="a">Comments</a>
-			<a href="./annotate.php" id="annotate" data-icon="custom" data-role="button" data-theme="a">Annotate</a>
+			<a href="./art.php" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
+			<a href="./comments.php" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
+			<a href="./annotate.php" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
 		</div><!-- /controlgroup -->
 		
 		<p>
@@ -55,8 +54,11 @@
 				<tr>		
 					<td>
 						<?php
+						if(mysql_num_rows($result)>0){		
+							$numRows = mysql_num_rows($result);
 							$row = mysql_fetch_assoc($result);
 							echo $row["rating"];
+						
 						?> 
 						<a href="#" data-role="button" data-icon="arrow-u" data-mini="true">Yeah!</a>
 						<a href="#" data-role="button" data-icon="arrow-d" data-mini="true">Boo</a>
@@ -70,6 +72,7 @@
 					<td> 
 						<?php
 							echo $row["comment"];
+						}
 						?> 
 					
 					</td>
@@ -112,9 +115,9 @@
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" class="menubar">
 					<ul>
-			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
+			<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
+			<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
 		</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
