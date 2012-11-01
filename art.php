@@ -9,21 +9,17 @@
 	<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 	<link rel="stylesheet" href="style.css" />
 	<link rel="apple-touch-icon" href="appicon.png" />
-	<link rel="apple-touch-startup-image" href="startup.png">
+	<link rel="apple-touch-startup-image" href="logo.png">
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
-	<script>
-    $(function() {
-        $( "#tabs" ).tabs();
-    });
-    </script>
+
 
 </head>
 <body>
 	
 <div data-role="page">
-	<div data-role="header" data-id="samebar" class="headermenu" data-position="fixed" data-tap-toggle="false">
+	<div data-role="header">
 				<?php
 				
 				include("config.php");
