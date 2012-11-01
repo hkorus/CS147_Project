@@ -17,7 +17,7 @@
 		#comments .ui-icon { background:  url(icons/08-chat.png) 50% 50% no-repeat; }
 		#annotate .ui-icon { background:  url(icons/187-pencil.png) 50% 50% no-repeat; }
 		#art .ui-icon { background:  url(icons/98-palette.png) 50% 50% no-repeat; }
-		#help .ui-icon { background: url(icons/101-gameplan.png) 50% 50% no-repeat; }
+		#help .ui-icon { background: url(icons/84-lightbulb.png) 50% 50% no-repeat; }
 		#logout .ui-icon { background:  url(icons/54-lock.png) 50% 50% no-repeat; }
-		
-		p {font-family:"Andale Mono", Verdana, Arial, Helvetica, sans-serif;}
+
+		.rating .ui-btn { width: 100px; }
