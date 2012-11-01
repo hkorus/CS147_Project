@@ -25,7 +25,7 @@
 				
 				include("config.php");
 
-				$query = "SELECT * FROM comments WHERE art_id = ".$_GET['id']." ORDER BY rating DESC";
+				$query = "SELECT * FROM comments WHERE id = ".$_GET['id']." ORDER BY rating DESC";
 				$result = mysql_query($query);
 			?>				
 				
