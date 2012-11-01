@@ -24,7 +24,6 @@
 
 <div data-role="page">
 
-
 	<div data-role="header" data-id="samebar" class="headermenu" data-position="fixed" data-tap-toggle="false">
 				<?php
 

@@ -20,6 +20,15 @@
 <div data-role="page">
 
 	<div data-role="header">
+			
+			<?php
+				
+				include("config.php");
+				$query = "SELECT * FROM comments";
+				$result = mysql_query($query);
+				$numRows = mysql_num_rows($result); 
+						
+			?>				
 				
 			<h1>Comments</h1>
 		
@@ -34,9 +43,71 @@
 			<a href="./annotate.php" id="annotate" data-icon="custom" data-role="button" data-theme="a">Annotate</a>
 		</div><!-- /controlgroup -->
 		
-	
-		<p>Comments Page</p>
+		<p>
+			<table border="1">
+				<tr>
+					
+					<td><b>Rating</b></td>
+					<td><b>Annotation</b></td>
+					<td><b>Comment</b></td>
+				</tr>	
+				
+				<tr>		
+					<td>
+						<?php
+							$row = mysql_fetch_assoc($result);
+							echo $row["rating"];
+						?> 
+						<a href="#" data-role="button" data-icon="arrow-u" data-mini="true">Yeah!</a>
+						<a href="#" data-role="button" data-icon="arrow-d" data-mini="true">Boo</a>
+					</td>
+					<td>
+						<?php
+							echo $row["annotation"];
+						?> 
+
+					</td>
+					<td> 
+						<?php
+							echo $row["comment"];
+						?> 
+					
+					</td>
+				</tr>	
+				
+				<tr>		
+					<td>
+						
+					</td>
+					<td>
+						
+
+					</td>
+					<td> 
+											
+					</td>
+				</tr>	
+
+				<tr>		
+					<td>
+						
+					</td>
+					<td>
+						
+					</td>
+					<td> 
+											
+					</td>
+				</tr>	
+
+			</table>
+		</p>
+		
+		
+		
+		
 	</div><!-- /content -->
+	
 
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" class="menubar">

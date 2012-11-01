@@ -36,10 +36,7 @@ if($result!=false){
 		<h1>Motif</h1>
 
 	</div><!-- /header -->
-	
-	
-	
-	
+
 			<div data-role="content">
 				
 					<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
