@@ -22,16 +22,23 @@
 		<h1>Help</h1>
 
 	</div><!-- /header -->
+	
+	<div data-role="content">
+		<p><center><font face="andale mono">mo·tif /mōˈtēf/</font></center></p>
+		<p><center>Noun: A distinctive feature or dominant idea in an artistic composition.</center></p>
+		
 
-<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
-	<div data-role="navbar" class="menubar">
-		<ul>
-			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
-		</ul>
-	</div><!-- /navbar -->
-</div><!-- /footer -->
+	</div><!-- /content -->
+
+	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
+		<div data-role="navbar" class="menubar">
+			<ul>
+				<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
+				<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
+				<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /footer -->
 
 
 </div><!-- /page -->

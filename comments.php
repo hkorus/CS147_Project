@@ -24,81 +24,82 @@
 			<?php
 				
 				include("config.php");
-				$query = "SELECT * FROM comments";
+
+				$query = "SELECT * FROM comments WHERE art_id = ".$_GET['id']." ORDER BY rating DESC";
 				$result = mysql_query($query);
-				$numRows = mysql_num_rows($result); 
-						
 			?>				
 				
 			<h1>Comments</h1>
 		
 	</div><!-- /header -->
+	
+	<script type = "text/javascript">
+		function send_rating(comment, amount){
+			var request = new XMLHttpRequest();
+			request.open('POST', 'http://stanford.edu/~lcuth/cgi-bin/CS147_Project/rate_image.php', false);
+			request.setRequestHeader("Content-type", "application/upload")
+			request.send(comment+"&"+amount); // because of "false" above, will block until the request is done
+			                // and status is available. Not recommended, however it works for simple cases.
+			if (request.status === 200) {
+			  alert("Rated!")
+			}
+		}
+	</script>
 
 	
 	<div data-role="content">
 		
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
-			<a href="./art.php" id="art" data-icon="custom" data-role="button" data-theme="a">Art</a></li>
-			<a href="./comments.php" id="comments" data-icon="custom" data-role="button" data-theme="a">Comments</a>
-			<a href="./annotate.php" id="annotate" data-icon="custom" data-role="button" data-theme="a">Annotate</a>
+			<a href="./art.php?id=<?php echo $row["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
+			<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
+			<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
 		</div><!-- /controlgroup -->
 		
 		<p>
-			<table border="1">
+			<table width="99%">
 				<tr>
 					
-					<td><b>Rating</b></td>
+					<td colspan="2"><b>Rating<b></td>
 					<td><b>Annotation</b></td>
 					<td><b>Comment</b></td>
+					<td><b>Link</b></td>
+					
 				</tr>	
 				
-				<tr>		
-					<td>
-						<?php
-							$row = mysql_fetch_assoc($result);
-							echo $row["rating"];
+				<?php
+						
+						if(mysql_num_rows($result)>0){		
+							while($row = mysql_fetch_assoc($result)) {
+								echo "<tr><td>";
+								
+							       echo $row["rating"];
+						
 						?> 
-						<a href="#" data-role="button" data-icon="arrow-u" data-mini="true">Yeah!</a>
-						<a href="#" data-role="button" data-icon="arrow-d" data-mini="true">Boo</a>
+						</td><td>
+						<div data-role="controlgroup" data-type="vertical" class="rating">
+							<a href="#" data-role="button" id="vote-up" data-icon="custom" data-mini="true" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)">Yeah!</a>
+							<a href="#" data-role="button" id="vote-down" data-icon="custom" data-mini="true" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1)">Boo</a>
+						</div>	
 					</td>
 					<td>
 						<?php
-							echo $row["annotation"];
+							echo "<img src = '".$row["annotation"]."' width = '110px'>";
 						?> 
 
 					</td>
 					<td> 
 						<?php
 							echo $row["comment"];
+						
 						?> 
 					
 					</td>
+					<td>
+						<a href = "view_comment.php?id<?php echo $row["comment_id"] ?>"> View </a>
+					</td>
 				</tr>	
+				<?php } } ?>
 				
-				<tr>		
-					<td>
-						
-					</td>
-					<td>
-						
-
-					</td>
-					<td> 
-											
-					</td>
-				</tr>	
-
-				<tr>		
-					<td>
-						
-					</td>
-					<td>
-						
-					</td>
-					<td> 
-											
-					</td>
-				</tr>	
 
 			</table>
 		</p>
@@ -112,9 +113,9 @@
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" class="menubar">
 					<ul>
-			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
+			<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
+			<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
 		</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->

@@ -14,15 +14,20 @@
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-	<script src="/path/to/jquery.masonry.min.js"></script>
+	<script src="isotope/jquery.isotope.min.js"></script>
 	
-	<script>
-		$(function(){
-  			$('#container').masonry({
-    		// options
-    		itemSelector : '.image',
-    		columnWidth : 240
+	
+	<script>	
+		$( function(){
+			var $container = $('#container');
+  			
+  			$container.imagesLoaded( function(){
+    			$container.isotope({
+    				itemSelector : '.image',
+    				masonryHorizontal: {
+    					columnWidth: 240
+    				}
+    			});
   			});
 		});
 	</script>
@@ -39,19 +44,17 @@
 	<div data-role="content">
 		<p>Favorites Page</p>
 		
-		//<table>
 		<div id="container">
 		<?php
 			include("config.php");
 			$query = "SELECT * FROM art";
 			$result = mysql_query($query);
 			while ($row = mysql_fetch_assoc($result)) {
-				//echo "<td><img width='100' class='pretty' src='".$row["image_url"]."' /></td>";
-				<div class="image"><img width='100' class='pretty' src='".$row["image_url"]."'</div>
+				echo "<div class='image'><a href='./art.php' ?id='".$row['id']."'><img width='100' src='".$row['image_url']."'></a></div>";
 			} 
 			?>
-		</div><!-- /containe -->
-		//</table>
+		</div><!-- /container -->
+
 	</div><!-- /content -->
 	
 	
