@@ -36,7 +36,7 @@
 	<script type = "text/javascript">
 		function send_rating(comment, amount){
 			var request = new XMLHttpRequest();
-			request.open('POST', 'http://stanford.edu/~lcuth/cgi-bin/CS147_Project/rate_image.php', false);
+			request.open('POST', 'rate_image.php', false);
 			request.setRequestHeader("Content-type", "application/upload")
 			request.send(comment+"&"+amount); // because of "false" above, will block until the request is done
 			                // and status is available. Not recommended, however it works for simple cases.

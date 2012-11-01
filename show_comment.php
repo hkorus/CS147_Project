@@ -72,7 +72,7 @@
 	<script type = "text/javascript">
 		function refresh(){
 			var num = Math.floor(Math.random() * <?php echo $rand ?>) + 1;
-			window.location="http://stanford.edu/~lcuth/cgi-bin/CS147_Project/art.php?id="+num;
+			window.location="art.php?id="+num;
 		}
 	</script>
 	
