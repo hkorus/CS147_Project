@@ -36,14 +36,14 @@
 	
 	<div data-role="content">
 
-		<p>HOMIE PAGE</p>
+		<p>HOME PAGE</p>
 	</div><!-- /content -->
 		
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
-		<div data-role="navbar" class="menubar" data-grid="c">
+		<div data-role="navbar" class="menubar">
 		
 		<ul>
-			<li><a href="./art.php" id="art" data-icon="custom">Art</a></li>
+			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
 			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
 		</ul>
