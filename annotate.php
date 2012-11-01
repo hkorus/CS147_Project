@@ -23,22 +23,13 @@ if($result!=false){
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script type="text/javascript" src="drawing_canvas.js"></script>
 	<style type="text/css" media="screen">
-    	#canvas, img { display:block; border:1px solid black;}
+    	#canvas{ display:block; border:1px solid black;background-size: 100%;}
 
-		<?php
-		
-		$size = getimagesize($row["image_url"]);
-		$width = $size[0];
-		$height = $size[1];
-		$newWidth = (500/$height)*$width;
-
-		echo "#canvas { background:url(".$row["image_url"]."); background-size:".$newWidth."px 500px}";
-
-		?>
   	</style>
-
+	
 </head>
 <body>
+
 
 	<div data-role="page">
 		<div data-role="header" data-id="samebar" class="headermenu" data-position="fixed" data-tap-toggle="false">
@@ -47,40 +38,45 @@ if($result!=false){
 	</div><!-- /header -->
 	
 	
-		
+	
 	
 			<div data-role="content">
 				
 					<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
-						<a href="./art.php" id="art" data-icon="custom" data-role="button" data-theme="a">Art</a></li>
+						<a href="./art.php?id=<?php echo $row["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a">Art</a></li>
 						<a href="./comments.php" id="comments" data-icon="custom" data-role="button" data-theme="a">Comments</a>
 						<a href="./annotate.php" id="annotate" data-icon="custom" data-role="button" data-theme="a">Annotate</a>
 					</div><!-- /controlgroup -->
-
+					<table style = "width:100%;border-collapse:collapse;">
+						<tr>
+							<td style  = "width:100%;">
 							<canvas id="canvas"></canvas>
+							<td>
+						<td style = "width:70px;background-color:#E0E0E0;vertical-align:top;">	
+								<p></p>
+								<div  style = "text-align: center;"><img src = "icons/undo.png" width = "50px" onclick = "undo()"></div>
+								<div><canvas id="extralarge" height = "60px" width = "70px"  onclick = "changeSize(50)"></canvas></div>
+							<div><canvas id="large" height = "50px" width = "70px"  onclick = "changeSize(20)"></canvas></div>
+								<div><canvas id="medium" height = "40px" width = "70px"  onclick = "changeSize(10)"></canvas></div>
+								<div><canvas id="small" height = "30px" width = "70px" onclick = "changeSize(3)"></canvas></li>
+							</div>
+							
 
-						<div style = " background-color:#E0E0E0;position: fixed; right:0; top: 40px">	
-							<p><canvas id="extralarge" height = "50" width = "80" onclick = "changeSize(50)"></canvas></p>
-							<p><canvas id="large" height = "50" width = "80" onclick = "changeSize(20)"></canvas></p>
-							<p><canvas id="medium" height = "50" width = "80" onclick = "changeSize(10)"></canvas></p>
-							<p><canvas id="small" height = "50" width = "80" onclick = "changeSize(3)"></canvas></p>
 
 
-
-							<input type="button" value="undo" onclick="undo()" />
-							<input type="button" value="save" onclick="save()" />
-
-						</div>
+						</td>
+					</tr>
+				</table>
 
 					<?php
 				echo "<p>".$row["title"]."</p>";
-				}	
+				}
 				?>
 
 				<script type="text/javascript"> 
 				$(document).ready(function() {
 					<?php
-
+					
 					echo "prepareCanvas('".$row["image_url"]."')";
 
 					?>

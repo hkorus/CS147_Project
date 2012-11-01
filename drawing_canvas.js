@@ -12,9 +12,9 @@ function Point(x, y, size){
 	this.size = size;
 }
 
-function xscale(height, img){
-	var ratio = height/img.height;
-	return ratio * img.width;
+function yscale(width, img){
+	var ratio = width/img.width;
+	return ratio * img.height;
 }
 
 function drawOneCircle(controlCanvas, size){
@@ -37,22 +37,34 @@ function drawControls(){
 	
 }
 
+function resetDimensions(){
+	var rect = canvas.getBoundingClientRect();
+	canvas.width = rect.right-rect.left;
+	canvas.height = rect.bottom-rect.top;
+}
+
 function prepareCanvas(url){
-	
 	drawControls();
-	
 	canvas = document.getElementById('canvas');
 	context = canvas.getContext("2d");
 	img = new Image();
 	img.src = url;
 	
-	canvas.height = 500;
-	canvas.width = xscale(500, img);
-	  
+	canvas.style.backgroundImage = "url("+url+")";
+	canvas.style.width = "100%"
+	canvas.height = yscale(canvas.width, img)
+	
+	resetDimensions();
+
 	$('#canvas').mousedown(onMouseDown);
 	$('#canvas').mousemove(onMouseMove);
 	$('#canvas').mouseup(onMouseUp);
 	$('#canvas').mouseleave(onMouseLeave);
+	
+	window.onresize = function(event) {
+	    resetDimensions();
+		redraw();
+	}
 }
 
 function onMouseDown(e){	
@@ -66,22 +78,16 @@ function onMouseUp(e){
 	redraw();
 }
 
-function getMousePos(canvas, evt) {
-        var rect = canvas.getBoundingClientRect(), root = document.documentElement;
-        // return relative mouse position
-        var mouseX = evt.clientX - rect.left - root.scrollLeft;
-        var mouseY = evt.clientY - rect.top - root.scrollTop;
-        return {
-          x: mouseX,
-          y: mouseY
-        };
-}
+
+
+
 
 function onMouseMove(e){	
 	
 	if(drawing){
-		var mouse = getMousePos(canvas, e);
-		var newPoint = new Point(mouse.x, mouse.y, lineWidth);
+		var rect = canvas.getBoundingClientRect();
+		var newPoint = new Point(e.pageX-rect.left, e.pageY-rect.top, lineWidth);
+		
 		paths[paths.length-1].push(newPoint);
 	}
 	redraw();
