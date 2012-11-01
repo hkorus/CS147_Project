@@ -13,24 +13,61 @@
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
+	<script>
+    $(function() {
+        $( "#tabs" ).tabs();
+    });
+    </script>
 
 </head>
 <body>
 	
 <div data-role="page">
+
 	<div data-role="header">
 		<h1>Art</h1>
 	</div><!-- /header -->
 		
 	<div data-role="content">	
 	
+	<div data-role="header" data-id="samebar" class="headermenu" data-position="fixed" data-tap-toggle="false">
+				<?php
+				
+				include("config.php");
+				$id = $_GET["id"];
+				$query = "SELECT * FROM art";
+				
+				if($id != NULL){
+					$query = "SELECT * FROM art where id = ".$id;
+				}
+				$result = mysql_query($query);
+				$numRows = mysql_num_rows($result);
+				$selectedRow = rand(0, $numRows-1);
+				while ($row = mysql_fetch_assoc($result)) {
+					if($selectedRow == 0){
+						
+						?>
+			<h1>Motif</h1>
+		
+
+	</div><!-- /header -->
+			
+	<div data-role="content">
+
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
 			<a href="./art.php" id="art" data-icon="custom" data-role="button" data-theme="a">Art</a></li>
 			<a href="./comments.php" id="comments" data-icon="custom" data-role="button" data-theme="a">Comments</a>
 			<a href="./annotate.php" id="annotate" data-icon="custom" data-role="button" data-theme="a">Annotate</a>
 		</div><!-- /controlgroup -->
 		
-		<p>Art Page</p>
+			<?php
+			    	echo "<img src='".$row["image_url"]."' alt = 'Image not found' width ='99%'>";
+					echo "<p>".$row["title"]."</p>";
+			
+				}
+				$selectedRow--;
+			}
+			?>
 	</div><!-- /content -->
 
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
