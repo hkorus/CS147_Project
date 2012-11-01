@@ -1,6 +1,15 @@
 		.menubar .ui-btn .ui-btn-inner { padding-top: 40px !important; }
 		.menubar .ui-btn .ui-icon { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
+
+		.art-buttons .ui-btn .ui-icon { width: 30px!important; height: 30px!important; margin-top: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
+		.art-buttons #art { width: 150px; }
+		.art-buttons #comments { width: 150px; }
+		.art-buttons #annotate { width: 150px; }
+	
 		
+		.art-menu .ui-btn .ui-btn-inner { padding-top: 40px !important; }
+		.art-menu .ui-btn .ui-icon { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
+
 		
 		#refresh .ui-icon { background:  url(icons/01-refresh.png) 50% 50% no-repeat; }
 		#search .ui-icon { background: url(icons/06-magnify.png) 50% 50% no-repeat; }
