@@ -42,54 +42,60 @@ if($result!=false){
 
 	<div data-role="page">
 		<div data-role="header" data-id="samebar" class="headermenu" data-position="fixed" data-tap-toggle="false">
-			
-		<a href="./art.php?id=<?php echo $row["id"]?>" id="art" data-icon="custom">Art</a>
-		<a href="./comments.php" id="comments" data-icon="custom">Comments</a>
-		<h1>Annotation</h1>
-
+		<h1>Motif</h1>
 
 	</div><!-- /header -->
-
-	<div data-role="content">
+	
+	
 		
-					<canvas id="canvas"></canvas>
+	
+			<div data-role="content">
 				
-				<div style = " background-color:#E0E0E0;position: fixed; right:0; top: 40px">	
-					<p><canvas id="extralarge" height = "50" width = "80" onclick = "changeSize(50)"></canvas></p>
-					<p><canvas id="large" height = "50" width = "80" onclick = "changeSize(20)"></canvas></p>
-					<p><canvas id="medium" height = "50" width = "80" onclick = "changeSize(10)"></canvas></p>
-					<p><canvas id="small" height = "50" width = "80" onclick = "changeSize(3)"></canvas></p>
-					
-					
-					
-					<input type="button" value="undo" onclick="undo()" />
-					<input type="button" value="save" onclick="save()" />
-					
-				</div>
-			
-			<?php
-		echo "<p>".$row["title"]."</p>";
-		}	
-		?>
+					<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
+						<a href="./art.php" id="art" data-icon="custom" data-role="button" data-theme="a">Art</a></li>
+						<a href="./comments.php" id="comments" data-icon="custom" data-role="button" data-theme="a">Comments</a>
+						<a href="./annotate.php" id="annotate" data-icon="custom" data-role="button" data-theme="a">Annotate</a>
+					</div><!-- /controlgroup -->
 
-		<script type="text/javascript"> 
-		$(document).ready(function() {
-			<?php
+							<canvas id="canvas"></canvas>
 
-			echo "prepareCanvas('".$row["image_url"]."')";
+						<div style = " background-color:#E0E0E0;position: fixed; right:0; top: 40px">	
+							<p><canvas id="extralarge" height = "50" width = "80" onclick = "changeSize(50)"></canvas></p>
+							<p><canvas id="large" height = "50" width = "80" onclick = "changeSize(20)"></canvas></p>
+							<p><canvas id="medium" height = "50" width = "80" onclick = "changeSize(10)"></canvas></p>
+							<p><canvas id="small" height = "50" width = "80" onclick = "changeSize(3)"></canvas></p>
 
-			?>
-		});
-		</script>
-	</div><!-- /content -->
+
+
+							<input type="button" value="undo" onclick="undo()" />
+							<input type="button" value="save" onclick="save()" />
+
+						</div>
+
+					<?php
+				echo "<p>".$row["title"]."</p>";
+				}	
+				?>
+
+				<script type="text/javascript"> 
+				$(document).ready(function() {
+					<?php
+
+					echo "prepareCanvas('".$row["image_url"]."')";
+
+					?>
+				});
+				</script>
+			</div><!-- /content -->
 
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
-		<div data-role="navbar" class="menubar" data-grid="c">
-			<ul>
-				<li><a href="./art.php" id="art" data-icon="custom">Art</a></li>
-				<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
-				<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
-			</ul>
+		<div data-role="navbar" class="menubar">
+					<ul>
+			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
+			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
+		</ul>
+
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
 

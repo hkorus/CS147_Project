@@ -27,9 +27,11 @@
 				<?php
 				
 				include("config.php");
+				$id = $_GET["id"];
 				$query = "SELECT * FROM art";
-				if($_GET["id"] != NULL){
-					$query = "SELECT * FROM art WHERE id = $_GET[id]";
+				
+				if($id != NULL){
+					$query = "SELECT * FROM art where id = ".$id;
 				}
 				$result = mysql_query($query);
 				$numRows = mysql_num_rows($result);
@@ -38,33 +40,20 @@
 					if($selectedRow == 0){
 						
 						?>
-			<h1>Art</h1>
-			<a href="./comments.php" id="comments" data-icon="custom">Comments</a>
-			<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom">Annotate</a>
+			<h1>Motif</h1>
 		
+
 	</div><!-- /header -->
-	
-	<div id="tabs">
-    <ul>
-        <li><a href="#tabs-art">Art</a></li>
-        <li><a href="#tabs-comments">Comments</a></li>
-        <li><a href="#tabs-annotate">Annotate</a></li>
-    </ul>
-    <div id="tabs-art">
-        <p>Art page</p>
-    </div>
-    <div id="tabs-comments">
-        <p>Comments Page</p>
-    </div>
-    <div id="tabs-annotate">
-        <p>Annotation Page</p>
-    </div>
-</div>
-	
+			
 	<div data-role="content">
+		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
+			<a href="./art.php" id="art" data-icon="custom" data-role="button" data-theme="a">Art</a></li>
+			<a href="./comments.php" id="comments" data-icon="custom" data-role="button" data-theme="a">Comments</a>
+			<a href="./annotate.php" id="annotate" data-icon="custom" data-role="button" data-theme="a">Annotate</a>
+		</div><!-- /controlgroup -->
 		
 			<?php
-			    	echo "<img src='".$row["image_url"]."' alt = 'Image not found' height ='500px'>";
+			    	echo "<img src='".$row["image_url"]."' alt = 'Image not found' width ='99%'>";
 					echo "<p>".$row["title"]."</p>";
 			
 				}
@@ -74,10 +63,10 @@
 	</div><!-- /content -->
 
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
-		<div data-role="navbar" class="menubar" data-grid="c">
+		<div data-role="navbar" class="menubar">
 					<ul>
 
-			<li><a href="./art.php" id="art" data-icon="custom">Art</a></li>
+			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
 			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
 		</ul>
