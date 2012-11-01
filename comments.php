@@ -92,7 +92,7 @@
 					
 					</td>
 					<td>
-						<a href = "view_comment.php?id<?php echo $row["comment_id"] ?>"> View </a>
+						<a href = "show_comment.php?id=<?php echo $row["comment_id"] ?>"> View </a>
 					</td>
 				</tr>	
 				<?php } } ?>
