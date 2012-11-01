@@ -50,9 +50,9 @@
 	<div data-role="content">
 		
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
-			<a href="./art.php" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
-			<a href="./comments.php" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
-			<a href="./annotate.php" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
+			<a href="./art.php?id=<?php echo $_GET["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
+			<a href="./comments.php?id=<?php echo $_GET["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
+			<a href="./annotate.php?id=<?php echo $_GET["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
 		</div><!-- /controlgroup -->
 		
 		<p>
