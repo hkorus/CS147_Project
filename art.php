@@ -13,28 +13,36 @@
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
+	<script>
+    $(function() {
+        $( "#tabs" ).tabs();
+    });
+    </script>
 
 </head>
 <body>
 	
 <div data-role="page">
-	<div data-role="header" data-id="samebar" class="headermenu" data-position="fixed" data-tap-toggle="false">
-				
-			<h1>Art</h1>
-			<a href="./comments.php" id="comments" data-icon="custom">Comments</a>
-			<a href="./annotate.php" id="annotate" data-icon="custom">Annotate</a>
-		
+	<div data-role="header">
+		<h1>Art</h1>
 	</div><!-- /header -->
+		
+	<div data-role="content">	
 	
-	<div data-role="content">
+		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
+			<a href="./art.php" id="art" data-icon="custom" data-role="button" data-theme="a">Art</a></li>
+			<a href="./comments.php" id="comments" data-icon="custom" data-role="button" data-theme="a">Comments</a>
+			<a href="./annotate.php" id="annotate" data-icon="custom" data-role="button" data-theme="a">Annotate</a>
+		</div><!-- /controlgroup -->
+		
 		<p>Art Page</p>
 	</div><!-- /content -->
 
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
-		<div data-role="navbar" class="menubar" data-grid="c">
+		<div data-role="navbar" class="menubar">
 					<ul>
 
-			<li><a href="./art.php" id="art" data-icon="custom">Art</a></li>
+			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
 			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
 		</ul>
