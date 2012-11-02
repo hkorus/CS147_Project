@@ -63,14 +63,25 @@
 		</td>
 		<td style = "text-align:right;width:50px"><img src= "icons/heart.png" width = "30" height = "30" onclick = "send_favorite(<?php echo $row["id"]?>)">
 			</td></tr></table>
+		
+			<p style="font-family: Andale Mono; font-size: 16px;"><b><?php echo $row["title"]; ?> </b> 
+					(<?php echo $row["year"]; ?>)	
+					- 
+ 				  <?php	echo $row["artist"]; ?></p>
 			
 			<?php
-			    	echo "<img src='".$row["image_url"]."' alt = 'Image not found' width ='99%'>";
-
-				}
+			   	echo "<img src='".$row["image_url"]."' alt = 'Image not found' width ='99%'>";
+			?>
+			
+			
+			
+			<?php
+			 
+			 	}
 				$selectedRow--;
 			}
 			?>
+			
 	</div><!-- /content -->
 	
 	<?php
