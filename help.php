@@ -13,6 +13,7 @@
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
+	
 </head>
 <body>
 
@@ -24,9 +25,8 @@
 	</div><!-- /header -->
 	
 	<div data-role="content">
-		<p><center><font face="andale mono">mo·tif /mōˈtēf/</font></center></p>
-		<p><center>Noun: A distinctive feature or dominant idea in an artistic composition.</center></p>
-		
+		<h1><center>mo·tif /mōˈtēf/</center></h1>
+		<p><center>(noun): a distinctive feature or dominant idea in an artistic composition.</center></p>
 
 	</div><!-- /content -->
 
