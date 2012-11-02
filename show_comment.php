@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-	<title>Comment Page</title>
+	<title>Comment</title>
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
  	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -8,8 +8,8 @@
 
 	<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 	<link rel="stylesheet" href="style.css" />
-	<link rel="apple-touch-icon" href="appicon.png" />
-	<link rel="apple-touch-startup-image" href="startup.png">
+	<link rel="apple-touch-icon" href="icons/icon2.png" />
+	<link rel="apple-touch-startup-image" href="images/logo.png">
 
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
@@ -22,7 +22,7 @@
 
 <div data-role="page">
 
-	<div data-role="header" data-id="samebar" class="headermenu" data-position="fixed" data-tap-toggle="false">
+	<div data-role="header">
 				<?php
 
 				include("config.php");
@@ -38,7 +38,7 @@
 				$artPiece = mysql_fetch_assoc($artResult);
 
 						?>
-			<h1>Motif</h1>
+			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
 
 	</div><!-- /header -->
 			

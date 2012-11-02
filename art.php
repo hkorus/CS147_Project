@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-	<title>Art Page</title>
+	<title>Art</title>
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
  	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -8,8 +8,9 @@
 
 	<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 	<link rel="stylesheet" href="style.css" />
-	<link rel="apple-touch-icon" href="appicon.png" />
-	<link rel="apple-touch-startup-image" href="startup.png">
+	<link rel="apple-touch-icon" href="icons/icon2.png" />
+	<link rel="apple-touch-startup-image" href="images/logo.png">
+	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script type="text/javascript" src="drawing_canvas.js"></script>
@@ -49,7 +50,7 @@
 					if($selectedRow == 0){
 
 						?>
-			<h1>Motif</h1>
+			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
 
 	</div><!-- /header -->
 			
@@ -70,7 +71,7 @@
  				  <?php	echo $row["artist"]; ?></p>
 			
 			<?php
-			   	echo "<img src='".$row["image_url"]."' alt = 'Image not found' width ='99%'>";
+			   	echo "<img src='".$row["image_source"]."' alt = 'Image not found' width ='99%'>";
 			?>
 			
 			

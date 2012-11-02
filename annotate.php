@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-	<title>Annotation Page</title>
+	<title>Annotation</title>
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -8,8 +8,8 @@
 
 	<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 	<link rel="stylesheet" href="style.css" />
-	<link rel="apple-touch-icon" href="appicon.png" />
-	<link rel="apple-touch-startup-image" href="startup.png">
+	<link rel="apple-touch-icon" href="icons/icon2.png" />
+	<link rel="apple-touch-startup-image" href="images/logo.png">
 	
 
 	<?php
@@ -44,8 +44,8 @@ if($result!=false){
 
 
 	<div data-role="page">
-		<div data-role="header" data-id="samebar" class="headermenu" data-position="fixed" data-tap-toggle="false">
-		<h1>Motif</h1>
+		<div data-role="header">
+		<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
 
 	</div><!-- /header -->
 
