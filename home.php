@@ -8,8 +8,8 @@
 
 	<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 	<link rel="stylesheet" href="style.css" />
-	<link rel="apple-touch-icon" href="appicon.png" />
-	<link rel="apple-touch-startup-image" href="logo.png">
+	<link rel="apple-touch-icon" href="icons/icon2.png" />
+	<link rel="apple-touch-startup-image" href="images/logo.png">
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
@@ -20,13 +20,16 @@
 	
 	<div data-role="page">
 		<div data-role="header">
-			<h1>Motif</h1>
+			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
 		
 		</div><!-- /header -->
 	
 		<div data-role="content">
 
-			<p>HOME PAGE</p>
+			<p style="text-align:center"><img src="images/logo_crop.png"></p>
+			<p style="font-family: Andale Mono; font-size: 18px; text-align: center">discover art, draw your commentary</p>
+			<br></br>
+			
 			<div id="fb-root"></div>
 	<script>
   		(function() {
@@ -89,7 +92,6 @@
 	</style>
 
 
-		<p>HOME PAGE</p>
 	</div><!-- /content -->
 		
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
