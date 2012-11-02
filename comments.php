@@ -24,7 +24,7 @@
 			<?php
 				
 				include("config.php");
-				$query = "SELECT * FROM comments WHERE art_id = ".$_GET['id']." ORDER BY rating DESC";
+				$query = "SELECT * FROM comments, art WHERE art_id = id and art_id = ".$_GET['id']." ORDER BY rating DESC";
 				$result = mysql_query($query);
 				
 			?>				
@@ -56,42 +56,58 @@
 		</div><!-- /controlgroup -->
 		
 		<p>
-			<table border="1">
+			<table style = "text-align:center">
 				<tr>
 					
 					<td><b>Rating</b></td>
-					<td><b>Annotation</b></td>
+					<td style = "width:200px"><b>Annotation</b></td>
 					<td><b>Comment</b></td>
-					<td><b>Link</b></td>
 					
 				</tr>	
 				
 				<?php
 						
-						if(mysql_num_rows($result)>0){		
+						if(mysql_num_rows($result)>0){	
 							while($row = mysql_fetch_assoc($result)) {
 								echo "<tr><td>";
-								
-							       echo $row["rating"];
 						
 						?> 
 						<a href="#" data-role="button" data-icon="arrow-u" data-mini="true" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)">Yeah!</a>
 						<a href="#" data-role="button" data-icon="arrow-d" data-mini="true" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1)">Boo</a>
+						
+						<?php echo $row["rating"]; ?>
 					</td>
-					<td>
+					<td style = "width:200px;text-align:center">
 						<?php
-							echo "<img src = '".$row["annotation"]."' width = '50px'>";
+							echo "<canvas id = '".$row["comment_id"]."' width = '100%'></canvas>
+							";
+							
+							echo "<script type = 'text/javascript'>"."
+										$(document).ready(function() {"."
+										canvas = document.getElementById('".$row["comment_id"]."');"."
+										context = canvas.getContext('2d');"."
+										img = new Image();"."
+										img.src = '".$row["annotation"]."';"."
+										
+										backgroundImg = new Image();"."
+										backgroundImg.src = '".$row["image_url"]."';"."
+										context.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height)"."
+										context.drawImage(img, 0, 0, canvas.width, canvas.height)".
+									"});";
+
+
+								echo "</script>";
 						?> 
 
 					</td>
-					<td> 
+					<td style = "text-align:center"> 
 						<?php
 							echo $row["comment"];
 						
 						?> 
 					
 					</td>
-					<td>
+					<td style = "width:80px;">
 						<a href = "show_comment.php?id=<?php echo $row["comment_id"] ?>"> View </a>
 					</td>
 				</tr>	
@@ -99,6 +115,8 @@
 				
 			</table>
 		</p>
+		
+	
 		
 		
 		

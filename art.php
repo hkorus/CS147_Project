@@ -10,7 +10,6 @@
 	<link rel="stylesheet" href="style.css" />
 	<link rel="apple-touch-icon" href="appicon.png" />
 	<link rel="apple-touch-startup-image" href="startup.png">
-
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script type="text/javascript" src="drawing_canvas.js"></script>
@@ -33,9 +32,8 @@
 <body>
 
 <div data-role="page">
-
-	<div data-role="header" data-id="samebar" class="headermenu" data-position="fixed" data-tap-toggle="false">
-				<?php
+	<div data-role="header">
+			<?php
 
 				include("config.php");
 				$id = $_GET["id"];
