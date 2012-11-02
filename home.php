@@ -89,7 +89,6 @@
 	</style>
 
 
-		<p>HOME PAGE</p>
 	</div><!-- /content -->
 		
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
