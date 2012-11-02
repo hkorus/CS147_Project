@@ -24,9 +24,9 @@
 			<?php
 				
 				include("config.php");
-
-				$query = "SELECT * FROM comments WHERE id = ".$_GET['id']." ORDER BY rating DESC";
+				$query = "SELECT * FROM comments WHERE art_id = ".$_GET['id']." ORDER BY rating DESC";
 				$result = mysql_query($query);
+				
 			?>				
 				
 			<h1>Comments</h1>
@@ -36,7 +36,7 @@
 	<script type = "text/javascript">
 		function send_rating(comment, amount){
 			var request = new XMLHttpRequest();
-			request.open('POST', 'http://stanford.edu/~lcuth/cgi-bin/CS147_Project/rate_image.php', false);
+			request.open('POST', 'rate_image.php', false);
 			request.setRequestHeader("Content-type", "application/upload")
 			request.send(comment+"&"+amount); // because of "false" above, will block until the request is done
 			                // and status is available. Not recommended, however it works for simple cases.
@@ -50,9 +50,9 @@
 	<div data-role="content">
 		
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
-			<a href="./art.php?id=<?php echo $row["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
-			<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
-			<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
+			<a href="./art.php?id=<?php echo $_GET["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
+			<a href="./comments.php?id=<?php echo $_GET["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
+			<a href="./annotate.php?id=<?php echo $_GET["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
 		</div><!-- /controlgroup -->
 		
 		<p>
@@ -83,7 +83,7 @@
 					</td>
 					<td>
 						<?php
-							echo "<img src = '".$row["annotation"]."' width = '110px'>";
+							echo "<img src = '".$row["annotation"]."' width = '100px'>";
 						?> 
 
 					</td>
@@ -100,7 +100,6 @@
 				</tr>	
 				<?php } } ?>
 				
-
 			</table>
 		</p>
 		

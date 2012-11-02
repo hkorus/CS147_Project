@@ -42,7 +42,7 @@
 	<div data-role="content">
 
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
-			<a href="./art.php" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
+			<a href="./art.php?id=<?php echo $row["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
 			<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
 			<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button" rel="external" data-theme="a">Annotate</a>
 		</div><!-- /controlgroup -->
