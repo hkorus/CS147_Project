@@ -59,7 +59,7 @@
 			<table style = "text-align:center">
 				<tr>
 					
-					<td colspan="2"><b>Rating</b></td>
+					<td><b>Rating</b></td>
 					<td><b>Annotation</b></td>
 					<td><b>Comment</b></td>
 					
@@ -70,13 +70,15 @@
 						if(mysql_num_rows($result)>0){	
 							while($row = mysql_fetch_assoc($result)) {
 								echo "<tr><td>";
-								echo $row["rating"]; ?>
 
-					</td>
-					<td>
-						<a href="#" data-role="button" data-icon="arrow-u" data-mini="true" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)">Yeah!</a>
-						<a href="#" data-role="button" data-icon="arrow-d" data-mini="true" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1)">Boo</a>
+						?> 
+						<table ><tr >
+						<td style="padding-left:15px;"><img src = "icons/up_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)"></td></tr>
 						
+						<tr><td style="padding-left:15px;"><img src = "icons/down_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1)"></td></tr>
+						
+						<tr><td style="padding-left:15px;"><?php echo $row["rating"]; ?></td></tr></table>
+
 					</td>
 					<td style = "width:150px; text-align:center">
 						<?php
@@ -113,9 +115,12 @@
 						<a href = "show_comment.php?id=<?php echo $row["comment_id"] ?>"> View </a>
 					</td>
 				</tr>	
-				<?php } } ?>
+				<?php } } else {?>
 				
 			</table>
+			<?php 
+			echo "<br/>";
+			echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }?>
 		</p>
 		
 	
