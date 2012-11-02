@@ -13,6 +13,20 @@
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script type="text/javascript" src="drawing_canvas.js"></script>
+	
+	<script type = "text/javascript">
+		function send_favorite(id){
+			var request = new XMLHttpRequest();
+			request.open('POST', 'mark_favorite.php', false);
+			request.setRequestHeader("Content-type", "application/upload")
+			request.send(id); // because of "false" above, will block until the request is done
+			                // and status is available. Not recommended, however it works for simple cases.
+			if (request.status === 200) {
+			  alert("Favorited!")
+			}
+		}
+	</script>
+
 
 </head>
 <body>
@@ -40,13 +54,16 @@
 	</div><!-- /header -->
 			
 	<div data-role="content">
-
+		<table><tr><td>
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
 			<a href="./art.php?id=<?php echo $row["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
 			<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
 			<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button" rel="external" data-theme="a">Annotate</a>
 		</div><!-- /controlgroup -->
-		
+		</td>
+		<td style = "text-align:right;width:50px"><img src= "icons/heart.png" width = "30" height = "30" onclick = "send_favorite(<?php echo $row["id"]?>)">
+			</td></tr></table>
+			
 			<?php
 			    	echo "<img src='".$row["image_url"]."' alt = 'Image not found' width ='99%'>";
 
@@ -72,7 +89,7 @@
 	<script type = "text/javascript">
 		function refresh(){
 			var num = Math.floor(Math.random() * <?php echo $rand ?>) + 1;
-			window.location="http://stanford.edu/~lcuth/cgi-bin/CS147_Project/art.php?id="+num;
+			window.location="art.php?id="+num;
 		}
 	</script>
 

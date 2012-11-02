@@ -8,7 +8,6 @@
 
 	<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 	<link rel="stylesheet" href="style.css" />
-	<link rel="stylesheet" href="image.css: />
 	<link rel="apple-touch-icon" href="appicon.png" />
 	<link rel="apple-touch-startup-image" href="startup.png">
 	
@@ -47,10 +46,10 @@
 		<div id="container">
 		<?php
 			include("config.php");
-			$query = "SELECT * FROM art";
+			$query = "SELECT * FROM art, fave_art where id = art_id";
 			$result = mysql_query($query);
 			while ($row = mysql_fetch_assoc($result)) {
-				echo "<div class='image'><a href='./art.php' ?id='".$row['id']."'><img width='100' src='".$row['image_url']."'></a></div>";
+				echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_url']."'></a></div>";
 			} 
 			?>
 		</div><!-- /container -->

@@ -161,7 +161,7 @@ function save(){
 	var val = document.getElementById("commentBox").value;
 	var dataURL = canvas.toDataURL();
 	var request = new XMLHttpRequest();
-	request.open('POST', 'http://stanford.edu/~lcuth/cgi-bin/CS147_Project/save_image.php', false);
+	request.open('POST', 'save_image.php', false);
 	request.setRequestHeader("Content-type", "application/upload")
 	request.send(val+"&"+id+"&"+dataURL); // because of "false" above, will block until the request is done
 	                // and status is available. Not recommended, however it works for simple cases.
