@@ -25,35 +25,11 @@
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
-	<script src="isotope/jquery.isotope.min.js"></script>
 	
+	<script src="isotope-master/jquery.isotope.min.js"></script>
 	
-	<!--<script>	
-		$( function(){
-			var $container = $('#container');
-  			
-  			$container.imagesLoaded( function(){
-    			$container.isotope({
-    				itemSelector : '.image',
-    				masonryHorizontal: {
-    					columnWidth: 240
-    				}
-    			});
-  			});
-		});
-	</script>-->
 
-	<script>
-		$(window).load(function() {
-        	var $container = $('#container');
-        	$container.isotope({ 
-        		itemSelector : '.image',
-    			masonryHorizontal: {
-    				columnWidth: 240
-    			}
-    		});
-        });
-	</script>
+
 		
 </head>
 <body>
@@ -70,6 +46,7 @@
 		<div id="container">
 		<?php
 			include("config.php");
+
 			if ($fb_user) {
 				//$query = "SELECT * FROM art, fave_art where id = art_id and user_id =".$fb_user;
 				$query = "SELECT * FROM art, fave_art where id = art_id";
@@ -85,10 +62,23 @@
 
 	</div><!-- /content -->
 	
+	<script type = "text/javascript">
+	  
 	
+	$(window).load(function() {
+        	var container = $('#container');
+        	container.isotope({ 
+        		itemSelector : '.image',
+    			masonryHorizontal: {
+    				columnWidth: 240
+    			}
+    		});
+        });
+	</script>
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" class="menubar">
 		<ul>
+
 			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
 			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
 			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>

@@ -50,7 +50,7 @@
 			<a href="./annotate.php?id=<?php echo $row["art_id"]?>" id="annotate" data-icon="custom" data-role="button" rel="external" data-theme="a">Annotate</a>
 		</div><!-- /controlgroup -->
 		
-			<canvas id="canvas"></canvas>
+			<canvas id="canvas" ></canvas>
 			
 		
 			<?php
@@ -77,19 +77,22 @@
 	</script>
 	
 	<script type = "text/javascript">
-		$(document).ready(function() {
-			canvas = document.getElementById('canvas');
+	$(document).bind('pageinit', function() {
+ 			canvas = document.getElementById('canvas');
 			context = canvas.getContext("2d");
 			img = new Image();
 			img.src = <?php echo "'".$row["annotation"]."'" ?>;
-			canvas.width = img.width;
-			canvas.height = img.height;
 			
-			backgroundImg = new Image();
-			backgroundImg.src = <?php echo "'".$artPiece["image_url"]."'" ?>;
-			context.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height)
+			img.onload = function(){
+				canvas.width = img.width;
+				canvas.height = img.height;
+			
+				backgroundImg = new Image();
+				backgroundImg.src = <?php echo "'".$artPiece["image_url"]."'" ?>;
+				context.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height)
 
-			context.drawImage(img, 0, 0)
+				context.drawImage(img, 0, 0, canvas.width, canvas.height)
+			}
 		});
 
 	

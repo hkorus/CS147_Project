@@ -25,7 +25,6 @@
 			<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
 			
 			<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
-     			
      			<div class="show_when_not_connected">
         			<a onclick="promptLogin()" class="login-button"> 
          				<span>Login</span>
@@ -47,7 +46,7 @@
 			<div id="fb-root"></div>
 			
 			<script>
-  				(function() {
+			$(document).bind('pageinit', function() {
     				var e = document.createElement('script'); e.async = true;
        				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
         			document.getElementById('fb-root').appendChild(e);
@@ -66,7 +65,10 @@
     			};
   			</script>
   	
+<<<<<<< HEAD
 			<div class="section">
+=======
+>>>>>>> 20ea874e2d6aeb035978f2b85e0b02600a06cecc
 				<div class="show_when_connected">
 					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
 						<a class="login-button" onclick="logout()">
@@ -74,9 +76,12 @@
 						</a>
 					</div>
 				</div>
+<<<<<<< HEAD
 			</div>
 			
 
+=======
+>>>>>>> 20ea874e2d6aeb035978f2b85e0b02600a06cecc
   	
 		</div><!-- /content -->
 		
