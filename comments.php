@@ -86,37 +86,30 @@
 			<a href="./annotate.php?id=<?php echo $_GET["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
 		</div><!-- /controlgroup -->
 		<p></p>
-		<table style = "text-align:center">
-			<tr>
-
-				<td><b>Rating</b></td>
-				<td><b>Annotation</b></td>
-				<td><b>Comment</b></td>
-
-			</tr>	
-
+		<table class="bottomBorder" style="text-align:center; width:100%;">
+		
 			<?php
 		$arr = array();
 		$image = "";
 		if(mysql_num_rows($result)>0){	
 			while($row = mysql_fetch_assoc($result)) {
 				$image = $row['image_url'];
-				echo "<tr><td>";
+				echo "<tr><td style='border-collapse:collapse; border-bottom:1px dotted black;padding:5px;'>";
 
-				?> 
-				<table ><tr >
-					<td style="padding-left:15px;"><img id = "up-<?php echo $row["comment_id"] ?>" src = "icons/up_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)"></td></tr>
+				?>
+				<table class="noBorder" style="width:20%"><tr>
+					<td style="padding-left:15px; padding-right:15px;"><img id = "up-<?php echo $row["comment_id"] ?>" src = "icons/up_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)"></td></tr>
 
-					<tr><td id = "number-<?php echo $row["comment_id"] ?>" style="padding-left:15px;"><?php echo $row["rating"]; ?></td></tr>
+					<tr><td id = "number-<?php echo $row["comment_id"] ?>" style="padding-left:15px; padding-right:15px;"><?php echo $row["rating"]; ?></td></tr>
 
-					<tr><td style="padding-left:15px;"><img id = "down-<?php echo $row["comment_id"] ?>" src = "icons/down_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1)"></td></tr>
+					<tr><td style="padding-left:15px; padding-right:15px;"><img id = "down-<?php echo $row["comment_id"] ?>" src = "icons/down_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1)"></td></tr>
 					</table>
 
 				</td>
-				<td style = "width:150px; text-align:center">
+				<td style="border-collapse:collapse; border-bottom:1px dotted black;padding:5px;">
 					<?php
 
-				echo "<canvas id = 'canvas-".$row["comment_id"]."' width = '100%'></canvas>
+				echo "<canvas id = 'canvas-".$row["comment_id"]."' width = '30%'></canvas>
 					";
 				array_push($arr, $row["comment_id"]);
 				array_push($arr, $row["annotation"]);
@@ -125,14 +118,14 @@
 
 
 			</td>
-			<td style = "width:200px"> 
+			<td style = "width:40%; border-collapse:collapse; border-bottom:1px dotted black;padding:5px;"> 
 				<?php
 			echo $row["comment"];
 
 			?> 
 
 		</td>
-		<td style = "width:80px;">
+		<td style = "width:10%; border-collapse:collapse; border-bottom:1px dotted black;padding:5px;">
 			<a href = "show_comment.php?id=<?php echo $row["comment_id"] ?>"> View </a>
 		</td>
 	</tr>	
@@ -256,9 +249,9 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 	<div data-role="navbar" class="menubar" data-grid="c">
 		<ul>
 			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
-			<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
+			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
+			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
 		</ul>
 	</div><!-- /navbar -->
 </div><!-- /footer -->

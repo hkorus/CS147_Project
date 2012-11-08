@@ -163,9 +163,9 @@ if($result!=false){
 		<div data-role="navbar" class="menubar" data-grid="c">
 		<ul>
 			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
-			<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
+			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
+			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
 		</ul>
 
 		</div><!-- /navbar -->
