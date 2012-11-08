@@ -95,7 +95,6 @@
 					<p>Please login to view Favorites</p>
 				</div>
 				
-			</div>
 		</div><!-- /container -->
 		
 		
