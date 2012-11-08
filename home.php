@@ -25,6 +25,38 @@
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
 	
+	<script type = "text/javascript">
+		function search(){
+			var term = document.getElementById("term").value;
+
+			var request = new XMLHttpRequest();
+			request.open('POST', 'search.php', false);
+			request.setRequestHeader("Content-type", "application/upload")
+			request.send(term); // because of "false" above, will block until the request is done
+			// and status is available. Not recommended, however it works for simple cases.
+			if(request.status == 200){
+				
+				var html = "";
+				var results = document.getElementById("results");
+				var text = request.responseText;
+				var loc = text.indexOf('|');
+				while(loc!=-1){
+					var one = text.substring(0, loc)
+					var andloc = text.indexOf("&");
+					if(andloc == -1) {
+						break;
+					}
+					var id = one.substring(0, andloc);
+					var info = one.substring(andloc+1);
+					html+= "<p><a href = 'art.php?id="+id+"'>"+info+"</a><p>";
+					
+					text = text.substring(0,loc);
+					loc = text.indexOf("|")
+				}
+				results.innerHTML = html;
+			}
+		}
+	</script>
 	  
 </head>
 <body>
@@ -50,11 +82,13 @@
 			<br></br>
 			
 			<div class="search" style="width:75%">
-				<form action="search.php" method="post">
-   				<input type="text" name="term" />
-    			<input type="submit" name="submit" value="Search!" />
-    			</form>
+   				<input type="text" name="term" id = "term"/>
+					<input type="submit" name="submit" value="Search!" onclick = "search()"/>
+					<div id = "results" style="height:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+
+					</div>
 			</div><!-- /search -->
+			
 			
 			<div id="fb-root"></div>
 			
@@ -78,7 +112,6 @@
     			};
   			</script>
   	
-			<div class="section">
 				<div class="show_when_connected">
 					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
 						<a class="login-button" onclick="logout()">
@@ -89,7 +122,6 @@
 						?>
 					</div>
 				</div>
-			</div>
   	
 
 		</div><!-- /content -->
