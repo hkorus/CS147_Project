@@ -52,7 +52,7 @@
 				$query = "SELECT * FROM art, fave_art where id = art_id";
 				$result = mysql_query($query);
 				while ($row = mysql_fetch_assoc($result)) {
-					echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_url']."'></a></div>";
+					echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_source']."'></a></div>";
 				} 
 			} else {
 				echo "Please login to view favorites";

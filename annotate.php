@@ -58,6 +58,7 @@ if($result!=false){
 						<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
 						<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
 					</div><!-- /controlgroup -->
+					
 					<table style = "width:100%;">
 						<tr>
 							<td style  = "width:100%;">
@@ -98,7 +99,7 @@ if($result!=false){
 				$(document).bind('pageinit', function() {
 					
 					<?php
-					echo "prepareCanvas('".$row["image_url"]."', ".$row["id"].")";
+					echo "prepareCanvas('".$row["image_source"]."', ".$row["id"].")";
 
 					?>
 				});

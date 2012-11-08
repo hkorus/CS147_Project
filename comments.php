@@ -81,7 +81,7 @@
 		$image = "";
 		if(mysql_num_rows($result)>0){	
 			while($row = mysql_fetch_assoc($result)) {
-				$image = $row['image_url'];
+				$image = $row['image_source'];
 				echo "<tr><td>";
 
 				?> 
