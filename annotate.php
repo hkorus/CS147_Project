@@ -27,7 +27,7 @@ if($result!=false){
 	<link rel='stylesheet' href='spectrum.css' />
 	
 	<style type="text/css" media="screen">
-    	#canvas{ display:block; border:1px solid black;background-size: 100%;}
+    	#canvas{ display:block; background-size: 100%;}
 		table, td, tr {
 			margin:0;
 			padding:0;
@@ -95,9 +95,9 @@ if($result!=false){
 				?>
 
 				<script type="text/javascript"> 
-				$(document).ready(function() {
-					<?php
+				$(document).bind('pageinit', function() {
 					
+					<?php
 					echo "prepareCanvas('".$row["image_url"]."', ".$row["id"].")";
 
 					?>
@@ -108,9 +108,9 @@ if($result!=false){
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" class="menubar">
 					<ul>
-			<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
+			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
+			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
 		</ul>
 
 		</div><!-- /navbar -->

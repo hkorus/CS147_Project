@@ -8,6 +8,7 @@
 
 	<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="fbstyle.css" />
 	<link rel="apple-touch-icon" href="icons/icon2.png" />
 	<link rel="apple-touch-startup-image" href="images/logo.png">
 	
@@ -21,7 +22,14 @@
 	<div data-role="page">
 		<div data-role="header">
 			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
-		
+			
+    		<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
+     			<div class="show_when_not_connected">
+        			<a onclick="promptLogin()" class="login-button"> 
+         				<span>Login</span>
+        			</a>
+      			</div>
+    		</div>
 		</div><!-- /header -->
 	
 		<div data-role="content">
@@ -47,7 +55,7 @@
       		xfbml: true,
       		oauth: true});
  
-      		FB.Event.subscribe('auth.statusResponseChange', handleResponseChange);	
+      		FB.getLoginStatus(handleStatusChange)
     	};
   	</script>
   	
@@ -61,13 +69,6 @@
    		}
    	</script>
    
-   	<div id="login">
-     	<p><button onClick="loginUser();">Login</button></p>
-   	</div>
-   	<div id="logout">
-     	<div id="user-info"></div>
-     	<p><button  onClick="FB.logout();">Logout</button></p>
-   	</div>
    
   	<script>
     	function loginUser() {    
@@ -92,20 +93,30 @@
 	</style>
 
 
+
+		<div class="show_when_connected">
+			<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
+				<a class="login-button" onclick="logout()">
+					<span>Logout</span>
+				</a>
+			</div>
+		</div>
+  	
 	</div><!-- /content -->
 		
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" class="menubar">
-		
-		<ul>
-			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
-		</ul>
+			<ul>
+				<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
+				<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
+				<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
+			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
 	
 	</div><!-- /page -->
+
+	<script src="auth.js"></script>
 
 </body>
 

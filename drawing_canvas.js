@@ -47,28 +47,31 @@ function resetDimensions(){
 }
 
 function prepareCanvas(url, photo_id){
-	id = photo_id
+	id = photo_id;
 	drawControls();
 	canvas = document.getElementById('canvas');
 	context = canvas.getContext("2d");
 	img = new Image();
 	img.src = url;
-
+	img.onload = function(){
 	
-	canvas.style.backgroundImage = "url("+url+")";
-	canvas.style.width = "100%"
-	canvas.height = yscale(canvas.width, img)
+		canvas.style = "border:1px solid black;"
+    	
+		canvas.style.backgroundImage = "url("+url+")";
+		canvas.style.width = "100%"
+		canvas.height = yscale(canvas.width, img)
 		
-	resetDimensions();
+		resetDimensions();
 
-	$('#canvas').mousedown(onMouseDown);
-	$('#canvas').mousemove(onMouseMove);
-	$('#canvas').mouseup(onMouseUp);
-	$('#canvas').mouseleave(onMouseLeave);
+		$('#canvas').mousedown(onMouseDown);
+		$('#canvas').mousemove(onMouseMove);
+		$('#canvas').mouseup(onMouseUp);
+		$('#canvas').mouseleave(onMouseLeave);
 	
-	window.onresize = function(event) {
-	    resetDimensions();
-		redraw();
+		window.onresize = function(event) {
+	    	resetDimensions();
+			redraw();
+		}
 	}
 
 	
@@ -94,7 +97,6 @@ function onMouseMove(e){
 	if(drawing){
 		var rect = canvas.getBoundingClientRect();
 		var newPoint = new Point(e.clientX-rect.left, e.clientY-rect.top, lineWidth, curColor);
-		
 		paths[paths.length-1].push(newPoint);
 	}
 	redraw();
@@ -147,7 +149,6 @@ function changeSize(size){
 	var curId = getSizeString(lineWidth);
 	document.getElementById(curId).style.backgroundColor = "#E0E0E0";
 	document.getElementById(getSizeString(size)).style.backgroundColor = "#B0B0B0";
-	
 	
 	lineWidth = size;
 }

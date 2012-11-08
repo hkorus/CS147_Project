@@ -35,14 +35,26 @@
 	
 	<script type = "text/javascript">
 		function send_rating(comment, amount){
+			
+			var up = document.getElementById("up-"+comment);
+			var down = document.getElementById("down-"+comment);
+			
+			if(amount > 0){
+				up.src = "icons/selected_up_arrow.png"
+			}else{
+				down.src = "icons/selected_down_arrow.png"
+			}
+			up.onclick = "";
+			down.onclick = "";
+			var num = document.getElementById("number-"+comment);
+			num.innerHTML = ""+(parseInt(num.innerHTML)+amount)
+			
 			var request = new XMLHttpRequest();
 			request.open('POST', 'rate_image.php', false);
 			request.setRequestHeader("Content-type", "application/upload")
 			request.send(comment+"&"+amount); // because of "false" above, will block until the request is done
 			                // and status is available. Not recommended, however it works for simple cases.
-			if (request.status === 200) {
-			  alert("Rated!")
-			}
+			  
 		}
 	</script>
 
@@ -54,8 +66,7 @@
 			<a href="./comments.php?id=<?php echo $_GET["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
 			<a href="./annotate.php?id=<?php echo $_GET["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
 		</div><!-- /controlgroup -->
-		
-		<p>
+			<p></p>
 			<table style = "text-align:center">
 				<tr>
 					
@@ -66,42 +77,32 @@
 				</tr>	
 				
 				<?php
-						
+						$arr = array();
+						$image = "";
 						if(mysql_num_rows($result)>0){	
 							while($row = mysql_fetch_assoc($result)) {
+								$image = $row['image_url'];
 								echo "<tr><td>";
 
 						?> 
 						<table ><tr >
-						<td style="padding-left:15px;"><img src = "icons/up_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)"></td></tr>
+						<td style="padding-left:15px;"><img id = "up-<?php echo $row["comment_id"] ?>" src = "icons/up_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)"></td></tr>
 						
-						<tr><td style="padding-left:15px;"><img src = "icons/down_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1)"></td></tr>
+						<tr><td style="padding-left:15px;"><img id = "down-<?php echo $row["comment_id"] ?>" src = "icons/down_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1)"></td></tr>
 						
-						<tr><td style="padding-left:15px;"><?php echo $row["rating"]; ?></td></tr></table>
+						<tr><td id = "number-<?php echo $row["comment_id"] ?>" style="padding-left:15px;"><?php echo $row["rating"]; ?></td></tr></table>
 
 					</td>
 					<td style = "width:150px; text-align:center">
 						<?php
 
-							echo "<canvas id = '".$row["comment_id"]."' width = '100%'></canvas>
+							echo "<canvas id = 'canvas-".$row["comment_id"]."' width = '100%'></canvas>
 							";
+							array_push($arr, $row["comment_id"]);
+							array_push($arr, $row["annotation"]);
 							
-							echo "<script type = 'text/javascript'>"."
-										$(document).ready(function() {"."
-										canvas = document.getElementById('".$row["comment_id"]."');"."
-										context = canvas.getContext('2d');"."
-										img = new Image();"."
-										img.src = '".$row["annotation"]."';"."
-										
-										backgroundImg = new Image();"."
-										backgroundImg.src = '".$row["image_url"]."';"."
-										context.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height)"."
-										context.drawImage(img, 0, 0, canvas.width, canvas.height)".
-									"});";
-
-
-								echo "</script>";
-						?> 
+							?>
+							
 
 					</td>
 					<td style = "width:200px"> 
@@ -121,10 +122,47 @@
 			<?php 
 			echo "<br/>";
 			echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }?>
-		</p>
 		
 	
-		
+		<script type = 'text/javascript'>
+					$(document).bind('pageinit', function() {
+						
+						array = new Array(<?php 
+							for ($i=0; $i< count($arr); $i+=2)
+							{
+								echo "'".$arr[$i]."','".$arr[$i+1]."'";
+								if($i!= count($arr)-2){
+									echo ",";
+								}
+							 }
+
+						?>);
+						for (var i=0;i<array.length;i+=2)
+						{ 
+							var newCanvas = document.getElementById("canvas-"+array[i]);
+							var newContext = newCanvas.getContext('2d');
+							var newImg = new Image();
+							newImg.src = array[i+1];	
+							
+							newImg.onload = function(){
+								backgroundImg = new Image();
+								backgroundImg.src = <?php echo "'".$image."'"; ?>;
+								
+								backgroundImg.onload = function(){
+									newContext.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
+									newContext.drawImage(newImg, 0, 0,  newCanvas.width, newCanvas.height);
+								}
+							}
+							
+							
+							
+						}
+						
+													
+				});
+
+
+			</script>
 		
 		
 		
@@ -134,9 +172,9 @@
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" class="menubar">
 					<ul>
-			<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
+			<li><a href="./art.php" id="art" data-icon="custom" >Random Art</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom" >Favorites</a></li>
+			<li><a href="./help.php" id="help" data-icon="custom" >Help</a></li>
 		</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
