@@ -88,7 +88,7 @@
 				canvas.height = img.height;
 			
 				backgroundImg = new Image();
-				backgroundImg.src = <?php echo "'".$artPiece["image_url"]."'" ?>;
+				backgroundImg.src = <?php echo "'".$artPiece["image_source"]."'" ?>;
 				context.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height)
 
 				context.drawImage(img, 0, 0, canvas.width, canvas.height)
