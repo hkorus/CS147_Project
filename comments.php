@@ -72,12 +72,11 @@
 								echo "<tr><td>";
 
 						?> 
-						<table ><tr >
-						<td style="padding-left:15px;"><img src = "icons/up_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)"></td></tr>
-						
+						<table>
+						<tr><td style="padding-left:15px;"><img src = "icons/up_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)"></td></tr>
+						<tr><td style="padding-left:15px; font-size:18px;"><?php echo $row["rating"]; ?></td></tr>
 						<tr><td style="padding-left:15px;"><img src = "icons/down_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1)"></td></tr>
-						
-						<tr><td style="padding-left:15px;"><?php echo $row["rating"]; ?></td></tr></table>
+						</table>
 
 					</td>
 					<td style = "width:150px; text-align:center">

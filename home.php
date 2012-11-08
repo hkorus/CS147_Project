@@ -35,8 +35,12 @@
 		<div data-role="content">
 
 			<p style="text-align:center"><img src="images/logo_crop.png"></p>
-			<p style="font-family: Andale Mono; font-size: 18px; text-align: center">discover art, draw your commentary</p>
+			<p style="font-family: Andale Mono; font-size: 18px; text-align: center;">discover art, draw your commentary</p>
 			<br></br>
+			
+				<label for="search-basic">Search for artwork:</label>
+				<input type="search" name="search" id="search-basic" value="" data-icon="custom" />
+			
 			
 			<div id="fb-root"></div>
 			
