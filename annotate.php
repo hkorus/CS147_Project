@@ -27,7 +27,7 @@ if($result!=false){
 	<link rel='stylesheet' href='spectrum.css' />
 	
 	<style type="text/css" media="screen">
-    	#canvas{ display:block; background-size: 100%;}
+    	#canvas{ display:block; border:1px solid black;background-size: 100%;}
 		table, td, tr {
 			margin:0;
 			padding:0;
@@ -45,9 +45,9 @@ if($result!=false){
 
 	<div data-role="page">
 		<div data-role="header">
-			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
-			<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
-		</div><!-- /header -->
+		<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
+
+	</div><!-- /header -->
 
 			<div data-role="content" id = "container">
 				
@@ -95,9 +95,9 @@ if($result!=false){
 				?>
 
 				<script type="text/javascript"> 
-				$(document).bind('pageinit', function() {
-					
+				$(document).ready(function() {
 					<?php
+					
 					echo "prepareCanvas('".$row["image_url"]."', ".$row["id"].")";
 
 					?>
@@ -106,7 +106,6 @@ if($result!=false){
 			</div><!-- /content -->
 
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
-
 		<div data-role="navbar" class="menubar" data-grid="c">
 		<ul>
 			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
