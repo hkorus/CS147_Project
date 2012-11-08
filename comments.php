@@ -125,6 +125,13 @@
 		
 	
 		<script type = 'text/javascript'>
+		
+					function yscale(width, img){
+						var ratio = width/img.width;
+						return ratio * img.height;
+					}
+					
+					
 					$(document).bind('pageinit', function() {
 						
 						array = new Array(<?php 
@@ -137,25 +144,39 @@
 							 }
 
 						?>);
+						
+						var canvasList = new Array();
+						var backgroundImg = new Image();
+						backgroundImg.src = <?php echo "'".$image."'"; ?>;
+												
 						for (var i=0;i<array.length;i+=2)
 						{ 
-							var newCanvas = document.getElementById("canvas-"+array[i]);
-							var newContext = newCanvas.getContext('2d');
-							var newImg = new Image();
-							newImg.src = array[i+1];	
+							newCanvas = document.getElementById("canvas-"+array[i]);
+							canvasList.push(newCanvas);
 							
-							newImg.onload = function(){
-								backgroundImg = new Image();
-								backgroundImg.src = <?php echo "'".$image."'"; ?>;
+							newImg = new Image();
+							newImg.src = array[i+1];
+							canvasList.push(newImg);
+							
+							
+							if(i == array.length-2){
+								newImg.onload = function(){
+									
+									for(var j = 0; j<canvasList.length; j+=2){
+										newCanvas = canvasList[j];
+										newImg = canvasList[j+1];
+										
+										context = newCanvas.getContext('2d');
+										newCanvas.width = 200;
+										newCanvas.height = yscale(newCanvas.width, newImg)
+										context.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
+										context.drawImage(newImg, 0, 0,  newCanvas.width, newCanvas.height);
+									}
+
 								
-								backgroundImg.onload = function(){
-									newContext.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
-									newContext.drawImage(newImg, 0, 0,  newCanvas.width, newCanvas.height);
 								}
 							}
-							
-							
-							
+								
 						}
 						
 													
