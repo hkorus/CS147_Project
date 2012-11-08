@@ -213,6 +213,7 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 	</div><!-- /navbar -->
 </div><!-- /footer -->
 
+
 </div><!-- /page -->
 </body>
 
