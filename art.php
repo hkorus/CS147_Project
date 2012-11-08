@@ -25,6 +25,7 @@
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script type="text/javascript" src="drawing_canvas.js"></script>
+	<script src="auth.js"></script>
 	
 	<script type = "text/javascript">
 		function send_favorite(id){
@@ -173,7 +174,7 @@
 	</div><!-- /footer -->
 	
 </div><!-- /page -->
-<script src="auth.js"></script>
+
 </body>
 
 </html>
