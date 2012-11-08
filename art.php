@@ -26,11 +26,12 @@
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script type="text/javascript" src="drawing_canvas.js"></script>
 	<script src="auth.js"></script>
+	<script src='spectrum.js'></script>
 	
 	<script type = "text/javascript">
 		function send_favorite(id){
 			if(<?php echo $fb_user ?>) {
-				var button = document.getElementById("fav_button");				
+				var button = $(".fav_button:last")[0]				
 				button.src = 'icons/heart-glowing.png';
 				button.onclick = "";
 				var request = new XMLHttpRequest();
@@ -88,7 +89,7 @@
 			<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button"  data-theme="a">Annotate</a>
 		</div><!-- /controlgroup -->
 		</td>
-		<td style = "text-align:right;width:50px"><img id = "fav_button" src= "icons/heart.png" width = "30" height = "30" onclick = "send_favorite(<?php echo $row["id"]?>)">
+		<td style = "text-align:right;width:50px"><img class = "fav_button" src= "icons/heart.png" width = "30" height = "30" onclick = "send_favorite(<?php echo $row["id"]?>)">
 			</td></tr></table>
 		
 			<p style="font-family: Andale Mono; font-size: 16px;"><b><?php echo $row["title"]; ?> </b> 
@@ -109,12 +110,12 @@
 			}
 			?>
 			
-					<div id="fb-root"></div>
+					<div class="fb-root"></div>
 		<script>
 			$(document).bind('pageinit', function() {
     				var e = document.createElement('script'); e.async = true;
        				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-        			document.getElementById('fb-root').appendChild(e);
+        			$(".fb-root:last")[0].appendChild(e);
         		}());
 			</script>
   	

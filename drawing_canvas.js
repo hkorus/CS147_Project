@@ -33,10 +33,10 @@ function drawOneCircle(controlCanvas, size){
 }
 
 function drawControls(){
-	drawOneCircle(document.getElementById('small'), 3);
-	drawOneCircle(document.getElementById('medium'), 10);
-	drawOneCircle(document.getElementById('large'), 20);
-	drawOneCircle(document.getElementById('extralarge'), 50);
+	drawOneCircle($('.small:last')[0], 3);
+	drawOneCircle($('.medium:last')[0], 10);
+	drawOneCircle($('.large:last')[0], 20);
+	drawOneCircle($('.extralarge:last')[0], 50);
 
 }
 
@@ -48,20 +48,20 @@ function resetDimensions(){
 
 function prepareCanvas(url, photo_id){
 	id = photo_id;
-	drawControls();
+	drawControls();	
 	canvas = $('.drawingCanvas:last')[0]
 	context = canvas.getContext("2d");
 	img = new Image();
 	img.src = url;
 	img.onload = function(){
 		canvas.style = "border:1px solid black;"
-    	canvas.style.width = "100%"
-
+    	canvas.width = 600;
+		//resetDimensions();
 		canvas.height = yscale(canvas.width, img)
 
 		canvas.style.backgroundImage = "url("+url+")";
 		//canvas.style.backgroundSize = "100% Auto";
-	  
+	  	
 		
 		$('.drawingCanvas:last').mousedown(onMouseDown);
 		$('.drawingCanvas:last').mousemove(onMouseMove);
@@ -169,19 +169,21 @@ function getSizeString(size){
 
 function changeSize(size){
 	var curId = getSizeString(lineWidth);
-	document.getElementById(curId).style.backgroundColor = "#E0E0E0";
-	document.getElementById(getSizeString(size)).style.backgroundColor = "#B0B0B0";
+	$('.'+curId+':last')[0].style.backgroundColor = "#E0E0E0";
+	
+	$('.'+getSizeString(size)+':last')[0].style.backgroundColor = "#B0B0B0";
 
 	lineWidth = size;
 }
 
 function changeColor(){
-	curColor = document.getElementById('colorPicker').value;
+	
+	curColor = $('.colorPicker:last')[0].value;
 }
 
 function save(){
 
-	var val = document.getElementById("commentBox").value;
+	var val = $('.commentBox:last')[0].value;
 	var dataURL = canvas.toDataURL();
 	var request = new XMLHttpRequest();
 	request.open('POST', 'save_image.php', false);

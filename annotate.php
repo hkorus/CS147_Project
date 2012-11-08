@@ -41,7 +41,7 @@ if($result!=false){
 	
 	
 	<style type="text/css" media="screen">
-    	#drawingCanvas{ display:block; background-size: 100%;}
+    	.drawingCanvas{ display:block; background-size: 100%;}
 		table, td, tr {
 			margin:0;
 			padding:0;
@@ -79,19 +79,19 @@ if($result!=false){
 						<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a">Comments</a>
 						<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a">Annotate</a>
 					</div><!-- /controlgroup -->
-					<table style = "width:100%;">
+					<table style = "width:600px;">
 						<tr>
-							<td style  = "width:100%;">
+							<td style>
 							<canvas class="drawingCanvas"></canvas>
 							<td>
 						<td style = "padding:2px;background-color:#E0E0E0;vertical-align;text-align: center;"">	
 								<p></p>
 								<div><img src = "icons/undo.png" width = "50px" onclick = "undo()"></div>
-								<div><canvas id="extralarge" height = "60px" width = "70px"  onclick = "changeSize(50)"></canvas></div>
-							<div ><canvas id="large" height = "50px" width = "70px"  onclick = "changeSize(20)"></canvas></div>
-								<div><canvas style = "background-color:#B0B0B0;" id="medium" height = "40px" width = "70px"  onclick = "changeSize(10)" ></canvas></div>
-								<div><canvas id="small" height = "30px" width = "70px" onclick = "changeSize(3)"></canvas></li>
-								<div style = "text-align: center;"><input type='color' name='color' id = "colorPicker" onchange = "changeColor()"/></div>
+								<div><canvas class="extralarge" height = "60px" width = "70px"  onclick = "changeSize(50)"></canvas></div>
+							<div ><canvas class="large" height = "50px" width = "70px"  onclick = "changeSize(20)"></canvas></div>
+								<div><canvas style = "background-color:#B0B0B0;" class="medium" height = "40px" width = "70px"  onclick = "changeSize(10)" ></canvas></div>
+								<div><canvas class="small" height = "30px" width = "70px" onclick = "changeSize(3)"></canvas></li>
+								<div style = "text-align: center;"><input type='color' name='color' class = "colorPicker" onchange = "changeColor()"/></div>
 							</div>
 							
 
@@ -100,8 +100,8 @@ if($result!=false){
 						</td>
 					</tr>
 					<tr>
-						<td style = "width:100%;background-color:#B0B0B0;padding:7px"">
-							<textarea id="commentBox" cols="100" rows="100">
+						<td style = "background-color:#B0B0B0;padding:7px">
+							<textarea class="commentBox" cols="100" rows="100">
 							</textarea>
 							</td>
 							<td></td>

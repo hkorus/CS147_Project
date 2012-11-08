@@ -50,7 +50,7 @@
 			<a href="./annotate.php?id=<?php echo $row["art_id"]?>" id="annotate" data-icon="custom" data-role="button"  data-theme="a">Annotate</a>
 		</div><!-- /controlgroup -->
 		
-			<canvas id="canvas" ></canvas>
+			<canvas class="displayCanvas" ></canvas>
 			
 		
 			<?php
@@ -78,7 +78,7 @@
 	
 	<script type = "text/javascript">
 	$(document).bind('pageinit', function() {
- 			canvas = document.getElementById('canvas');
+ 			canvas = $(".displayCanvas:last")[0];
 			context = canvas.getContext("2d");
 			img = new Image();
 			img.src = <?php echo "'".$row["annotation"]."'" ?>;

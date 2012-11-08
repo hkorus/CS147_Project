@@ -96,12 +96,12 @@
 		
 		
 		
-		<div id="fb-root"></div>
+		<div class="fb-root"></div>
 		<script>
 			$(document).bind('pageinit', function() {
     				var e = document.createElement('script'); e.async = true;
        				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-        			document.getElementById('fb-root').appendChild(e);
+        			$(".fb-root:last")[0].appendChild(e);
         		}());
 			</script>
   	

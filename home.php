@@ -28,7 +28,7 @@
 	
 	<script type = "text/javascript">
 		function search(){
-			var term = document.getElementById("term").value;
+			var term = $(".term:last")[0].value;
 
 			var request = new XMLHttpRequest();
 			request.open('POST', 'search.php', false);
@@ -38,7 +38,7 @@
 			if(request.status == 200){
 				
 				var html = "";
-				var results = document.getElementById("results");
+				var results = $(".results:last")[0];
 				var text = request.responseText;
 				var loc = text.indexOf('|');
 				while(loc!=-1){
@@ -83,21 +83,21 @@
 			<br></br>
 			
 			<div class="search" style="width:75%">
-   				<input type="text" name="term" id = "term"/>
+   				<input type="text" name="term" class = "term"/>
 					<input type="submit" name="submit" value="Search!" onclick = "search()"/>
-					<div id = "results" style="height:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+					<div class = "results" style="height:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
 
 					</div>
 			</div><!-- /search -->
 			
 			
-			<div id="fb-root"></div>
+			<div class="fb-root"></div>
 			
 			<script>
   				(function() {
     				var e = document.createElement('script'); e.async = true;
        				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-        			document.getElementById('fb-root').appendChild(e);
+        			$(".fb-root:last")[0].appendChild(e);
         		}());
 			</script>
   	
