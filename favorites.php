@@ -1,3 +1,14 @@
+<?php
+	require './facebook.php';
+	$facebook = new Facebook(array(
+		'appId'  => '291103611004949',
+  		'secret' => '226db60e672abf202f1424b1084fc38e',
+      	'cookie' => true));
+      	
+    $fb_user = $facebook->getUser();
+?>
+
+
 <!DOCTYPE html>
 <head>
 	<title>Favorites</title>
@@ -16,19 +27,31 @@
 	<script src="isotope/jquery.isotope.min.js"></script>
 	
 	
-	<script>	
-		$( function(){
-			var $container = $('#container');
-  			
-  			$container.imagesLoaded( function(){
-    			$container.isotope({
-    				itemSelector : '.image',
-    				masonryHorizontal: {
-    					columnWidth: 240
-    				}
-    			});
-  			});
-		});
+//	<script>	
+//		$( function(){
+//			var $container = $('#container');
+//  			
+//  			$container.imagesLoaded( function(){
+//    			$container.isotope({
+//    				itemSelector : '.image',
+//    				masonryHorizontal: {
+//    					columnWidth: 240
+//    				}
+//    			});
+//  			});
+//		});
+//	</script>
+
+	<script>
+		$(window).load(function() {
+        	var $container = $('#container');
+        	$container.isotope({ 
+        		itemSelector : '.image',
+    			masonryHorizontal: {
+    				columnWidth: 240
+    			}
+    		});
+        });
 	</script>
 		
 </head>
@@ -46,12 +69,17 @@
 		<div id="container">
 		<?php
 			include("config.php");
-			$query = "SELECT * FROM art, fave_art where id = art_id";
-			$result = mysql_query($query);
-			while ($row = mysql_fetch_assoc($result)) {
-				echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_url']."'></a></div>";
-			} 
-			?>
+			if ($fb_user) {
+				//$query = "SELECT * FROM art, fave_art where id = art_id and user_id =".$fb_user;
+				$query = "SELECT * FROM art, fave_art where id = art_id";
+				$result = mysql_query($query);
+				while ($row = mysql_fetch_assoc($result)) {
+					echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_url']."'></a></div>";
+				} 
+			} else {
+				echo "Please login to view favorites";
+			}
+		?>
 		</div><!-- /container -->
 
 	</div><!-- /content -->
