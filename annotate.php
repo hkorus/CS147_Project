@@ -106,8 +106,9 @@ if($result!=false){
 			</div><!-- /content -->
 
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
-		<div data-role="navbar" class="menubar">
-					<ul>
+		<div data-role="navbar" class="menubar" data-grid="c">
+		<ul>
+			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
 			<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
 			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
