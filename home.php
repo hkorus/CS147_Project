@@ -24,6 +24,7 @@
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
+	<script src="auth.js"></script>
 	
 	  
 </head>
@@ -78,7 +79,6 @@
     			};
   			</script>
   	
-			<div class="section">
 				<div class="show_when_connected">
 					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
 						<a class="login-button" onclick="logout()">
@@ -89,7 +89,6 @@
 						?>
 					</div>
 				</div>
-			</div>
   	
 
 		</div><!-- /content -->
@@ -107,8 +106,6 @@
 		</div><!-- /footer -->
 	
 	</div><!-- /page -->
-	
-	<script src="auth.js"></script>
 
 </body>
 

@@ -25,17 +25,22 @@
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script type="text/javascript" src="drawing_canvas.js"></script>
+	<script src="auth.js"></script>
 	
 	<script type = "text/javascript">
 		function send_favorite(id){
-			var button = document.getElementById("fav_button");				
-			button.src = 'icons/heart-glowing.png';
-			button.onclick = "";
-			var request = new XMLHttpRequest();
-			request.open('POST', 'mark_favorite.php', false);
-			request.setRequestHeader("Content-type", "application/upload")
-			request.send(id); // because of "false" above, will block until the request is done
+			if(<?php echo $fb_user ?>) {
+				var button = document.getElementById("fav_button");				
+				button.src = 'icons/heart-glowing.png';
+				button.onclick = "";
+				var request = new XMLHttpRequest();
+				request.open('POST', 'mark_favorite.php', false);
+				request.setRequestHeader("Content-type", "application/upload")
+				request.send(id); // because of "false" above, will block until the request is done
 			                // and status is available. Not recommended, however it works for simple cases.
+			} else {
+				alert("Please login to add art to Favorites");
+			}
 			
 		}
 	</script>
@@ -169,7 +174,7 @@
 	</div><!-- /footer -->
 	
 </div><!-- /page -->
-<script src="auth.js"></script>
+
 </body>
 
 </html>

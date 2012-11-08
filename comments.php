@@ -24,6 +24,7 @@
 
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
+	<script src="auth.js"></script>
 
 </head>
 <body>
@@ -258,7 +259,7 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 
 
 </div><!-- /page -->
-<script src="auth.js"></script>
+
 </body>
 
 </html>
