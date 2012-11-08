@@ -116,10 +116,10 @@ if($result!=false){
 				?>
 
 				<script type="text/javascript"> 
-				$(document).ready(function() {
+				$(document).bind('pageinit', function() {
 					<?php
-					
-					echo "prepareCanvas('".$row["image_url"]."', ".$row["id"].")";
+
+						echo "prepareCanvas('".$row["image_source"]."', ".$row["id"].")";
 
 					?>
 				});
