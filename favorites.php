@@ -74,30 +74,25 @@
 	
 	<div data-role="content">
 		<p>Favorites</p>
-		
 			<div id="container">
-				<div class="show_when_connected">
 					<?php
 						include("config.php");
 						if ($fb_user) {
-							//$query = "SELECT * FROM art, fave_art where id = art_id and user_id =".$fb_user;
-							$query = "SELECT * FROM art, fave_art where id = art_id";
+							$query = "SELECT * FROM art, fave_art where id = art_id and user_id =".$fb_user;
+							//$query = "SELECT * FROM art, fave_art where id = art_id";
 							$result = mysql_query($query);
 							while ($row = mysql_fetch_assoc($result)) {
 								echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_url']."'></a></div>";
 							} 
-						} else {
-							echo "Please login to view Favorites";
 						}
 					?>
-				</div>
-				<div class="show_when_not_connected">
-					<p>Please login to view Favorites</p>
-				</div>
-				
-			</div>
-		</div><!-- /container -->
+			</div><!-- /container -->
 		
+			<?php
+				if(!$fb_user) {
+					echo "Please login to view Favorites";
+				}
+			?>
 		
 		
 		
@@ -127,6 +122,9 @@
 						<a class="login-button" onclick="logout()">
 							<span>Logout</span>
 						</a>
+						<?php
+							$facebook->destroySession();
+						?>
 					</div>
 				</div>
 

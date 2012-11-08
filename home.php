@@ -71,6 +71,9 @@
 						<a class="login-button" onclick="logout()">
 							<span>Logout</span>
 						</a>
+						<?php
+							$facebook->destroySession();
+						?>
 					</div>
 				</div>
 			</div>

@@ -1,3 +1,13 @@
+<?php
+	require './facebook.php';
+	$facebook = new Facebook(array(
+		'appId'  => '291103611004949',
+  		'secret' => '226db60e672abf202f1424b1084fc38e',
+      	'cookie' => true));
+      	
+    $fb_user = $facebook->getUser();
+?>
+
 <!DOCTYPE html>
 <head>
 	<title>Art</title>
@@ -119,6 +129,9 @@
 							<span>Logout</span>
 						</a>
 					</div>
+					<?php
+						$facebook->destroySession();
+					?>
 				</div>
 			
 	</div><!-- /content -->
