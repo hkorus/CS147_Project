@@ -8,6 +8,7 @@
 
 	<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="fbstyle.css" />
 	<link rel="apple-touch-icon" href="icons/icon2.png" />
 	<link rel="apple-touch-startup-image" href="images/logo.png">
 
@@ -21,6 +22,14 @@
 
 		<div data-role="header">
 			<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
+			<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
+     			<div class="show_when_not_connected">
+        			<a onclick="promptLogin()" class="login-button"> 
+       					<span>Login</span>
+      				</a>
+    			</div>
+      		</div>
+			
 			<?php
 
 		include("config.php");
@@ -196,6 +205,34 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 
 	</script>
 
+		<div id="fb-root"></div>
+		<script>
+			$(document).bind('pageinit', function() {
+    				var e = document.createElement('script'); e.async = true;
+       				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+        			document.getElementById('fb-root').appendChild(e);
+        		}());
+			</script>
+  	
+			<script>
+    			window.fbAsyncInit = function() {
+      				FB.init({ appId: '291103611004949',
+      					status: true,
+      					cookie: true,
+      					xfbml: true,
+      					oauth: true});
+ 
+      				FB.getLoginStatus(handleStatusChange)
+    			};
+  			</script>
+
+				<div class="show_when_connected">
+					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
+						<a class="login-button" onclick="logout()">
+							<span>Logout</span>
+						</a>
+					</div>
+				</div>
 
 
 </div><!-- /content -->
@@ -215,6 +252,7 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 
 
 </div><!-- /page -->
+<script src="auth.js"></script>
 </body>
 
 </html>
