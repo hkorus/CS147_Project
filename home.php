@@ -29,7 +29,7 @@
 </head>
 <body>
 	
-	<div data-role="page">
+	<div data-role="page" id="homepage">
 		<div data-role="header">
 			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
 			<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
@@ -49,14 +49,17 @@
 			<p style="font-family: Andale Mono; font-size: 18px; text-align: center;">discover art, draw your commentary</p>
 			<br></br>
 			
-				<label for="search-basic">Search for artwork:</label>
-				<input type="search" name="search" id="search-basic" value="" data-icon="custom" />
-			
+			<div class="search" style="width:75%">
+				<form action="search.php" method="post">
+   				<input type="text" name="term" />
+    			<input type="submit" name="submit" value="Search!" />
+    			</form>
+			</div><!-- /search -->
 			
 			<div id="fb-root"></div>
 			
 			<script>
-			$(document).bind('pageinit', function() {
+  				(function() {
     				var e = document.createElement('script'); e.async = true;
        				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
         			document.getElementById('fb-root').appendChild(e);
@@ -75,6 +78,7 @@
     			};
   			</script>
   	
+			<div class="section">
 				<div class="show_when_connected">
 					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
 						<a class="login-button" onclick="logout()">
@@ -84,7 +88,10 @@
 							$facebook->destroySession();
 						?>
 					</div>
-				</div>  	
+				</div>
+			</div>
+  	
+
 		</div><!-- /content -->
 		
 		<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
@@ -100,7 +107,7 @@
 		</div><!-- /footer -->
 	
 	</div><!-- /page -->
-
+	
 	<script src="auth.js"></script>
 
 </body>
