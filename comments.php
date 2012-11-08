@@ -81,9 +81,9 @@
 	<div data-role="content">
 
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
-			<a href="./art.php?id=<?php echo $_GET["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
-			<a href="./comments.php?id=<?php echo $_GET["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
-			<a href="./annotate.php?id=<?php echo $_GET["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
+			<a href="./art.php?id=<?php echo $_GET["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" >Art</a></li>
+			<a href="./comments.php?id=<?php echo $_GET["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" >Comments</a>
+			<a href="./annotate.php?id=<?php echo $_GET["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" >Annotate</a>
 		</div><!-- /controlgroup -->
 		<p></p>
 		<table style = "text-align:center">
@@ -256,9 +256,9 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 	<div data-role="navbar" class="menubar" data-grid="c">
 		<ul>
 			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
-			<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
+			<li><a href="./art.php" id="art" data-icon="custom" >Random Art</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom" >Favorites</a></li>
+			<li><a href="./help.php" id="help" data-icon="custom" >Help</a></li>
 		</ul>
 	</div><!-- /navbar -->
 </div><!-- /footer -->

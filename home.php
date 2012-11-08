@@ -48,9 +48,9 @@
 					}
 					var id = one.substring(0, andloc);
 					var info = one.substring(andloc+1);
-					html+= "<p><a href = 'art.php?id="+id+"'>"+info+"</a><p>";
+					html+= "<a href = 'art.php?id="+id+"'>"+info+"</a><br/>";
 					
-					text = text.substring(0,loc);
+					text = text.substring(loc+1);
 					loc = text.indexOf("|")
 				}
 				results.innerHTML = html;
