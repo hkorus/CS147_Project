@@ -26,7 +26,7 @@
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
 	
-	<script src="isotope/jquery.isotope.min.js"></script>
+	<script src="isotope-master/jquery.isotope.min.js"></script>
 	
 
 
@@ -43,7 +43,7 @@
 	<div data-role="content">
 		<p>Favorites</p>
 		
-		<div id="container" style = "display:none">
+		<div id="container">
 		<?php
 			include("config.php");
 
@@ -65,10 +65,8 @@
 	<script type = "text/javascript">
 	  
 	
-	$(document).bind('pageinit', function() {
+	$(window).load(function() {
         	var container = $('#container');
-			container.style = "display:block"
-
         	container.isotope({ 
         		itemSelector : '.image',
     			masonryHorizontal: {
