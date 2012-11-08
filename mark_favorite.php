@@ -9,7 +9,6 @@ include("config.php");
     $fb_user = $facebook->getUser();
     
 	$imageData=$GLOBALS['HTTP_RAW_POST_DATA'];
-	//$query = "INSERT INTO fave_art VALUES (1,".$imageData.",NULL);";
 	$query = "INSERT INTO fave_art VALUES (".$fb_user.",".$imageData.",NULL);";
 	$result = mysql_query($query);
 

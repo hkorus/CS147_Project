@@ -24,6 +24,7 @@
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
+	<script src="auth.js"></script>
 	
 	<script type = "text/javascript">
 		function search(){
@@ -139,8 +140,6 @@
 		</div><!-- /footer -->
 	
 	</div><!-- /page -->
-	
-	<script src="auth.js"></script>
 
 </body>
 

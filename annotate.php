@@ -36,7 +36,9 @@ if($result!=false){
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script type="text/javascript" src="drawing_canvas.js"></script>
 	<script src='spectrum.js'></script>
+	<script src="auth.js"></script>
 	<link rel='stylesheet' href='spectrum.css' />
+	
 	
 	<style type="text/css" media="screen">
     	#canvas{ display:block; border:1px solid black;background-size: 100%;}
@@ -172,7 +174,7 @@ if($result!=false){
 	</div><!-- /footer -->
 
 </div><!-- /page -->
-<script src="auth.js"></script>
+
 </body>
 
 </html>

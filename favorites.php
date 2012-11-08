@@ -8,7 +8,6 @@
     $fb_user = $facebook->getUser();
 ?>
 
-
 <!DOCTYPE html>
 <head>
 	<title>Favorites</title>
@@ -26,6 +25,7 @@
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script src="isotope-master/jquery.isotope.min.js"></script>
+	<script src="auth.js"></script>
 	
 	
 	<!--<script>	
@@ -143,7 +143,6 @@
 	</div><!-- /footer -->
 	
 </div><!-- /page -->
-<script src="auth.js"></script>
 </body>
 
 </html>
