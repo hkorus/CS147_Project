@@ -110,13 +110,14 @@
 					<ul>
 
 			<li><a onclick = "refresh()" id="art" data-icon="custom">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
 		</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
 	
 </div><!-- /page -->
+<script src="auth.js"></script>
 </body>
 
 </html>

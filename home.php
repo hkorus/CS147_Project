@@ -39,48 +39,49 @@
 			<br></br>
 			
 			<div id="fb-root"></div>
-	<script>
-  		(function() {
-    		var e = document.createElement('script'); e.async = true;
-       		e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-        	document.getElementById('fb-root').appendChild(e);
-        	}());
-	</script>
+			
+			<script>
+  				(function() {
+    				var e = document.createElement('script'); e.async = true;
+       				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+        			document.getElementById('fb-root').appendChild(e);
+        		}());
+			</script>
   	
-	<script>
-    	window.fbAsyncInit = function() {
-      		FB.init({ appId: '291103611004949',
-      		status: true,
-      		cookie: true,
-      		xfbml: true,
-      		oauth: true});
+			<script>
+    			window.fbAsyncInit = function() {
+      				FB.init({ appId: '291103611004949',
+      					status: true,
+      					cookie: true,
+      					xfbml: true,
+      					oauth: true});
  
-      		FB.getLoginStatus(handleStatusChange)
-    	};
-  	</script>
+      				FB.getLoginStatus(handleStatusChange)
+    			};
+  			</script>
   	
-	<div class="section">
-		<div class="show_when_connected">
-			<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
-				<a class="login-button" onclick="logout()">
-					<span>Logout</span>
-				</a>
+			<div class="section">
+				<div class="show_when_connected">
+					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
+						<a class="login-button" onclick="logout()">
+							<span>Logout</span>
+						</a>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
   	
-	</div><!-- /content -->
+		</div><!-- /content -->
 		
-	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
-		<div data-role="navbar" class="menubar">
+		<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
+			<div data-role="navbar" class="menubar">
 		
-		<ul>
-			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
-		</ul>
-		</div><!-- /navbar -->
-	</div><!-- /footer -->
+				<ul>
+					<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
+					<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
+					<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
+				</ul>
+			</div><!-- /navbar -->
+		</div><!-- /footer -->
 	
 	</div><!-- /page -->
 
