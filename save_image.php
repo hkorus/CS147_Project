@@ -1,6 +1,14 @@
 <?php
 include("config.php");
-
+	
+	require './facebook.php';
+	$facebook = new Facebook(array(
+		'appId'  => '291103611004949',
+  		'secret' => '226db60e672abf202f1424b1084fc38e',
+      	'cookie' => true));
+      	
+    $fb_user = $facebook->getUser();
+    
 	$imageData=$GLOBALS['HTTP_RAW_POST_DATA'];
 	$msg = substr($imageData, 0, strpos($imageData, "&"));
 	$imageData = substr($imageData, strpos($imageData, "&")+1);
@@ -18,7 +26,7 @@ include("config.php");
    fwrite( $fp, $unencodedData);
    fclose( $fp );
 
-	$query = "INSERT INTO comments VALUES (".$commentId.",1,".$id.",'".$msg."','".$name."',NULL,0);";
+	$query = "INSERT INTO comments VALUES (".$commentId.$fb_user.$id.",'".$msg."','".$name."',NULL,0);";
 	$result = mysql_query($query);
 
 	

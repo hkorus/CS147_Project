@@ -25,11 +25,35 @@
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
-	
 	<script src="isotope-master/jquery.isotope.min.js"></script>
 	
+	
+	<!--<script>	
+		$( function(){
+			var $container = $('#container');
+  			
+  			$container.imagesLoaded( function(){
+    			$container.isotope({
+    				itemSelector : '.image',
+    				masonryHorizontal: {
+    					columnWidth: 240
+    				}
+    			});
+  			});
+		});
+	</script>-->
 
-
+	<script>
+		$(window).load(function() {
+        	var $container = $('#container');
+        	$container.isotope({ 
+        		itemSelector : '.image',
+    			masonryHorizontal: {
+    				columnWidth: 240
+    			}
+    		});
+        });
+	</script>
 		
 </head>
 <body>
@@ -38,47 +62,78 @@
 	<div data-role="header">
 		<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
 		<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
+		<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
+     		<div class="show_when_not_connected">
+        		<a onclick="promptLogin()" class="login-button"> 
+       				<span>Login</span>
+      			</a>
+    		</div>
+      	</div>
+	
 	</div><!-- /header -->
 	
 	<div data-role="content">
 		<p>Favorites</p>
+			<div id="container">
+					<?php
+						include("config.php");
+						if ($fb_user) {
+							$query = "SELECT * FROM art, fave_art where id = art_id and user_id =".$fb_user;
+							//$query = "SELECT * FROM art, fave_art where id = art_id";
+							$result = mysql_query($query);
+							while ($row = mysql_fetch_assoc($result)) {
+								echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_url']."'></a></div>";
+							} 
+						}
+					?>
+			</div><!-- /container -->
 		
-		<div id="container">
-		<?php
-			include("config.php");
+			<?php
+				if(!$fb_user) {
+					echo "Please login to view Favorites";
+				}
+			?>
+		
+		
+		
+		<div id="fb-root"></div>
+		<script>
+			$(document).bind('pageinit', function() {
+    				var e = document.createElement('script'); e.async = true;
+       				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+        			document.getElementById('fb-root').appendChild(e);
+        		}());
+			</script>
+  	
+			<script>
+    			window.fbAsyncInit = function() {
+      				FB.init({ appId: '291103611004949',
+      					status: true,
+      					cookie: true,
+      					xfbml: true,
+      					oauth: true});
+ 
+      				FB.getLoginStatus(handleStatusChange)
+    			};
+  			</script>
 
-			if ($fb_user) {
-				//$query = "SELECT * FROM art, fave_art where id = art_id and user_id =".$fb_user;
-				$query = "SELECT * FROM art, fave_art where id = art_id";
-				$result = mysql_query($query);
-				while ($row = mysql_fetch_assoc($result)) {
-					echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_url']."'></a></div>";
-				} 
-			} else {
-				echo "Please login to view favorites";
-			}
-		?>
-		</div><!-- /container -->
+				<div class="show_when_connected">
+					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
+						<a class="login-button" onclick="logout()">
+							<span>Logout</span>
+						</a>
+						<?php
+							$facebook->destroySession();
+						?>
+					</div>
+				</div>
 
 	</div><!-- /content -->
 	
-	<script type = "text/javascript">
-	  
 	
-	$(window).load(function() {
-        	var container = $('#container');
-        	container.isotope({ 
-        		itemSelector : '.image',
-    			masonryHorizontal: {
-    				columnWidth: 240
-    			}
-    		});
-        });
-	</script>
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
-		<div data-role="navbar" class="menubar" data-grid="c">
+		<div data-role="navbar" class="menubar">
 		<ul>
-
 			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
 			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
 			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
@@ -88,6 +143,7 @@
 	</div><!-- /footer -->
 	
 </div><!-- /page -->
+<script src="auth.js"></script>
 </body>
 
 </html>

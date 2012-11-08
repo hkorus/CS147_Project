@@ -1,3 +1,13 @@
+<?php
+	require './facebook.php';
+	$facebook = new Facebook(array(
+		'appId'  => '291103611004949',
+  		'secret' => '226db60e672abf202f1424b1084fc38e',
+      	'cookie' => true));
+      	
+    $fb_user = $facebook->getUser();
+?>
+
 <!DOCTYPE html>
 <head>
 	<title>Home Page</title>
@@ -22,15 +32,16 @@
 	<div data-role="page" id="homepage">
 		<div data-role="header">
 			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
+			<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
 			
-    		<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
+			<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
      			<div class="show_when_not_connected">
         			<a onclick="promptLogin()" class="login-button"> 
          				<span>Login</span>
         			</a>
       			</div>
-    		</div>
-		</div><!-- /header -->
+      		</div>
+   		</div><!-- /header -->
 	
 		<div data-role="content">
 
@@ -73,10 +84,14 @@
 						<a class="login-button" onclick="logout()">
 							<span>Logout</span>
 						</a>
+						<?php
+							$facebook->destroySession();
+						?>
 					</div>
 				</div>
 			</div>
   	
+
 		</div><!-- /content -->
 		
 		<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">

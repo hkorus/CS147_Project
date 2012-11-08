@@ -1,3 +1,13 @@
+<?php
+	require './facebook.php';
+	$facebook = new Facebook(array(
+		'appId'  => '291103611004949',
+  		'secret' => '226db60e672abf202f1424b1084fc38e',
+      	'cookie' => true));
+      	
+    $fb_user = $facebook->getUser();
+?>
+
 <!DOCTYPE html>
 <head>
 	<title>Art</title>
@@ -8,6 +18,7 @@
 
 	<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="fbstyle.css" />
 	<link rel="apple-touch-icon" href="icons/icon2.png" />
 	<link rel="apple-touch-startup-image" href="images/logo.png">
 	
@@ -17,14 +28,15 @@
 	
 	<script type = "text/javascript">
 		function send_favorite(id){
+			var button = document.getElementById("fav_button");				
+			button.src = 'icons/heart-glowing.png';
+			button.onclick = "";
 			var request = new XMLHttpRequest();
 			request.open('POST', 'mark_favorite.php', false);
 			request.setRequestHeader("Content-type", "application/upload")
 			request.send(id); // because of "false" above, will block until the request is done
 			                // and status is available. Not recommended, however it works for simple cases.
-			if (request.status === 200) {
-			  alert("Favorited!")
-			}
+			
 		}
 	</script>
 
@@ -35,6 +47,14 @@
 <div data-role="page">
 	<div data-role="header">
 		<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
+		
+		<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
+     		<div class="show_when_not_connected">
+        		<a onclick="promptLogin()" class="login-button"> 
+       				<span>Login</span>
+      			</a>
+    		</div>
+      	</div>
 			<?php
 
 				include("config.php");
@@ -63,7 +83,7 @@
 			<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button" rel="external" data-theme="a">Annotate</a>
 		</div><!-- /controlgroup -->
 		</td>
-		<td style = "text-align:right;width:50px"><img src= "icons/heart.png" width = "30" height = "30" onclick = "send_favorite(<?php echo $row["id"]?>)">
+		<td style = "text-align:right;width:50px"><img id = "fav_button" src= "icons/heart.png" width = "30" height = "30" onclick = "send_favorite(<?php echo $row["id"]?>)">
 			</td></tr></table>
 		
 			<p style="font-family: Andale Mono; font-size: 16px;"><b><?php echo $row["title"]; ?> </b> 
@@ -83,6 +103,37 @@
 				$selectedRow--;
 			}
 			?>
+			
+					<div id="fb-root"></div>
+		<script>
+			$(document).bind('pageinit', function() {
+    				var e = document.createElement('script'); e.async = true;
+       				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+        			document.getElementById('fb-root').appendChild(e);
+        		}());
+			</script>
+  	
+			<script>
+    			window.fbAsyncInit = function() {
+      				FB.init({ appId: '291103611004949',
+      					status: true,
+      					cookie: true,
+      					xfbml: true,
+      					oauth: true});
+ 
+      				FB.getLoginStatus(handleStatusChange)
+    			};
+  			</script>
+				<div class="show_when_connected">
+					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
+						<a class="login-button" onclick="logout()">
+							<span>Logout</span>
+						</a>
+					</div>
+					<?php
+						$facebook->destroySession();
+					?>
+				</div>
 			
 	</div><!-- /content -->
 	

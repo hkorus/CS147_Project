@@ -67,6 +67,13 @@ function prepareCanvas(url, photo_id){
 		$('#canvas').mousemove(onMouseMove);
 		$('#canvas').mouseup(onMouseUp);
 		$('#canvas').mouseleave(onMouseLeave);
+		
+		
+		$('#canvas').touchstart(onMouseDown, false);
+		$('#canvas').touchmove(onTouchMove, false);
+		$('#canvas').touchend(onMouseUp, false);
+		
+		
 	
 		window.onresize = function(event) {
 	    	resetDimensions();
@@ -77,13 +84,30 @@ function prepareCanvas(url, photo_id){
 	
 }
 
-function onMouseDown(e){	
+function onTouchMove(e){	
+	e.preventDefault();
+	if(drawing){
+		
+		var rect = canvas.getBoundingClientRect();
+		
+		var touches = event.touches;
+		var x = touches[0].clientX;
+		var y = touches[0].clientY
+		var newPoint = new Point(x-rect.left, y-rect.top, lineWidth, curColor);
+		paths[paths.length-1].push(newPoint);
+	}
+	redraw();
+}
+
+
+function onMouseDown(e){
 	drawing = true;
 	paths.push(new Array());
 	redraw();
 }
 
 function onMouseUp(e){
+	
 	drawing = false;
 	redraw();
 }
@@ -93,6 +117,7 @@ function onMouseUp(e){
 
 
 function onMouseMove(e){	
+	
 	
 	if(drawing){
 		var rect = canvas.getBoundingClientRect();
