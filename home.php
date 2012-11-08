@@ -1,3 +1,13 @@
+<?php
+	require './facebook.php';
+	$facebook = new Facebook(array(
+		'appId'  => '291103611004949',
+  		'secret' => '226db60e672abf202f1424b1084fc38e',
+      	'cookie' => true));
+      	
+    $fb_user = $facebook->getUser();
+?>
+
 <!DOCTYPE html>
 <head>
 	<title>Home Page</title>
@@ -65,7 +75,6 @@
     			};
   			</script>
   	
-			<div class="section">
 				<div class="show_when_connected">
 					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
 						<a class="login-button" onclick="logout()">
@@ -75,9 +84,7 @@
 							$facebook->destroySession();
 						?>
 					</div>
-				</div>
-			</div>
-  	
+				</div>  	
 		</div><!-- /content -->
 		
 		<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
