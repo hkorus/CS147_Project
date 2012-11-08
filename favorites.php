@@ -1,3 +1,14 @@
+<?php
+	require './facebook.php';
+	$facebook = new Facebook(array(
+		'appId'  => '291103611004949',
+  		'secret' => '226db60e672abf202f1424b1084fc38e',
+      	'cookie' => true));
+      	
+    $fb_user = $facebook->getUser();
+?>
+
+
 <!DOCTYPE html>
 <head>
 	<title>Favorites</title>
@@ -13,23 +24,10 @@
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
+	
 	<script src="isotope/jquery.isotope.min.js"></script>
 	
-	
-	<script>	
-		$( function(){
-			var $container = $('#container');
-  			
-  			$container.imagesLoaded( function(){
-    			$container.isotope({
-    				itemSelector : '.image',
-    				masonryHorizontal: {
-    					columnWidth: 240
-    				}
-    			});
-  			});
-		});
-	</script>
+
 		
 </head>
 <body>
@@ -43,20 +41,40 @@
 	<div data-role="content">
 		<p>Favorites</p>
 		
-		<div id="container">
+		<div id="container" style = "display:none">
 		<?php
 			include("config.php");
-			$query = "SELECT * FROM art, fave_art where id = art_id";
-			$result = mysql_query($query);
-			while ($row = mysql_fetch_assoc($result)) {
-				echo "<div class='image'><a href='./art.php?id=".$row['art_id']."' rel='external'><img width='100' src='".$row['image_url']."'></a></div>";
-			} 
-			?>
+
+			if ($fb_user) {
+				//$query = "SELECT * FROM art, fave_art where id = art_id and user_id =".$fb_user;
+				$query = "SELECT * FROM art, fave_art where id = art_id";
+				$result = mysql_query($query);
+				while ($row = mysql_fetch_assoc($result)) {
+					echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_url']."'></a></div>";
+				} 
+			} else {
+				echo "Please login to view favorites";
+			}
+		?>
 		</div><!-- /container -->
 
 	</div><!-- /content -->
 	
+	<script type = "text/javascript">
+	  
 	
+	$(document).bind('pageinit', function() {
+        	var container = $('#container');
+			container.style = "display:block"
+
+        	container.isotope({ 
+        		itemSelector : '.image',
+    			masonryHorizontal: {
+    				columnWidth: 240
+    			}
+    		});
+        });
+	</script>
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" class="menubar">
 		<ul>

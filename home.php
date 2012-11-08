@@ -40,11 +40,11 @@
 			
 			<div id="fb-root"></div>
 	<script>
-  		(function() {
+	$(document).bind('pageinit', function() {
     		var e = document.createElement('script'); e.async = true;
        		e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
         	document.getElementById('fb-root').appendChild(e);
-        	}());
+        	});
 	</script>
   	
 	<script>
@@ -54,10 +54,11 @@
       		cookie: true,
       		xfbml: true,
       		oauth: true});
+
  
-      		FB.getLoginStatus(handleStatusChange)
-    	};
-  	</script>
+      				FB.getLoginStatus(handleStatusChange)
+    			};
+  			</script>
   	
  	 <script>
   		function handleResponseChange(response) {
@@ -102,7 +103,7 @@
 			</div>
 		</div>
   	
-	</div><!-- /content -->
+		</div><!-- /content -->
 		
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" class="menubar">
@@ -113,6 +114,7 @@
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
+
 	
 	</div><!-- /page -->
 
