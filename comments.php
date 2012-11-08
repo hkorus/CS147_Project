@@ -107,9 +107,10 @@
 				<table ><tr >
 					<td style="padding-left:15px;"><img id = "up-<?php echo $row["comment_id"] ?>" src = "icons/up_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)"></td></tr>
 
-					<tr><td style="padding-left:15px;"><img id = "down-<?php echo $row["comment_id"] ?>" src = "icons/down_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1)"></td></tr>
+					<tr><td id = "number-<?php echo $row["comment_id"] ?>" style="padding-left:15px;"><?php echo $row["rating"]; ?></td></tr>
 
-					<tr><td id = "number-<?php echo $row["comment_id"] ?>" style="padding-left:15px;"><?php echo $row["rating"]; ?></td></tr></table>
+					<tr><td style="padding-left:15px;"><img id = "down-<?php echo $row["comment_id"] ?>" src = "icons/down_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1)"></td></tr>
+					</table>
 
 				</td>
 				<td style = "width:150px; text-align:center">
@@ -155,16 +156,19 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 		var ready = 0;
 
 		function createCanvases(){
+			ready++;
+			
+			if(ready == ((array.length/2)+1)){
+				for(var j = 0; j<canvasList.length; j+=2){
+					newCanvas = canvasList[j];
+					newImg = canvasList[j+1];
 
-			for(var j = 0; j<canvasList.length; j+=2){
-				newCanvas = canvasList[j];
-				newImg = canvasList[j+1];
-
-				context = newCanvas.getContext('2d');
-				newCanvas.width = 200;
-				newCanvas.height = yscale(newCanvas.width, newImg)
-				context.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
-				context.drawImage(newImg, 0, 0,  newCanvas.width, newCanvas.height);
+					context = newCanvas.getContext('2d');
+					newCanvas.width = 200;
+					newCanvas.height = yscale(newCanvas.width, newImg)
+					context.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
+					context.drawImage(newImg, 0, 0,  newCanvas.width, newCanvas.height);
+				}
 			}
 		}
 
@@ -184,13 +188,12 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 
 				backgroundImg.src = <?php echo "'".$image."'"; ?>;
 
-				backgroundImg.onload = function(){
-					ready++;
-					if(ready == ((array.length/2)+1)){
-						createCanvases();
-					}
-				}
-
+				backgroundImg.onload = createCanvases;
+				backgroundImg.onerror = createCanvases;
+				backgroundImg.onabort = createCanvases;
+				
+				
+				
 				for (var i=0;i<array.length;i+=2)
 				{ 
 					newCanvas = document.getElementById("canvas-"+array[i]);
@@ -199,12 +202,9 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 					newImg = new Image();
 					newImg.src = array[i+1];
 					canvasList.push(newImg);
-					newImg.onload = function(){
-						ready++;
-						if(ready == ((array.length/2)+1)){
-							createCanvases();
-						}
-					}
+					newImg.onload = createCanvases;
+					newImg.onerror = createCanvases;
+					newImg.onabort = createCanvases;
 
 
 				}

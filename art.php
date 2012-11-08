@@ -28,14 +28,15 @@
 	
 	<script type = "text/javascript">
 		function send_favorite(id){
+			var button = document.getElementById("fav_button");				
+			button.src = 'icons/heart-glowing.png';
+			button.onclick = "";
 			var request = new XMLHttpRequest();
 			request.open('POST', 'mark_favorite.php', false);
 			request.setRequestHeader("Content-type", "application/upload")
 			request.send(id); // because of "false" above, will block until the request is done
 			                // and status is available. Not recommended, however it works for simple cases.
-			if (request.status === 200) {
-			  alert("Favorited!")
-			}
+			
 		}
 	</script>
 
@@ -82,7 +83,7 @@
 			<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button" rel="external" data-theme="a">Annotate</a>
 		</div><!-- /controlgroup -->
 		</td>
-		<td style = "text-align:right;width:50px"><img src= "icons/heart.png" width = "30" height = "30" onclick = "send_favorite(<?php echo $row["id"]?>)">
+		<td style = "text-align:right;width:50px"><img id = "fav_button" src= "icons/heart.png" width = "30" height = "30" onclick = "send_favorite(<?php echo $row["id"]?>)">
 			</td></tr></table>
 		
 			<p style="font-family: Andale Mono; font-size: 16px;"><b><?php echo $row["title"]; ?> </b> 
