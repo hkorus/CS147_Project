@@ -45,9 +45,9 @@ if($result!=false){
 
 	<div data-role="page">
 		<div data-role="header">
-		<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
-
-	</div><!-- /header -->
+			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
+			<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
+		</div><!-- /header -->
 
 			<div data-role="content" id = "container">
 				
@@ -106,11 +106,13 @@ if($result!=false){
 			</div><!-- /content -->
 
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
-		<div data-role="navbar" class="menubar">
-					<ul>
-			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
+
+		<div data-role="navbar" class="menubar" data-grid="c">
+		<ul>
+			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
+			<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
+			<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
 		</ul>
 
 		</div><!-- /navbar -->
