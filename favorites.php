@@ -19,6 +19,7 @@
 
 	<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="fbstyle.css" />
 	<link rel="apple-touch-icon" href="icons/icon2.png" />
 	<link rel="apple-touch-startup-image" href="images/logo.png">
 	
@@ -27,20 +28,20 @@
 	<script src="isotope/jquery.isotope.min.js"></script>
 	
 	
-//	<script>	
-//		$( function(){
-//			var $container = $('#container');
-//  			
-//  			$container.imagesLoaded( function(){
-//    			$container.isotope({
-//    				itemSelector : '.image',
-//    				masonryHorizontal: {
-//    					columnWidth: 240
-//    				}
-//    			});
-//  			});
-//		});
-//	</script>
+	<!--<script>	
+		$( function(){
+			var $container = $('#container');
+  			
+  			$container.imagesLoaded( function(){
+    			$container.isotope({
+    				itemSelector : '.image',
+    				masonryHorizontal: {
+    					columnWidth: 240
+    				}
+    			});
+  			});
+		});
+	</script>-->
 
 	<script>
 		$(window).load(function() {
@@ -60,7 +61,7 @@
 <div data-role="page">
 	<div data-role="header">
 		<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
-		
+		<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
 	</div><!-- /header -->
 	
 	<div data-role="content">
