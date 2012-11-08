@@ -87,7 +87,7 @@
 	
 	
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
-		<div data-role="navbar" class="menubar" data-grid="c">
+		<div data-role="navbar" class="menubar">
 		<ul>
 			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
 			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
