@@ -41,7 +41,7 @@ if($result!=false){
 	
 	
 	<style type="text/css" media="screen">
-    	#canvas{ display:block; border:1px solid black;background-size: 100%;}
+    	#drawingCanvas{ display:block; background-size: 100%;}
 		table, td, tr {
 			margin:0;
 			padding:0;
@@ -75,14 +75,14 @@ if($result!=false){
 			
 				
 					<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
-						<a href="./art.php?id=<?php echo $row["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
-						<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
-						<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
+						<a href="./art.php?id=<?php echo $row["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a">Art</a></li>
+						<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a">Comments</a>
+						<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a">Annotate</a>
 					</div><!-- /controlgroup -->
 					<table style = "width:100%;">
 						<tr>
 							<td style  = "width:100%;">
-							<canvas id="canvas"></canvas>
+							<canvas class="drawingCanvas"></canvas>
 							<td>
 						<td style = "padding:2px;background-color:#E0E0E0;vertical-align;text-align: center;"">	
 								<p></p>
@@ -119,7 +119,7 @@ if($result!=false){
 				$(document).bind('pageinit', function() {
 					<?php
 
-						echo "prepareCanvas('".$row["image_source"]."', ".$row["id"].")";
+					echo "prepareCanvas('".$row["image_source"]."', ".$row["id"].")";
 
 					?>
 				});
@@ -166,7 +166,7 @@ if($result!=false){
 		<ul>
 			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
 			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom" >Favorites</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
 		</ul>
 
