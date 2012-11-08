@@ -34,6 +34,7 @@
 
 <div data-role="page">
 	<div data-role="header">
+		<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
 			<?php
 
 				include("config.php");

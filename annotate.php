@@ -45,9 +45,9 @@ if($result!=false){
 
 	<div data-role="page">
 		<div data-role="header">
-		<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
-
-	</div><!-- /header -->
+			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
+			<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
+		</div><!-- /header -->
 
 			<div data-role="content" id = "container">
 				
