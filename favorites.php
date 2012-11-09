@@ -49,10 +49,10 @@
     						return parseInt( $elem.find('.art_id').text(), 10 );
     					},
     					title : function ( $elem ) {
-    						return $elem.find('title').text();
+    						return $elem.find('.title').text();
     					},
     					artist : function ( $elem ) {
-    						return $elem.find('artist').text();
+    						return $elem.find('.artist').text();
     					}
     				}
     			});
@@ -156,10 +156,10 @@
 		
 		<p style='margin-left:10px;font-family: Andale Mono, san-serif; font-size: 25px;'>Favorites</p>
 			<div data-role="controlgroup" data-type="horizontal">
-  					<a href="#time_stamp" onclick="sortByTime()" data-role="button" data-theme="a">Sort by Date</a>
- 					<a href="#art_id" onclick="sortByArtId()" data-role="button" data-theme="a">Sort by ArtId</a>
- 					<!--<a href="#title" onclick="sortByTitle()" data-role="button" data-theme="a">Sort by Title</a>
- 					<a href="#artist" onclick="sortByArtist()" data-role="button" data-theme="a">Sort by Artist</a>-->
+  					<a href="#time_stamp" onclick="sortByTime()" data-role="button" data-theme="a">Sort by Date Added</a>
+ 					<!--<a href="#art_id" onclick="sortByArtId()" data-role="button" data-theme="a">Sort by ArtId</a>-->
+ 					<a href="#title" onclick="sortByTitle()" data-role="button" data-theme="a">Sort by Title</a>
+ 					<a href="#artist" onclick="sortByArtist()" data-role="button" data-theme="a">Sort by Artist</a>
 			</div>
 
 			<div id="container">
@@ -175,8 +175,8 @@
 								$result2 = mysql_query($query2);
 								$row2 = mysql_fetch_assoc($result2);
 								echo "<div class='image'><a href='./art.php?id=".$row['art_id']."' rel='external'><img width='100' src='".$row['image_url']."'></a>";
-								echo "<div class='time_stamp'>".$row['time_stamp']."</div>";
-								echo "<div class='art_id'>".$row['art_id']."</div>";
+								echo "<div class='time_stamp' style='display:none'>".$row['time_stamp']."</div>";
+								echo "<div class='art_id' style='display:none'>".$row['art_id']."</div>";
 								echo "<div class='title'>".$row2['title']."</div>";
 								echo "<div class='artist'>".$row2['artist']."</div>";
 								echo "</div>";
