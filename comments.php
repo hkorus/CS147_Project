@@ -84,9 +84,9 @@
 	<div data-role="content">
 
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
-			<a href="./art.php?id=<?php echo $_GET["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" >Art</a></li>
-			<a  id="comments" data-icon="custom" data-role="button" data-theme="a" >Comments</a>
-			<a href="./annotate.php?id=<?php echo $_GET["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" >Annotate</a>
+			<a href="./art.php?id=<?php echo $_GET["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
+			<a  id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external" style = "background:#B0B0B0">Comments</a>
+			<a href="./annotate.php?id=<?php echo $_GET["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
 		</div><!-- /controlgroup -->
 		<p></p>
 		<table class="bottomBorder" style="text-align:center; width:100%;">
@@ -129,7 +129,7 @@
 
 		</td>
 		<td style = "width:10%; border-collapse:collapse; border-bottom:1px dotted black;padding:5px;">
-			<a href = "show_comment.php?id=<?php echo $row["comment_id"] ?>"> View </a>
+			<a href = "show_comment.php?id=<?php echo $row["comment_id"] ?>"> <img src = "icons/side_arrow.png" width = "50" height = "50" rel="external"></img> </a>
 		</td>
 	</tr>	
 	<?php } } else {?>
@@ -153,8 +153,9 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 
 		function createCanvases(){
 			ready++;
-			
-			if(ready == ((array.length/2)+1)){
+			if(ready == array.length/2){
+				
+				
 				for(var j = 0; j<canvasList.length; j+=2){
 					newCanvas = canvasList[j];
 					newImg = canvasList[j+1];
@@ -162,10 +163,13 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 					context = newCanvas.getContext('2d');
 					newCanvas.width = 200;
 					newCanvas.height = yscale(newCanvas.width, newImg)
+
 					context.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
 					context.drawImage(newImg, 0, 0,  newCanvas.width, newCanvas.height);
 				}
+				ready = 0;
 			}
+			
 		}
 
 
@@ -187,7 +191,6 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 				backgroundImg.onload = createCanvases;
 				backgroundImg.onerror = createCanvases;
 				backgroundImg.onabort = createCanvases;
-				
 				
 				
 				for (var i=0;i<array.length;i+=2)
@@ -212,12 +215,12 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 
 	</script>
 
-		<div class="fb-root"></div>
+		<div id="fb-root"></div>
 		<script>
 			$(document).bind('pageinit', function() {
     				var e = document.createElement('script'); e.async = true;
        				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-        			$(".fb-root:last")[0].appendChild(e);
+        			document.getElementById("fb-root").appendChild(e);
         		}());
 			</script>
   	
@@ -252,10 +255,10 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 
 	<div data-role="navbar" class="menubar" data-grid="c">
 		<ul>
-			<li><a href="./home.php" id="home" data-icon="custom" >Home</a></li>
-			<li><a href="./art.php" id="art" data-icon="custom" >Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom" >Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom" >Help</a></li>
+			<li><a href="./home.php" id="home" data-icon="custom" rel="external">Home</a></li>
+			<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
+			<li><a href="./help.php" id="help" data-icon="custom" rel="external" >Help</a></li>
 		</ul>
 	</div><!-- /navbar -->
 </div><!-- /footer -->

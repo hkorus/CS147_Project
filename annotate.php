@@ -45,8 +45,8 @@ if($result!=false){
 	<style type="text/css" media="screen">
     	.drawingCanvas{ display:block; background-size: 100%;}
 		table, td, tr {
-			margin:0;
-			padding:0;
+			margin:0px;
+			padding:0px;
 			border-collapse:collapse;
 		}
 
@@ -62,7 +62,7 @@ if($result!=false){
 	<div data-role="page">
 		<div data-role="header">
 			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
-			<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
+			<a href="javascript:history.go(-1)" id="goback" data-icon="custom" rel = "external">Back</a>
 			<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
      			<div class="show_when_not_connected">
         			<a onclick="promptLogin()" class="login-button"> 
@@ -77,15 +77,15 @@ if($result!=false){
 			
 				
 					<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
-						<a href="./art.php?id=<?php echo $row["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a">Art</a></li>
-						<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a">Comments</a>
-						<a  id="annotate" data-icon="custom" data-role="button" data-theme="a">Annotate</a>
+						<a href="./art.php?id=<?php echo $row["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
+						<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
+						<a  id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external" style = "background:#B0B0B0">Annotate</a>
 					</div><!-- /controlgroup -->
 					<table style = "width:600px;border-collapse:collapse;">
 						<tr>
-							<td style>
-							<canvas class="drawingCanvas"></canvas>
 							<td>
+							<canvas class="drawingCanvas"></canvas>
+							</td>
 						<td style = "padding:2px;background-color:#E0E0E0;vertical-align;text-align: center;">	
 								<p></p>
 								<div><img src = "icons/undo.png" width = "50px" onclick = "undo()"></div>
@@ -106,7 +106,6 @@ if($result!=false){
 							<textarea class="commentBox" cols="100" rows="100">
 							</textarea>
 							</td>
-							<td></td>
 							<td style = "width:70px;background-color:#B0B0B0;vertical-align:center;text-align:center">	
 								<img src = "icons/post.png" style="width:60px;height:60px" onclick="save()">
 						</td>
@@ -168,10 +167,10 @@ if($result!=false){
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" class="menubar" data-grid="c">
 		<ul>
-			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
-			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom" >Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
+			<li><a href="./home.php" id="home" data-icon="custom" rel="external">Home</a></li>
+			<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
+			<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
 		</ul>
 
 		</div><!-- /navbar -->

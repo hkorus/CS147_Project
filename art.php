@@ -74,7 +74,7 @@
 
 <div data-role="page">
 	<div data-role="header">
-		<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
+		<a href="javascript:history.go(-1)" id="goback" data-icon="custom" rel = "external">Back</a>
 		
 		<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
      			<div class="show_when_not_connected">
@@ -91,9 +91,9 @@
 	<div data-role="content">
 		<table><tr><td>
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
-			<a  id="art" data-icon="custom" data-role="button" data-theme="a">Art</a></li>
-			<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" >Comments</a>
-			<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button"  data-theme="a">Annotate</a>
+			<a  id="art" data-icon="custom" data-role="button" data-theme="a" rel="external" style = "background:#B0B0B0">Art</a></li>
+			<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
+			<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button"  data-theme="a" rel="external">Annotate</a>
 		</div><!-- /controlgroup -->
 		</td>
 		<td style = "text-align:right;width:50px">
@@ -137,12 +137,12 @@
 			}
 			?>
 			
-					<div class="fb-root"></div>
+					<div id="fb-root"></div>
 		<script>
 			$(document).bind('pageinit', function() {
     				var e = document.createElement('script'); e.async = true;
        				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-        			$(".fb-root:last")[0].appendChild(e);
+        			document.getElementById("fb-root").appendChild(e);
         		}());
 			</script>
   	
@@ -193,10 +193,10 @@
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" class="menubar" data-grid="c">
 		<ul>
-			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
-			<li><a onclick = "refresh()" id="art" data-icon="custom">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom" >Help</a></li>
+			<li><a href="./home.php" id="home" data-icon="custom" rel="external">Home</a></li>
+			<li><a onclick = "refresh()" id="art" data-icon="custom" rel="external">Random Art</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel = "external">Favorites</a></li>
+			<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
 		</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
