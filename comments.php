@@ -162,8 +162,10 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 
 					context = newCanvas.getContext('2d');
 					newCanvas.width = 200;
-					newCanvas.height = yscale(newCanvas.width, newImg)
-
+					newCanvas.height = yscale(newCanvas.width, backgroundImg)
+					
+					
+					
 					context.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
 					context.drawImage(newImg, 0, 0,  newCanvas.width, newCanvas.height);
 				}

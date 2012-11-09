@@ -75,20 +75,31 @@
 
 	
 	<script type = "text/javascript">
-	$(document).ready(function() {
- 			var canvas = $(".displayCanvas:last")[0];
-			img = new Image();
-			img.src = <?php echo "'".$row["annotation"]."'" ?>;
+	
+		function yscale(width, img){
+			var ratio = width/img.width;
+			return ratio * img.height;
+		}
+		
+		var backgroundImg = new Image();
+		backgroundImg.src = <?php echo "'".$artPiece["image_source"]."'" ?>;
+		
+		var img = new Image();
+		img.src = <?php echo "'".$row["annotation"]."'" ?>;
+		
+		$(document).bind('pageinit', function(){
+	
+			var canvas = $(".displayCanvas:last")[0];
 			
-			img.onload = function(){
-				canvas.width = img.width;
-				canvas.height = img.height;
-				var context = canvas.getContext("2d");
 			
-				backgroundImg = new Image();
-				backgroundImg.src = <?php echo "'".$artPiece["image_source"]."'" ?>;
+			backgroundImg.onload = function(){	
 				
-				backgroundImg.onload = new function(){
+				img.onload = function(){
+					
+					canvas.width = "600";
+					canvas.height = yscale(canvas.width, img);
+					
+					var context = canvas.getContext("2d");
 				
 					context.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height)
 					context.drawImage(img, 0, 0, canvas.width, canvas.height)
