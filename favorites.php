@@ -30,20 +30,35 @@
 	<script src="auth.js"></script>
 	
 	
-	<!--<script>	
+	<script>	
 		$( function(){
 			var $container = $('#container');
   			
   			$container.imagesLoaded( function(){
     			$container.isotope({
     				itemSelector : '.image',
+    				sortAscending : false,
     				masonryHorizontal: {
     					columnWidth: 240
+    				},
+    				getSortData : {
+    					time_stamp : function ( $elem ) {
+      					return $elem.find('.time_stamp').text();
+    					},
+    					art_id : function ( $elem ) {
+    						return parseInt( $elem.find('.art_id').text(), 10 );
+    					},
+    					title : function ( $elem ) {
+    						return $elem.find('title').text();
+    					},
+    					artist : function ( $elem ) {
+    						return $elem.find('artist').text();
+    					}
     				}
     			});
   			});
 		});
-	</script>-->
+	</script>
 			<div class="fb-root"></div>
 		
 		<script>
@@ -66,7 +81,7 @@
     			};
   			</script>
 
-	<script>
+	<!--<script>
 	$(document).ready( function() {
         	var $container = $('#container');
         	$container.isotope({ 
@@ -76,29 +91,49 @@
     			}
     		});
         });
+	</script>-->
+	
+//	<script>
+//		$('#sort-by-id').click(function(){
+//  			// get href attribute, minus the '#'
+//  			//var sortName = $(this).attr('href').slice(1);
+//  			$('#container').isotope({ sortBy : 'art_id' });
+//  			return false;
+//		});
+//	</script>
+	<script>
+		function sortByArtId() {
+  			$('#container').isotope({ 
+  				sortBy : 'art_id',
+  				sortAscending : true
+  			});
+		}
+	</script>
+	<script>
+		function sortByTime() {
+  			$('#container').isotope({ 
+  				sortBy : 'time_stamp',
+  				sortAscending : false
+  			 });
+		}
+	</script>
+	<script>
+		function sortByTitle() {
+  			$('#container').isotope({ 
+  				sortBy : 'title',
+  				sortAscending : true
+  			 });
+		}
+	</script>
+	<script>
+		function sortByArtist() {
+  			$('#container').isotope({ 
+  				sortBy : 'artist',
+  				sortAscending : true
+  			 });
+		}
 	</script>
 	
-	<script>
-		$('#container').isotope({
-			getSortData : {
-    			time_stamp : function ( $elem ) {
-      				return $elem.find('.data_time').text();
-    			},
-    			art_id : function ( $elem ) {
-    				return parseInt( $elem.find('.art_id').text(), 10 );
-    			}
-    		}
-		});
-	</script>
-	
-	<script>
-		$('#sort-by-id').click(function(){
-  			// get href attribute, minus the '#'
-  			//var sortName = $(this).attr('href').slice(1);
-  			$('#container').isotope({ sortBy : 'art_id' });
-  			return false;
-		});
-	</script>
 		
 </head>
 <body>
@@ -116,13 +151,17 @@
       	</div>
 	
 	</div><!-- /header -->
-	
+
 	<div data-role="content">
+		
 		<p style='margin-left:10px;font-family: Andale Mono, san-serif; font-size: 25px;'>Favorites</p>
-			<!--<ul id="sort-by-id">
-  					<li><a href="#sortBy=time_stamp">time stamp</a></li>
- 					<li><a href="#art_id">art id</a></li>
-			</ul>-->
+			<div data-role="controlgroup" data-type="horizontal">
+  					<a href="#time_stamp" onclick="sortByTime()" data-role="button" data-theme="a">Sort by Date</a>
+ 					<a href="#art_id" onclick="sortByArtId()" data-role="button" data-theme="a">Sort by ArtId</a>
+ 					<!--<a href="#title" onclick="sortByTitle()" data-role="button" data-theme="a">Sort by Title</a>
+ 					<a href="#artist" onclick="sortByArtist()" data-role="button" data-theme="a">Sort by Artist</a>-->
+			</div>
+
 			<div id="container">
 					<?php
 						include("config.php");
@@ -132,9 +171,14 @@
 							$result = mysql_query($query);
 							while ($row = mysql_fetch_assoc($result)) {
 								//echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_url']."'></a></div>";
+								$query2 = "SELECT * FROM art where id = ".$row['art_id'];
+								$result2 = mysql_query($query2);
+								$row2 = mysql_fetch_assoc($result2);
 								echo "<div class='image'><a href='./art.php?id=".$row['art_id']."' rel='external'><img width='100' src='".$row['image_url']."'></a>";
-								echo "<div class='time_stamp'></div>";
-								echo "<div class='art_id'></div>";
+								echo "<div class='time_stamp'>".$row['time_stamp']."</div>";
+								echo "<div class='art_id'>".$row['art_id']."</div>";
+								echo "<div class='title'>".$row2['title']."</div>";
+								echo "<div class='artist'>".$row2['artist']."</div>";
 								echo "</div>";
 							} 
 						}
