@@ -44,6 +44,27 @@
   			});
 		});
 	</script>-->
+			<div class="fb-root"></div>
+		
+		<script>
+			$(document).bind('pageinit', function() {
+    				var e = document.createElement('script'); e.async = true;
+       				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+        			$(".fb-root:last")[0].appendChild(e);
+        		}());
+			</script>
+  	
+			<script>
+    			window.fbAsyncInit = function() {
+      				FB.init({ appId: '291103611004949',
+      					status: true,
+      					cookie: true,
+      					xfbml: true,
+      					oauth: true});
+ 
+      				FB.getLoginStatus(handleStatusChange)
+    			};
+  			</script>
 
 	<script>
 		$(window).load(function() {
@@ -52,27 +73,29 @@
         		itemSelector : '.image',
     			masonryHorizontal: {
     				columnWidth: 240
-    			},
-    			getSortData : {
-    				time_stamp : function ( $elem ) {
-      					return $elem.find('.time_stamp').attr('data-time');
-    				}
-    			},
-    			getSortData : {
-    				art_id : function ( $elem ) {
-      					return $elem.find('.art_id').attr('art-id');
-    				}
     			}
-    			
     		});
         });
 	</script>
 	
 	<script>
-		$('#sort-by a').click(function(){
+		$('#container').isotope({
+			getSortData : {
+    			time_stamp : function ( $elem ) {
+      				return $elem.find('.data_time').text();
+    			},
+    			art_id : function ( $elem ) {
+    				return parseInt( $elem.find('.art_id').text(), 10 );
+    			}
+    		}
+		});
+	</script>
+	
+	<script>
+		$('#sort-by-id').click(function(){
   			// get href attribute, minus the '#'
-  			var sortName = $(this).attr('href').slice(1);
-  			$('#container').isotope({ sortBy : sortName });
+  			//var sortName = $(this).attr('href').slice(1);
+  			$('#container').isotope({ sortBy : 'art_id' });
   			return false;
 		});
 	</script>
@@ -95,12 +118,11 @@
 	</div><!-- /header -->
 	
 	<div data-role="content">
-		<p>Favorites</p>
-			<ul id="sort-by">
-  					<li><a href="#time_stamp">time stamp</a></li>
- 					<li><a href="#art_id">art id</a></li>
-			</ul>
 		<p style='margin-left:10px;font-family: Andale Mono, san-serif; font-size: 25px;'>Favorites</p>
+			<!--<ul id="sort-by-id">
+  					<li><a href="#sortBy=time_stamp">time stamp</a></li>
+ 					<li><a href="#art_id">art id</a></li>
+			</ul>-->
 			<div id="container">
 					<?php
 						include("config.php");
@@ -111,8 +133,8 @@
 							while ($row = mysql_fetch_assoc($result)) {
 								//echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_url']."'></a></div>";
 								echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_url']."'></a>";
-								echo "<div class='time_stamp' data-time=".$row['time_stamp'].">".$row['time_stamp']."</div>";
-								echo "<div class='art_id' art-id=".$row['art_id'].">".$row['art_id']."</div>";
+								echo "<div class='time_stamp'></div>";
+								echo "<div class='art_id'></div>";
 								echo "</div>";
 							} 
 						}
@@ -124,29 +146,7 @@
 					echo "<p style='margin-left:25px;font-family: Andale Mono; font-size: 15px;'>Please login to view favorites!</p>";
 				}
 			?>
-		
-		
-		
-		<div class="fb-root"></div>
-		<script>
-			$(document).bind('pageinit', function() {
-    				var e = document.createElement('script'); e.async = true;
-       				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-        			$(".fb-root:last")[0].appendChild(e);
-        		}());
-			</script>
-  	
-			<script>
-    			window.fbAsyncInit = function() {
-      				FB.init({ appId: '291103611004949',
-      					status: true,
-      					cookie: true,
-      					xfbml: true,
-      					oauth: true});
- 
-      				FB.getLoginStatus(handleStatusChange)
-    			};
-  			</script>
+			
 
 				<div class="show_when_connected">
 					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
