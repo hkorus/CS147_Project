@@ -50,9 +50,29 @@
         		itemSelector : '.image',
     			masonryHorizontal: {
     				columnWidth: 240
+    			},
+    			getSortData : {
+    				time_stamp : function ( $elem ) {
+      					return $elem.find('.time_stamp').attr('data-time');
+    				}
+    			},
+    			getSortData : {
+    				art_id : function ( $elem ) {
+      					return $elem.find('.art_id').attr('art-id');
+    				}
     			}
+    			
     		});
         });
+	</script>
+	
+	<script>
+		$('#sort-by a').click(function(){
+  			// get href attribute, minus the '#'
+  			var sortName = $(this).attr('href').slice(1);
+  			$('#container').isotope({ sortBy : sortName });
+  			return false;
+		});
 	</script>
 		
 </head>
@@ -74,6 +94,10 @@
 	
 	<div data-role="content">
 		<p>Favorites</p>
+			<ul id="sort-by">
+  					<li><a href="#time_stamp">time stamp</a></li>
+ 					<li><a href="#art_id">art id</a></li>
+			</ul>
 			<div id="container">
 					<?php
 						include("config.php");
@@ -82,12 +106,16 @@
 							//$query = "SELECT * FROM art, fave_art where id = art_id";
 							$result = mysql_query($query);
 							while ($row = mysql_fetch_assoc($result)) {
-								echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_url']."'></a></div>";
+								//echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_url']."'></a></div>";
+								echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_url']."'></a>";
+								echo "<div class='time_stamp' data-time=".$row['time_stamp'].">".$row['time_stamp']."</div>";
+								echo "<div class='art_id' art-id=".$row['art_id'].">".$row['art_id']."</div>";
+								echo "</div>";
 							} 
 						}
 					?>
 			</div><!-- /container -->
-		
+				
 			<?php
 				if(!$fb_user) {
 					echo "Please login to view Favorites";
