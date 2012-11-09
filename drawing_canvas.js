@@ -21,6 +21,7 @@ function yscale(width, img){
 }
 
 function drawOneCircle(controlCanvas, size){
+	
 	ctx = controlCanvas.getContext("2d");
 	ctx.beginPath();
 	var locx = size/2+((controlCanvas.width-size)/2);
@@ -47,9 +48,17 @@ function resetDimensions(){
 }
 
 function prepareCanvas(url, photo_id){
+	
+	paths = new Array();
+	drawing = false;
+	curColor = "#000000"
+	lineWidth = 10;
+	
 	id = photo_id;
-	drawControls();	
 	canvas = $('.drawingCanvas:last')[0]
+	if(canvas == null) return;
+	drawControls();	
+	
 	context = canvas.getContext("2d");
 	img = new Image();
 	img.src = url;
@@ -58,9 +67,9 @@ function prepareCanvas(url, photo_id){
     	canvas.width = 600;
 		//resetDimensions();
 		canvas.height = yscale(canvas.width, img)
-
+		
 		canvas.style.backgroundImage = "url("+url+")";
-		//canvas.style.backgroundSize = "100% Auto";
+		canvas.style.backgroundSize = "100% Auto";
 	  	
 		
 		$('.drawingCanvas:last').mousedown(onMouseDown);

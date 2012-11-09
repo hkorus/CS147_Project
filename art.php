@@ -24,20 +24,29 @@
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
-	<script type="text/javascript" src="drawing_canvas.js"></script>
+	<script src="drawing_canvas.js"></script>
+	
+	
 	<script src="auth.js"></script>
-	<script src='spectrum.js'></script>
 	
 	<script type = "text/javascript">
 		function send_favorite(id){
 			if(<?php echo $fb_user ?>) {
-				var button = $(".fav_button:last")[0]				
-				button.src = 'icons/heart-glowing.png';
-				button.onclick = "";
-				var request = new XMLHttpRequest();
-				request.open('POST', 'mark_favorite.php', false);
-				request.setRequestHeader("Content-type", "application/upload")
-				request.send(id); // because of "false" above, will block until the request is done
+				var button = $(".fav_button:last")[0]
+				var src =button.src;
+				if(src.indexOf('icons/heart.png')!=-1){				
+					button.src = 'icons/heart-glowing.png';
+					var request = new XMLHttpRequest();
+					request.open('POST', 'mark_favorite.php', false);
+					request.setRequestHeader("Content-type", "application/upload")
+					request.send(id); // because of "false" above, will block until the request is done
+				}else {
+					button.src = 'icons/heart.png';
+					var request = new XMLHttpRequest();
+					request.open('POST', 'undo_favorite.php', false);
+					request.setRequestHeader("Content-type", "application/upload")
+					request.send(id); // because of "false" above, will block until the request is done
+				}
 			                // and status is available. Not recommended, however it works for simple cases.
 			} else {
 				alert("Please login to add art to Favorites");
@@ -49,34 +58,32 @@
 
 </head>
 <body>
+	<?php include("config.php");
+	$id = $_GET["id"];
+	$query = "SELECT * FROM art";
+
+	if($id != NULL){
+		$query = "SELECT * FROM art where id = ".$id;
+	}
+	$result = mysql_query($query);
+	$numRows = mysql_num_rows($result);
+	$selectedRow = rand(0, $numRows-1);
+	while ($row = mysql_fetch_assoc($result)) {
+		if($selectedRow == 0){
+	?>
 
 <div data-role="page">
 	<div data-role="header">
 		<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
 		
 		<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
-     		<div class="show_when_not_connected">
-        		<a onclick="promptLogin()" class="login-button"> 
-       				<span>Login</span>
-      			</a>
-    		</div>
+     			<div class="show_when_not_connected">
+        			<a onclick="promptLogin()" class="login-button"> 
+       					<span>Login</span>
+      				</a>
+    			</div>
       	</div>
-			<?php
-
-				include("config.php");
-				$id = $_GET["id"];
-				$query = "SELECT * FROM art";
-
-				if($id != NULL){
-					$query = "SELECT * FROM art where id = ".$id;
-				}
-				$result = mysql_query($query);
-				$numRows = mysql_num_rows($result);
-				$selectedRow = rand(0, $numRows-1);
-				while ($row = mysql_fetch_assoc($result)) {
-					if($selectedRow == 0){
-
-						?>
+		
 			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
 
 	</div><!-- /header -->
@@ -84,13 +91,33 @@
 	<div data-role="content">
 		<table><tr><td>
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
-			<a href="./art.php?id=<?php echo $row["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a">Art</a></li>
+			<a  id="art" data-icon="custom" data-role="button" data-theme="a">Art</a></li>
 			<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" >Comments</a>
 			<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button"  data-theme="a">Annotate</a>
 		</div><!-- /controlgroup -->
 		</td>
-		<td style = "text-align:right;width:50px"><img class = "fav_button" src= "icons/heart.png" width = "30" height = "30" onclick = "send_favorite(<?php echo $row["id"]?>)">
+		<td style = "text-align:right;width:50px">
+			
+			<?php 
+			
+				if($fb_user){ 
+					echo "<img class = 'fav_button' src= '";
+					$id = $row["id"];
+					$query = "SELECT * FROM fave_art where user_id = ".$fb_user." and art_id = ".$id;
+					$result = mysql_query($query);
+					$numRows = mysql_num_rows($result);
+					if($numRows == 0){
+						echo "icons/heart.png";
+					}else {
+						echo "icons/heart-glowing.png";
+					} 
+					echo "' width = '30' height = '30' onclick = 'send_favorite(".$row['id'].")'>";
+			
+				}else {echo "<img class = 'fav_button' src= 'icons/heart.png' width = '30' height = '30' onclick = 'send_favorite(".$row['id'].")'>";}
+			
+			?>
 			</td></tr></table>
+			
 		
 			<p style="font-family: Andale Mono; font-size: 16px;"><b><?php echo $row["title"]; ?> </b> 
 					(<?php echo $row["year"]; ?>)	
@@ -130,16 +157,16 @@
       				FB.getLoginStatus(handleStatusChange)
     			};
   			</script>
-				<div class="show_when_connected">
-					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
-						<a class="login-button" onclick="logout()">
-							<span>Logout</span>
-						</a>
-					</div>
+			<div class="show_when_connected">
+				<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
+					<a class="login-button" onclick="logout()">
+						<span>Logout</span>
+					</a>
 					<?php
 						$facebook->destroySession();
 					?>
 				</div>
+			</div>
 			
 	</div><!-- /content -->
 	

@@ -11,6 +11,9 @@
 <!DOCTYPE html>
 <head>
 	<title>Annotation</title>
+	
+	<script type="text/javascript" src="drawing_canvas.js"></script>
+	
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -34,7 +37,6 @@ if($result!=false){
 ?>
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
-	<script type="text/javascript" src="drawing_canvas.js"></script>
 	<script src='spectrum.js'></script>
 	<script src="auth.js"></script>
 	<link rel='stylesheet' href='spectrum.css' />
@@ -77,14 +79,14 @@ if($result!=false){
 					<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
 						<a href="./art.php?id=<?php echo $row["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a">Art</a></li>
 						<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a">Comments</a>
-						<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a">Annotate</a>
+						<a  id="annotate" data-icon="custom" data-role="button" data-theme="a">Annotate</a>
 					</div><!-- /controlgroup -->
-					<table style = "width:600px;">
+					<table style = "width:600px;border-collapse:collapse;">
 						<tr>
 							<td style>
 							<canvas class="drawingCanvas"></canvas>
 							<td>
-						<td style = "padding:2px;background-color:#E0E0E0;vertical-align;text-align: center;"">	
+						<td style = "padding:2px;background-color:#E0E0E0;vertical-align;text-align: center;">	
 								<p></p>
 								<div><img src = "icons/undo.png" width = "50px" onclick = "undo()"></div>
 								<div><canvas class="extralarge" height = "60px" width = "70px"  onclick = "changeSize(50)"></canvas></div>
@@ -105,7 +107,7 @@ if($result!=false){
 							</textarea>
 							</td>
 							<td></td>
-							<td style = "width:70px;background-color:#B0B0B0;vertical-align:center;">	
+							<td style = "width:70px;background-color:#B0B0B0;vertical-align:center;text-align:center">	
 								<img src = "icons/post.png" style="width:60px;height:60px" onclick="save()">
 						</td>
 						</tr>
@@ -117,6 +119,8 @@ if($result!=false){
 
 				<script type="text/javascript"> 
 				$(document).bind('pageinit', function() {
+					//alert( document.URL );
+					
 					<?php
 
 					echo "prepareCanvas('".$row["image_source"]."', ".$row["id"].")";

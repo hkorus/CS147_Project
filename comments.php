@@ -23,9 +23,9 @@
 	<link rel="apple-touch-startup-image" href="images/logo.png">
 
 	<script src="jquery-1.8.2.min.js"></script>
+	<script src="drawing_canvas.js"></script>
+	
 	<script src="jquery.mobile-1.2.0.js"></script>
-	<script type="text/javascript" src="drawing_canvas.js"></script>
-	<script src='spectrum.js'></script>
 	<script src="auth.js"></script>
 
 </head>
@@ -85,7 +85,7 @@
 
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
 			<a href="./art.php?id=<?php echo $_GET["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" >Art</a></li>
-			<a href="./comments.php?id=<?php echo $_GET["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" >Comments</a>
+			<a  id="comments" data-icon="custom" data-role="button" data-theme="a" >Comments</a>
 			<a href="./annotate.php?id=<?php echo $_GET["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" >Annotate</a>
 		</div><!-- /controlgroup -->
 		<p></p>
