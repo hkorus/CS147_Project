@@ -129,7 +129,7 @@
 
 		</td>
 		<td style = "width:10%; border-collapse:collapse; border-bottom:1px dotted black;padding:5px;">
-			<a href = "show_comment.php?id=<?php echo $row["comment_id"] ?>"> <img src = "icons/side_arrow.png" width = "50" height = "50" rel="external"></img> </a>
+			<a href = "show_comment.php?id=<?php echo $row["comment_id"] ?>" rel="external"> <img src = "icons/side_arrow.png" width = "50" height = "50" ></img> </a>
 		</td>
 	</tr>	
 	<?php } } else {?>
@@ -153,7 +153,7 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 
 		function createCanvases(){
 			ready++;
-			if(ready == array.length/2){
+			if(ready > array.length/2){
 				
 				
 				for(var j = 0; j<canvasList.length; j+=2){
@@ -174,7 +174,6 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 
 
 		$(document).bind('pageinit', function() {
-
 			array = new Array(<?php 
 				for ($i=0; $i< count($arr); $i+=2)
 				{

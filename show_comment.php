@@ -49,11 +49,11 @@
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
 			<a href="./art.php?id=<?php echo $row["art_id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
 			<a href="./comments.php?id=<?php echo $row["art_id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
-			<a href="./annotate.php?id=<?php echo $row["art_id"]?>" id="annotate" data-icon="custom" data-role="button"  data-theme="a"rel="external">Annotate</a>
+			<a href="./annotate.php?id=<?php echo $row["art_id"]?>" id="annotate" data-icon="custom" data-role="button"  data-theme="a" rel="external">Annotate</a>
 		</div><!-- /controlgroup -->
 			
 			<?php
-					echo "<p>".$row["comment"]."</p>";
+					echo "<p style = 'font-family: Andale Mono; font-size: 18px;'>".$row["comment"]."</p>";
 					
 			?>
 			<canvas class="displayCanvas" ></canvas>
@@ -75,21 +75,24 @@
 
 	
 	<script type = "text/javascript">
-	$(document).bind('pageinit', function() {
- 			canvas = $(".displayCanvas:last")[0];
-			context = canvas.getContext("2d");
+	$(document).ready(function() {
+ 			var canvas = $(".displayCanvas:last")[0];
 			img = new Image();
 			img.src = <?php echo "'".$row["annotation"]."'" ?>;
 			
 			img.onload = function(){
 				canvas.width = img.width;
 				canvas.height = img.height;
+				var context = canvas.getContext("2d");
 			
 				backgroundImg = new Image();
 				backgroundImg.src = <?php echo "'".$artPiece["image_source"]."'" ?>;
-				context.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height)
-
-				context.drawImage(img, 0, 0, canvas.width, canvas.height)
+				
+				backgroundImg.onload = new function(){
+				
+					context.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height)
+					context.drawImage(img, 0, 0, canvas.width, canvas.height)
+				}
 			}
 		});
 

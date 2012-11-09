@@ -137,10 +137,10 @@
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" class="menubar" data-grid="c">
 		<ul>
-			<li><a href="./home.php" id="home" data-icon="custom" rel = "external">Home</a></li>
-			<li><a href="./art.php" id="art" data-icon="custom" rel = "external">Random Art</a></li>
-			<li><a onclick = "window.location.reload()" id="favorites" data-icon="custom" rel = "external">Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom" rel = "external">Help</a></li>
+			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
+			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
+			<li><a onclick = "window.location.reload()" id="favorites" data-icon="custom">Favorites</a></li>
+			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
 		</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
