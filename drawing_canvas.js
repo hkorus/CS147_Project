@@ -21,23 +21,24 @@ function yscale(width, img){
 }
 
 function drawOneCircle(controlCanvas, size){
+	
 	ctx = controlCanvas.getContext("2d");
 	ctx.beginPath();
 	var locx = size/2+((controlCanvas.width-size)/2);
 	var locy = size/2+((controlCanvas.height-size)/2);
-	
+
 	ctx.arc(locx, locy, size/2, 0, Math.PI*2, true); 
 	ctx.closePath();
 	ctx.fill();
-	
+
 }
 
 function drawControls(){
-	drawOneCircle(document.getElementById('small'), 3);
-	drawOneCircle(document.getElementById('medium'), 10);
-	drawOneCircle(document.getElementById('large'), 20);
-	drawOneCircle(document.getElementById('extralarge'), 50);
-	
+	drawOneCircle($('.small:last')[0], 3);
+	drawOneCircle($('.medium:last')[0], 10);
+	drawOneCircle($('.large:last')[0], 20);
+	drawOneCircle($('.extralarge:last')[0], 50);
+
 }
 
 function resetDimensions(){
@@ -47,49 +48,57 @@ function resetDimensions(){
 }
 
 function prepareCanvas(url, photo_id){
+	
+	paths = new Array();
+	drawing = false;
+	curColor = "#000000"
+	lineWidth = 10;
+	
 	id = photo_id;
-	drawControls();
-	canvas = document.getElementById('canvas');
+	canvas = $('.drawingCanvas:last')[0]
+	if(canvas == null) return;
+	drawControls();	
+	
 	context = canvas.getContext("2d");
 	img = new Image();
 	img.src = url;
 	img.onload = function(){
-	
 		canvas.style = "border:1px solid black;"
-    	
-		canvas.style.backgroundImage = "url("+url+")";
-		canvas.style.width = "100%"
+    	canvas.width = 600;
+		//resetDimensions();
 		canvas.height = yscale(canvas.width, img)
 		
-		resetDimensions();
+		canvas.style.backgroundImage = "url("+url+")";
+		canvas.style.backgroundSize = "100% Auto";
+	  	
+		
+		$('.drawingCanvas:last').mousedown(onMouseDown);
+		$('.drawingCanvas:last').mousemove(onMouseMove);
+		$('.drawingCanvas:last').mouseup(onMouseUp);
+		$('.drawingCanvas:last').mouseleave(onMouseLeave);
 
-		$('#canvas').mousedown(onMouseDown);
-		$('#canvas').mousemove(onMouseMove);
-		$('#canvas').mouseup(onMouseUp);
-		$('#canvas').mouseleave(onMouseLeave);
-		
-		
-		$('#canvas').touchstart(onMouseDown, false);
-		$('#canvas').touchmove(onTouchMove, false);
-		$('#canvas').touchend(onMouseUp, false);
-		
-		
-	
+		$('.drawingCanvas:last').touchstart(onMouseDown, false);
+		$('.drawingCanvas:last').touchmove(onTouchMove, false);
+		$('.drawingCanvas:last').touchend(onMouseUp, false);
+
+
+
 		window.onresize = function(event) {
 	    	resetDimensions();
 			redraw();
 		}
+		
 	}
 
-	
+
 }
 
 function onTouchMove(e){	
 	e.preventDefault();
 	if(drawing){
-		
+
 		var rect = canvas.getBoundingClientRect();
-		
+
 		var touches = event.touches;
 		var x = touches[0].clientX;
 		var y = touches[0].clientY
@@ -107,18 +116,16 @@ function onMouseDown(e){
 }
 
 function onMouseUp(e){
-	
+
 	drawing = false;
 	redraw();
 }
 
 
 
-
-
 function onMouseMove(e){	
-	
-	
+
+
 	if(drawing){
 		var rect = canvas.getBoundingClientRect();
 		var newPoint = new Point(e.clientX-rect.left, e.clientY-rect.top, lineWidth, curColor);
@@ -132,7 +139,6 @@ function onMouseLeave(e){
 }
 
 function redraw(){
-  
   canvas.width = canvas.width; // Clears the canvas
   context.lineJoin = "round";
    		
@@ -172,19 +178,21 @@ function getSizeString(size){
 
 function changeSize(size){
 	var curId = getSizeString(lineWidth);
-	document.getElementById(curId).style.backgroundColor = "#E0E0E0";
-	document.getElementById(getSizeString(size)).style.backgroundColor = "#B0B0B0";
+	$('.'+curId+':last')[0].style.backgroundColor = "#E0E0E0";
 	
+	$('.'+getSizeString(size)+':last')[0].style.backgroundColor = "#B0B0B0";
+
 	lineWidth = size;
 }
 
 function changeColor(){
-	curColor = document.getElementById('colorPicker').value;
+	
+	curColor = $('.colorPicker:last')[0].value;
 }
 
 function save(){
-	
-	var val = document.getElementById("commentBox").value;
+
+	var val = $('.commentBox:last')[0].value;
 	var dataURL = canvas.toDataURL();
 	var request = new XMLHttpRequest();
 	request.open('POST', 'save_image.php', false);

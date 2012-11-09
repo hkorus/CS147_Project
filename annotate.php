@@ -11,6 +11,9 @@
 <!DOCTYPE html>
 <head>
 	<title>Annotation</title>
+	
+	<script type="text/javascript" src="drawing_canvas.js"></script>
+	
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -34,14 +37,13 @@ if($result!=false){
 ?>
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
-	<script type="text/javascript" src="drawing_canvas.js"></script>
 	<script src='spectrum.js'></script>
 	<script src="auth.js"></script>
 	<link rel='stylesheet' href='spectrum.css' />
 	
 	
 	<style type="text/css" media="screen">
-    	#canvas{ display:block; border:1px solid black;background-size: 100%;}
+    	.drawingCanvas{ display:block; background-size: 100%;}
 		table, td, tr {
 			margin:0;
 			padding:0;
@@ -75,23 +77,23 @@ if($result!=false){
 			
 				
 					<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
-						<a href="./art.php?id=<?php echo $row["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
-						<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
-						<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
+						<a href="./art.php?id=<?php echo $row["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a">Art</a></li>
+						<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a">Comments</a>
+						<a  id="annotate" data-icon="custom" data-role="button" data-theme="a">Annotate</a>
 					</div><!-- /controlgroup -->
-					<table style = "width:100%;">
+					<table style = "width:600px;border-collapse:collapse;">
 						<tr>
-							<td style  = "width:100%;">
-							<canvas id="canvas"></canvas>
+							<td style>
+							<canvas class="drawingCanvas"></canvas>
 							<td>
-						<td style = "padding:2px;background-color:#E0E0E0;vertical-align;text-align: center;"">	
+						<td style = "padding:2px;background-color:#E0E0E0;vertical-align;text-align: center;">	
 								<p></p>
 								<div><img src = "icons/undo.png" width = "50px" onclick = "undo()"></div>
-								<div><canvas id="extralarge" height = "60px" width = "70px"  onclick = "changeSize(50)"></canvas></div>
-							<div ><canvas id="large" height = "50px" width = "70px"  onclick = "changeSize(20)"></canvas></div>
-								<div><canvas style = "background-color:#B0B0B0;" id="medium" height = "40px" width = "70px"  onclick = "changeSize(10)" ></canvas></div>
-								<div><canvas id="small" height = "30px" width = "70px" onclick = "changeSize(3)"></canvas></li>
-								<div style = "text-align: center;"><input type='color' name='color' id = "colorPicker" onchange = "changeColor()"/></div>
+								<div><canvas class="extralarge" height = "60px" width = "70px"  onclick = "changeSize(50)"></canvas></div>
+							<div ><canvas class="large" height = "50px" width = "70px"  onclick = "changeSize(20)"></canvas></div>
+								<div><canvas style = "background-color:#B0B0B0;" class="medium" height = "40px" width = "70px"  onclick = "changeSize(10)" ></canvas></div>
+								<div><canvas class="small" height = "30px" width = "70px" onclick = "changeSize(3)"></canvas></li>
+								<div style = "text-align: center;"><input type='color' name='color' class = "colorPicker" onchange = "changeColor()"/></div>
 							</div>
 							
 
@@ -100,12 +102,12 @@ if($result!=false){
 						</td>
 					</tr>
 					<tr>
-						<td style = "width:100%;background-color:#B0B0B0;padding:7px"">
-							<textarea id="commentBox" cols="100" rows="100">
+						<td style = "background-color:#B0B0B0;padding:7px">
+							<textarea class="commentBox" cols="100" rows="100">
 							</textarea>
 							</td>
 							<td></td>
-							<td style = "width:70px;background-color:#B0B0B0;vertical-align:center;">	
+							<td style = "width:70px;background-color:#B0B0B0;vertical-align:center;text-align:center">	
 								<img src = "icons/post.png" style="width:60px;height:60px" onclick="save()">
 						</td>
 						</tr>
@@ -117,9 +119,11 @@ if($result!=false){
 
 				<script type="text/javascript"> 
 				$(document).bind('pageinit', function() {
+					//alert( document.URL );
+					
 					<?php
 
-						echo "prepareCanvas('".$row["image_source"]."', ".$row["id"].")";
+					echo "prepareCanvas('".$row["image_source"]."', ".$row["id"].")";
 
 					?>
 				});
@@ -166,7 +170,7 @@ if($result!=false){
 		<ul>
 			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
 			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom" >Favorites</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
 		</ul>
 

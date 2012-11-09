@@ -23,6 +23,8 @@
 	<link rel="apple-touch-startup-image" href="images/logo.png">
 
 	<script src="jquery-1.8.2.min.js"></script>
+	<script src="drawing_canvas.js"></script>
+	
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script src="auth.js"></script>
 
@@ -56,8 +58,8 @@
 	<script type = "text/javascript">
 	function send_rating(comment, amount){
 
-		var up = document.getElementById("up-"+comment);
-		var down = document.getElementById("down-"+comment);
+		var up = $(".up-"+comment+':last')[0]
+		var down = $(".down-"+comment+':last')[0]
 
 		if(amount > 0){
 			up.src = "icons/selected_up_arrow.png"
@@ -66,7 +68,7 @@
 		}
 		up.onclick = "";
 		down.onclick = "";
-		var num = document.getElementById("number-"+comment);
+		var num = $(".number-"+comment+':last')[0]
 		num.innerHTML = ""+(parseInt(num.innerHTML)+amount)
 
 		var request = new XMLHttpRequest();
@@ -83,7 +85,7 @@
 
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
 			<a href="./art.php?id=<?php echo $_GET["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" >Art</a></li>
-			<a href="./comments.php?id=<?php echo $_GET["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" >Comments</a>
+			<a  id="comments" data-icon="custom" data-role="button" data-theme="a" >Comments</a>
 			<a href="./annotate.php?id=<?php echo $_GET["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" >Annotate</a>
 		</div><!-- /controlgroup -->
 		<p></p>
@@ -99,18 +101,18 @@
 
 				?>
 				<table class="noBorder" style="width:20%"><tr>
-					<td style="padding-left:15px; padding-right:15px;"><img id = "up-<?php echo $row["comment_id"] ?>" src = "icons/up_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)"></td></tr>
+					<td style="padding-left:15px; padding-right:15px;"><img class = "up-<?php echo $row["comment_id"] ?>" src = "icons/up_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)"></td></tr>
 
-					<tr><td id = "number-<?php echo $row["comment_id"] ?>" style="padding-left:15px; padding-right:15px;"><?php echo $row["rating"]; ?></td></tr>
+					<tr><td class = "number-<?php echo $row["comment_id"] ?>" style="padding-left:15px; padding-right:15px;"><?php echo $row["rating"]; ?></td></tr>
 
-					<tr><td style="padding-left:15px; padding-right:15px;"><img id = "down-<?php echo $row["comment_id"] ?>" src = "icons/down_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1)"></td></tr>
+					<tr><td style="padding-left:15px; padding-right:15px;"><img class = "down-<?php echo $row["comment_id"] ?>" src = "icons/down_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1)"></td></tr>
 					</table>
 
 				</td>
 				<td style="border-collapse:collapse; border-bottom:1px dotted black;padding:5px;">
 					<?php
 
-				echo "<canvas id = 'canvas-".$row["comment_id"]."' width = '30%'></canvas>
+				echo "<canvas class = 'canvas-".$row["comment_id"]."' width = '30%'></canvas>
 					";
 				array_push($arr, $row["comment_id"]);
 				array_push($arr, $row["annotation"]);
@@ -190,7 +192,8 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 				
 				for (var i=0;i<array.length;i+=2)
 				{ 
-					newCanvas = document.getElementById("canvas-"+array[i]);
+					newCanvas = $(".canvas-"+array[i]+':last')[0]
+					
 					canvasList.push(newCanvas);
 
 					newImg = new Image();
@@ -209,12 +212,12 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 
 	</script>
 
-		<div id="fb-root"></div>
+		<div class="fb-root"></div>
 		<script>
 			$(document).bind('pageinit', function() {
     				var e = document.createElement('script'); e.async = true;
        				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-        			document.getElementById('fb-root').appendChild(e);
+        			$(".fb-root:last")[0].appendChild(e);
         		}());
 			</script>
   	

@@ -24,6 +24,8 @@
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
+	<script src="drawing_canvas.js"></script>
+	
 	<script src="isotope-master/jquery.isotope.min.js"></script>
 	<script src="auth.js"></script>
 	
@@ -98,6 +100,7 @@
   					<li><a href="#time_stamp">time stamp</a></li>
  					<li><a href="#art_id">art id</a></li>
 			</ul>
+		<p style='margin-left:10px;font-family: Andale Mono, san-serif; font-size: 25px;'>Favorites</p>
 			<div id="container">
 					<?php
 						include("config.php");
@@ -118,18 +121,18 @@
 				
 			<?php
 				if(!$fb_user) {
-					echo "Please login to view Favorites";
+					echo "<p style='margin-left:25px;font-family: Andale Mono; font-size: 15px;'>Please login to view favorites!</p>";
 				}
 			?>
 		
 		
 		
-		<div id="fb-root"></div>
+		<div class="fb-root"></div>
 		<script>
 			$(document).bind('pageinit', function() {
     				var e = document.createElement('script'); e.async = true;
        				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-        			document.getElementById('fb-root').appendChild(e);
+        			$(".fb-root:last")[0].appendChild(e);
         		}());
 			</script>
   	

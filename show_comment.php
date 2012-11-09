@@ -49,14 +49,15 @@
 			<a href="./comments.php?id=<?php echo $row["art_id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" >Comments</a>
 			<a href="./annotate.php?id=<?php echo $row["art_id"]?>" id="annotate" data-icon="custom" data-role="button"  data-theme="a">Annotate</a>
 		</div><!-- /controlgroup -->
-		
-			<canvas id="canvas" ></canvas>
 			
-		
+			<canvas class="displayCanvas" ></canvas>
 			<?php
 					echo "<p>".$row["comment"]."</p>";
 					
 			?>
+			
+		
+		
 	</div><!-- /content -->
 	
 	<?php
@@ -68,17 +69,11 @@
 	
 
 	?>
-	
-	<script type = "text/javascript">
-		function refresh(){
-			var num = Math.floor(Math.random() * <?php echo $rand ?>) + 1;
-			window.location="art.php?id="+num;
-		}
-	</script>
+
 	
 	<script type = "text/javascript">
 	$(document).bind('pageinit', function() {
- 			canvas = document.getElementById('canvas');
+ 			canvas = $(".displayCanvas:last")[0];
 			context = canvas.getContext("2d");
 			img = new Image();
 			img.src = <?php echo "'".$row["annotation"]."'" ?>;
@@ -102,7 +97,7 @@
 		<div data-role="navbar" class="menubar" data-grid="c">
 		<ul>
 			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
-			<li><a onclick = "refresh()" id="art" data-icon="custom">Random Art</a></li>
+			<li><a href = "./art.php" id="art" data-icon="custom">Random Art</a></li>
 			<li><a href="./favorites.php" id="favorites" data-icon="custom" >Favorites</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom" >Help</a></li>
 		</ul>
