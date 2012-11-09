@@ -33,6 +33,7 @@
 	<div data-role="header">
 		<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
 		<a href="javascript:history.go(-1)" id="goback" data-icon="custom" rel = "external">Back</a>
+
 		<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
      		<div class="show_when_not_connected">
         		<a onclick="promptLogin()" class="login-button"> 
@@ -43,29 +44,48 @@
 	</div><!-- /header -->
 	
 	<div data-role="content">
-		<h1><center>mo·tif /mōˈtēf/</center></h1>
-		<p><center>(noun): a distinctive feature or dominant idea in an artistic composition.</center></p>
+		<h1 style="font-family: Andale Mono; font-size: 25px;"><center>mo·tif /mōˈtēf/</center></h1>
+		<h2><center>(noun): a distinctive feature or dominant idea in an artistic composition.</center></h2>
+		<br>
+		<h3><center>Home</center></h3>
+		<p><center>Search for art by artist name in the search text field.
+		<br> Not sure what you want to view? Try clicking for Random Art.</center></p>
+		<br>
+		<h3><center>Favorites</center></h3>
+		<p><center>Login and keep track of artwork that interests you on your favorites page.
+		<br>Add art to your favorites by clicking the heart icon when on the art viewing page.</center></p>
+		<br>
+		<h3><center>Art</center></h3>
+		<p><center>View art! Art that you searched for or art picked at random.</center></p>
+		<br>
+		<h3><center>Comments</h3>
+		<p><center>Read other viewers' comments and annotations on a particular piece.
+		<br>You can upvote or down vote their comments by clicking the arrows to the left of the comment.</center><p>
+		<br>
+		<h3><center>Annotate</center></h3>
+		<p><center>Markup the artwork by choosing a style-tip and color on the right.
+		<br>Draw your commentary, highlight details, add, enhance, deface, have fun.</center></p>
 		
-				<div id="fb-root"></div>
+		<div id="fb-root"></div>
 		<script>
 			$(document).bind('pageinit', function() {
     				var e = document.createElement('script'); e.async = true;
        				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
         			document.getElementById('fb-root').appendChild(e);
-        		}());
-			</script>
+       		}());
+		</script>
   	
-			<script>
-    			window.fbAsyncInit = function() {
-      				FB.init({ appId: '291103611004949',
-      					status: true,
-      					cookie: true,
-      					xfbml: true,
-      					oauth: true});
+		<script>
+    		window.fbAsyncInit = function() {
+     			FB.init({ appId: '291103611004949',
+      				status: true,
+      				cookie: true,
+      				xfbml: true,
+     				oauth: true});
  
-      				FB.getLoginStatus(handleStatusChange)
-    			};
-  			</script>
+      			FB.getLoginStatus(handleStatusChange)
+    		};
+  		</script>
 
 				<div class="show_when_connected">
 					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
