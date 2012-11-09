@@ -14,7 +14,7 @@
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
 	
-
+	<script src = "drawing_canvas.js"></script>
 	
 
 </head>
@@ -23,6 +23,8 @@
 <div data-role="page">
 
 	<div data-role="header">
+		<a href="javascript:history.go(-1)" id="goback" data-icon="custom" rel = "external">Back</a>
+		
 				<?php
 
 				include("config.php");
@@ -45,16 +47,17 @@
 	<div data-role="content">
 
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
-			<a href="./art.php?id=<?php echo $row["art_id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" >Art</a></li>
-			<a href="./comments.php?id=<?php echo $row["art_id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" >Comments</a>
-			<a href="./annotate.php?id=<?php echo $row["art_id"]?>" id="annotate" data-icon="custom" data-role="button"  data-theme="a">Annotate</a>
+			<a href="./art.php?id=<?php echo $row["art_id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
+			<a href="./comments.php?id=<?php echo $row["art_id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
+			<a href="./annotate.php?id=<?php echo $row["art_id"]?>" id="annotate" data-icon="custom" data-role="button"  data-theme="a" rel="external">Annotate</a>
 		</div><!-- /controlgroup -->
 			
-			<canvas class="displayCanvas" ></canvas>
 			<?php
-					echo "<p>".$row["comment"]."</p>";
+					echo "<p style = 'font-family: Andale Mono; font-size: 18px;'>".$row["comment"]."</p>";
 					
 			?>
+			<canvas class="displayCanvas" ></canvas>
+			
 			
 		
 		
@@ -72,21 +75,24 @@
 
 	
 	<script type = "text/javascript">
-	$(document).bind('pageinit', function() {
- 			canvas = $(".displayCanvas:last")[0];
-			context = canvas.getContext("2d");
+	$(document).ready(function() {
+ 			var canvas = $(".displayCanvas:last")[0];
 			img = new Image();
 			img.src = <?php echo "'".$row["annotation"]."'" ?>;
 			
 			img.onload = function(){
 				canvas.width = img.width;
 				canvas.height = img.height;
+				var context = canvas.getContext("2d");
 			
 				backgroundImg = new Image();
 				backgroundImg.src = <?php echo "'".$artPiece["image_source"]."'" ?>;
-				context.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height)
-
-				context.drawImage(img, 0, 0, canvas.width, canvas.height)
+				
+				backgroundImg.onload = new function(){
+				
+					context.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height)
+					context.drawImage(img, 0, 0, canvas.width, canvas.height)
+				}
 			}
 		});
 
@@ -96,10 +102,10 @@
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" class="menubar" data-grid="c">
 		<ul>
-			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
-			<li><a href = "./art.php" id="art" data-icon="custom">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom" >Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom" >Help</a></li>
+			<li><a href="./home.php" id="home" data-icon="custom" rel="external">Home</a></li>
+			<li><a href = "./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
+			<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
 		</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->

@@ -56,7 +56,7 @@ function prepareCanvas(url, photo_id){
 	
 	id = photo_id;
 	canvas = $('.drawingCanvas:last')[0]
-	if(canvas == null) return;
+	if(typeof canvas === 'undefined') return;
 	drawControls();	
 	
 	context = canvas.getContext("2d");
@@ -82,11 +82,6 @@ function prepareCanvas(url, photo_id){
 		$('.drawingCanvas:last').touchend(onMouseUp, false);
 
 
-
-		window.onresize = function(event) {
-	    	resetDimensions();
-			redraw();
-		}
 		
 	}
 
@@ -191,7 +186,6 @@ function changeColor(){
 }
 
 function save(){
-
 	var val = $('.commentBox:last')[0].value;
 	var dataURL = canvas.toDataURL();
 	var request = new XMLHttpRequest();
@@ -200,6 +194,7 @@ function save(){
 	request.send(val+"&"+id+"&"+dataURL); // because of "false" above, will block until the request is done
 	                // and status is available. Not recommended, however it works for simple cases.
 	if (request.status === 200) {
+		
 	  alert("Posted!")
 	}
 }

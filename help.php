@@ -31,8 +31,9 @@
 <div data-role="page">
 
 	<div data-role="header">
-		<h1 style="font-family: Andale Mono, san-serif; font-size: 18px;">motif</h1>
-		<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
+		<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
+		<a href="javascript:history.go(-1)" id="goback" data-icon="custom" rel = "external">Back</a>
+
 		<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
      		<div class="show_when_not_connected">
         		<a onclick="promptLogin()" class="login-button"> 
@@ -102,10 +103,10 @@
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" class="menubar" data-grid="c">
 			<ul>
-				<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
-				<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
-				<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
-				<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
+				<li><a href="./home.php" id="home" data-icon="custom" rel="external">Home</a></li>
+				<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
+				<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
+				<li><a onclick = "window.location.reload()" id="help" data-icon="custom" rel="external">Help</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->

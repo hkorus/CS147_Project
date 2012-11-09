@@ -21,6 +21,11 @@
 	<link rel="stylesheet" href="fbstyle.css" />
 	<link rel="apple-touch-icon" href="icons/icon2.png" />
 	<link rel="apple-touch-startup-image" href="images/logo.png">
+	<style type="text/css">
+		a:link {
+			COLOR: #FFFFFF;
+		}
+	</style>
 	
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
@@ -29,7 +34,6 @@
 	<script type = "text/javascript">
 		function search(){
 			var term = $(".term:last")[0].value;
-
 			var request = new XMLHttpRequest();
 			request.open('POST', 'search.php', false);
 			request.setRequestHeader("Content-type", "application/upload")
@@ -39,6 +43,7 @@
 				
 				var html = "";
 				var results = $(".results:last")[0];
+				results.style.border = "1px solid #ccc";
 				var text = request.responseText;
 				var loc = text.indexOf('|');
 				while(loc!=-1){
@@ -49,7 +54,7 @@
 					}
 					var id = one.substring(0, andloc);
 					var info = one.substring(andloc+1);
-					html+= "<a href = 'art.php?id="+id+"'>"+info+"</a><br/>";
+					html+= "<a href= 'art.php?id="+id+"' rel='external'><div style = 'background:#D8D8D8'>"+info+"<br/></div></a>";
 					
 					text = text.substring(loc+1);
 					loc = text.indexOf("|")
@@ -58,6 +63,14 @@
 			}
 		}
 	</script>
+	<script type = "text/javascript">
+		function isEnter(){
+			if(event.keyCode == 13){
+			        search();
+			    }	
+		}
+		
+	</script>
 	  
 </head>
 <body>
@@ -65,7 +78,7 @@
 	<div data-role="page" id="homepage">
 		<div data-role="header">
 			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
-			<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
+			<a href="javascript:history.go(-1)" id="goback" data-icon="custom" rel = "external">Back</a>
 			
 			<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
      			<div class="show_when_not_connected">
@@ -77,27 +90,29 @@
    		</div><!-- /header -->
 	
 		<div data-role="content">
-
+			<br/><br/><br/><br/><br/><br/>
 			<p style="text-align:center"><img src="images/logo_crop.png"></p>
 			<p style="font-family: Andale Mono; font-size: 18px; text-align: center;">discover art, draw your commentary</p>
 			<br></br>
 			
-			<div class="search" style="width:75%">
-   				<input type="text" name="term" class = "term"/>
-					<input type="submit" name="submit" value="Search!" onclick = "search()"/>
-					<div class = "results" style="height:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+			<div class="search" style="width:100%;margin-left:auto; margin-right:auto;">
+   				<table style = "text-align:center;margin-left:auto; margin-right:auto"><tr><td>
+						<input type="text" id = "term" name="term" class = "term" onkeyup = "isEnter()" style="width:400px;"/></td><td>	
+							<input type="submit" name="submit" value="Search!" onclick = "search()"/></td></tr>
+					</table>
+					<div class = "results" style="width:500px;height:120px;font:16px/26px Georgia, Garamond, Serif;overflow:auto;margin-left:auto; margin-right:auto">
 
 					</div>
 			</div><!-- /search -->
 			
 			
-			<div class="fb-root"></div>
+			<div id="fb-root"></div>
 			
 			<script>
   				(function() {
     				var e = document.createElement('script'); e.async = true;
        				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-        			$(".fb-root:last")[0].appendChild(e);
+        			document.getElementById("fb-root").appendChild(e);
         		}());
 			</script>
   	
@@ -131,10 +146,10 @@
 			<div data-role="navbar" class="menubar" data-grid="c">
 		
 				<ul>
-					<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
-					<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
-					<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
-					<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
+					<li><a onclick = "window.location.reload()" id="home" data-icon="custom" rel="external">Home</a></li>
+					<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
+					<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
+					<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
 				</ul>
 			</div><!-- /navbar -->
 		</div><!-- /footer -->

@@ -17,7 +17,7 @@ include("config.php");
 	$fp = fopen($name, 'w');
    fwrite( $fp, $unencodedData);
    fclose( $fp );
-
+	$msg = mysql_real_escape_string($msg);
 	$query = "INSERT INTO comments VALUES (".$commentId.",1,".$id.",'".$msg."','".$name."',NULL,0);";
 	$result = mysql_query($query);
 

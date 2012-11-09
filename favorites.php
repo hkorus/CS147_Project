@@ -67,7 +67,7 @@
   			</script>
 
 	<script>
-		$(window).load(function() {
+	$(document).ready( function() {
         	var $container = $('#container');
         	$container.isotope({ 
         		itemSelector : '.image',
@@ -106,7 +106,7 @@
 <div data-role="page">
 	<div data-role="header">
 		<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
-		<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
+		<a href="javascript:history.go(-1)" id="goback" data-icon="custom" rel = "external">Back</a>
 		<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
      		<div class="show_when_not_connected">
         		<a onclick="promptLogin()" class="login-button"> 
@@ -132,7 +132,7 @@
 							$result = mysql_query($query);
 							while ($row = mysql_fetch_assoc($result)) {
 								//echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_url']."'></a></div>";
-								echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_url']."'></a>";
+								echo "<div class='image'><a href='./art.php?id=".$row['art_id']."' rel='external'><img width='100' src='".$row['image_url']."'></a>";
 								echo "<div class='time_stamp'></div>";
 								echo "<div class='art_id'></div>";
 								echo "</div>";
@@ -146,7 +146,6 @@
 					echo "<p style='margin-left:25px;font-family: Andale Mono; font-size: 15px;'>Please login to view favorites!</p>";
 				}
 			?>
-			
 
 				<div class="show_when_connected">
 					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
@@ -167,7 +166,7 @@
 		<ul>
 			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
 			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom">Favorites</a></li>
+			<li><a onclick = "window.location.reload()" id="favorites" data-icon="custom">Favorites</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
 		</ul>
 		</div><!-- /navbar -->
