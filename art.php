@@ -34,14 +34,14 @@
 			if(<?php echo $fb_user ?>) {
 				var button = $(".fav_button:last")[0]
 				var src =button.src;
-				if(src.indexOf('icons/heart.png')!=-1){				
-					button.src = 'icons/heart-glowing.png';
+				if(src.indexOf('icons/heart_grey.png')!=-1){				
+					button.src = 'icons/heart.png';
 					var request = new XMLHttpRequest();
 					request.open('POST', 'mark_favorite.php', false);
 					request.setRequestHeader("Content-type", "application/upload")
 					request.send(id); // because of "false" above, will block until the request is done
 				}else {
-					button.src = 'icons/heart.png';
+					button.src = 'icons/heart_grey.png';
 					var request = new XMLHttpRequest();
 					request.open('POST', 'undo_favorite.php', false);
 					request.setRequestHeader("Content-type", "application/upload")
@@ -107,13 +107,13 @@
 					$result = mysql_query($query);
 					$numRows = mysql_num_rows($result);
 					if($numRows == 0){
-						echo "icons/heart.png";
+						echo "icons/heart_grey.png";
 					}else {
-						echo "icons/heart-glowing.png";
+						echo "icons/heart.png";
 					} 
 					echo "' width = '30' height = '30' onclick = 'send_favorite(".$row['id'].")'>";
 			
-				}else {echo "<img class = 'fav_button' src= 'icons/heart.png' width = '30' height = '30' onclick = 'send_favorite(".$row['id'].")'>";}
+				}else {echo "<img class = 'fav_button' src= 'icons/heart-grey.png' width = '30' height = '30' onclick = 'send_favorite(".$row['id'].")'>";}
 			
 			?>
 			</td></tr></table>
