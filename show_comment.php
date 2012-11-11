@@ -13,6 +13,7 @@
 
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
+	<script src="isotope-master/jquery.isotope.min.js"></script>
 	
 	<script src = "drawing_canvas.js"></script>
 	
@@ -86,16 +87,15 @@
 	
 	$( function(){
 		var $container = $('#container');
-		
 		$container.imagesLoaded( function(){
-			var backgroundImg = $('#artPiece')
-			var img = $('#annotation')
+			var backgroundImg = $('#artPiece')[0]
+			var img = $('#annotation')[0]
 			var canvas = $(".displayCanvas:last")[0];
-			canvas.width = "600";
+			canvas.width = "600";			
 			canvas.height = yscale(canvas.width, img);
-			var context = canvas.getContext("2d");
+			var context = canvas.getContext("2d");	
 			context.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height)
-			context.drawImage(img, 0, 0, canvas.width, canvas.height)
+			context.drawImage(img, 0, 0, canvas.width, canvas.height)			
 				
 		});
 	});
