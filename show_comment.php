@@ -57,6 +57,10 @@
 					
 			?>
 			<canvas class="displayCanvas" ></canvas>
+			<div id = "container" style = "display:none">
+				<img id = "artPiece" src = <?php echo "'".$artPiece["image_source"]."'" ?> ></img>
+				<img id = "annotation" src = <?php echo "'".$row["annotation"]."'" ?> ></img>
+			</div>
 			
 			
 		
@@ -75,37 +79,28 @@
 
 	
 	<script type = "text/javascript">
+	function yscale(width, img){
+		var ratio = width/img.width;
+		return ratio * img.height;
+	}
 	
-		function yscale(width, img){
-			var ratio = width/img.width;
-			return ratio * img.height;
-		}
+	$( function(){
+		var $container = $('#container');
 		
-		var backgroundImg = new Image();
-		backgroundImg.src = <?php echo "'".$artPiece["image_source"]."'" ?>;
-		
-		var img = new Image();
-		img.src = <?php echo "'".$row["annotation"]."'" ?>;
-		
-		$(document).bind('pageinit', function(){
-	
+		$container.imagesLoaded( function(){
+			var backgroundImg = $('#artPiece')
+			var img = $('#annotation')
 			var canvas = $(".displayCanvas:last")[0];
-			
-			
-			backgroundImg.onload = function(){	
+			canvas.width = "600";
+			canvas.height = yscale(canvas.width, img);
+			var context = canvas.getContext("2d");
+			context.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height)
+			context.drawImage(img, 0, 0, canvas.width, canvas.height)
 				
-				img.onload = function(){
-					
-					canvas.width = "600";
-					canvas.height = yscale(canvas.width, img);
-					
-					var context = canvas.getContext("2d");
-				
-					context.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height)
-					context.drawImage(img, 0, 0, canvas.width, canvas.height)
-				}
-			}
 		});
+	});
+			
+	
 
 	
 	</script>
