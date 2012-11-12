@@ -24,6 +24,7 @@
 
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="drawing_canvas.js"></script>
+	<script src="isotope-master/jquery.isotope.min.js"></script>
 	
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script src="auth.js"></script>
@@ -89,7 +90,7 @@
 			<a href="./annotate.php?id=<?php echo $_GET["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
 		</div><!-- /controlgroup -->
 		<p></p>
-		<table class="bottomBorder" style="text-align:center; width:100%;">
+		<table id = "commentTable" class="bottomBorder" style="text-align:center; width:100%;">
 		
 			<?php
 		$arr = array();
@@ -116,7 +117,10 @@
 					";
 				array_push($arr, $row["comment_id"]);
 				array_push($arr, $row["annotation"]);
-
+				
+				echo "<img class = 'background' src = '".$image."' style = 'display:none' ></img>";
+				echo "<img class = 'image-".$row["comment_id"]."' src = '".$row["annotation"]."' style = 'display:none' ></img>";
+				
 				?>
 
 
@@ -147,68 +151,40 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 			return ratio * img.height;
 		}
 
-		var canvasList = new Array();
-		var backgroundImg = new Image();
-		var ready = 0;
-
-		function createCanvases(){
-			ready++;
-			if(ready > array.length/2){
-				
-				
-				for(var j = 0; j<canvasList.length; j+=2){
-					newCanvas = canvasList[j];
-					newImg = canvasList[j+1];
-
-					context = newCanvas.getContext('2d');
-					newCanvas.width = 200;
-					newCanvas.height = yscale(newCanvas.width, newImg)
-
-					context.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
-					context.drawImage(newImg, 0, 0,  newCanvas.width, newCanvas.height);
-				}
-				ready = 0;
-			}
+	
 			
-		}
-
-
-		$(document).bind('pageinit', function() {
-			array = new Array(<?php 
-				for ($i=0; $i< count($arr); $i+=2)
-				{
-					echo "'".$arr[$i]."','".$arr[$i+1]."'";
-					if($i!= count($arr)-2){
-						echo ",";
+			$( function(){
+				var $container = $('#commentTable');
+				array = new Array(<?php 
+					for ($i=0; $i< count($arr); $i+=2)
+					{
+						echo "'".$arr[$i]."'";
+						if($i!= count($arr)-2){
+							echo ",";
+						}
 					}
-				}
 
-				?>);
-
-				backgroundImg.src = <?php echo "'".$image."'"; ?>;
-
-				backgroundImg.onload = createCanvases;
-				backgroundImg.onerror = createCanvases;
-				backgroundImg.onabort = createCanvases;
-				
-				
-				for (var i=0;i<array.length;i+=2)
-				{ 
-					newCanvas = $(".canvas-"+array[i]+':last')[0]
+					?>);
+				$container.imagesLoaded( function(){
+					var backgroundImg = $('.background:last')[0]
 					
-					canvasList.push(newCanvas);
+					
+					for (var i=0;i<array.length;i++){
+						var newCanvas = $(".canvas-"+array[i]+':last')[0]
+						
+						var img = $(".image-"+array[i]+':last')[0]
+						
+												
+						context = newCanvas.getContext('2d');
+						newCanvas.width = 200;
+						newCanvas.height = yscale(newCanvas.width, backgroundImg)
+						context.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
+						context.drawImage(img, 0, 0,  newCanvas.width, newCanvas.height);
+						
+						
+					}		
 
-					newImg = new Image();
-					newImg.src = array[i+1];
-					canvasList.push(newImg);
-					newImg.onload = createCanvases;
-					newImg.onerror = createCanvases;
-					newImg.onabort = createCanvases;
-
-
-				}
-
-
+				});
 			});
 
 
