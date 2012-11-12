@@ -140,7 +140,7 @@
 	
 <div data-role="page">
 	<div data-role="header">
-		<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
+		<h1 style="font-family: Courier; font-size: 18px;">motif</h1>
 		<a href="javascript:history.go(-1)" id="goback" data-icon="custom" rel = "external">Back</a>
 		<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
      		<div class="show_when_not_connected">
@@ -154,18 +154,21 @@
 
 	<div data-role="content">
 		
-		<p style='margin-left:10px;font-family: Andale Mono, san-serif; font-size: 25px;'>Favorites</p>
+		<div>
+		<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 25px;'>Favorites
+		<a href="./user_comments.php" rel="external" data-role="button" data-theme="a" style="float:right; margin:0px;">My Comments</a></p>
+		</div>
 			<div data-role="controlgroup" data-type="horizontal">
   					<a href="#time_stamp" onclick="sortByTime()" data-role="button" data-theme="a">Sort by Date Added</a>
  					<!--<a href="#art_id" onclick="sortByArtId()" data-role="button" data-theme="a">Sort by ArtId</a>-->
  					<a href="#title" onclick="sortByTitle()" data-role="button" data-theme="a">Sort by Title</a>
- 					<a href="#artist" onclick="sortByArtist()" data-role="button" data-theme="a">Sort by Artist</a>
-			</div>
-
+ 					<a href="#artist" onclick="sortByArtist()" data-role="button" data-theme="a">Sort by Artist</a>	
+			</div>	
 			<div id="container">
 					<?php
 						include("config.php");
 						if ($fb_user) {
+							
 							$query = "SELECT * FROM art, fave_art where id = art_id and user_id =".$fb_user;
 							//$query = "SELECT * FROM art, fave_art where id = art_id";
 							$result = mysql_query($query);
@@ -187,7 +190,7 @@
 				
 			<?php
 				if(!$fb_user) {
-					echo "<p style='margin-left:25px;font-family: Andale Mono; font-size: 15px;'>Please login to view favorites!</p>";
+					echo "<p style='margin-left:25px;font-family: Courier; font-size: 15px;'>Please login to view favorites!</p>";
 				}
 			?>
 

@@ -31,7 +31,7 @@
 <div data-role="page">
 
 	<div data-role="header">
-		<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
+		<h1 style="font-family: Courier; font-size: 18px;">motif</h1>
 		<a href="javascript:history.go(-1)" id="goback" data-icon="custom" rel = "external">Back</a>
 
 		<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
@@ -44,7 +44,7 @@
 	</div><!-- /header -->
 	
 	<div data-role="content">
-		<h1 style="font-family: Andale Mono; font-size: 25px;"><center>mo·tif /mōˈtēf/</center></h1>
+		<h1 style="font-family: Courier; font-size: 25px;"><center>mo·tif /mōˈtēf/</center></h1>
 		<h2><center>(noun): a distinctive feature or dominant idea in an artistic composition.</center></h2>
 		<br>
 		<h3><center>Home</center></h3>

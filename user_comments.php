@@ -10,7 +10,7 @@
 
 <!DOCTYPE html>
 <head>
-	<title>Comments</title>
+	<title>My Comments</title>
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -46,8 +46,16 @@
 			<?php
 
 		include("config.php");
-		$query = "SELECT * FROM comments, art WHERE art_id = id and art_id = ".$_GET['id']." ORDER BY rating DESC";
-		$result = mysql_query($query);
+				$id = $_GET["id"];
+				$query = "SELECT * FROM comments where user_id = ".$fb_user;
+				
+				$result = mysql_query($query);
+				$row = mysql_fetch_assoc($result);
+				
+				$artQuery = "SELECT * FROM art where id = ".$row["art_id"];
+				
+				$artResult = mysql_query($artQuery);
+				$artPiece = mysql_fetch_assoc($artResult);
 
 		?>				
 
@@ -83,23 +91,16 @@
 
 	<div data-role="content">
 
-		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
-			<a href="./art.php?id=<?php echo $_GET["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
-			<a  id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external" style = "background:#B0B0B0">Comments</a>
-			<a href="./annotate.php?id=<?php echo $_GET["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
-		</div><!-- /controlgroup -->
-		<p></p>
+		<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 25px;'>My Comments</p>
 		<table class="bottomBorder" style="text-align:center; width:100%;">
 		
 			<?php
 		$arr = array();
-		$image = "";
 		if(mysql_num_rows($result)>0){	
 			while($row = mysql_fetch_assoc($result)) {
-				$image = $row['image_source'];
 				echo "<tr><td style='border-collapse:collapse; border-bottom:1px dotted black;padding:5px;'>";
-
 				?>
+				
 				<table class="noBorder" style="width:20%"><tr>
 					<td style="padding-left:15px; padding-right:15px;"><img class = "up-<?php echo $row["comment_id"] ?>" src = "icons/up_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)"></td></tr>
 
@@ -112,10 +113,10 @@
 				<td style="border-collapse:collapse; border-bottom:1px dotted black;padding:5px;">
 					<?php
 
-				echo "<canvas class = 'canvas-".$row["comment_id"]."' width = '30%'></canvas>
-					";
+				echo "<canvas class = 'canvas-".$row["comment_id"]."' width = '30%'></canvas>";
 				array_push($arr, $row["comment_id"]);
 				array_push($arr, $row["annotation"]);
+				array_push($arr, $artPiece["image_source"]);
 
 				?>
 
@@ -148,17 +149,17 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 		}
 
 		var canvasList = new Array();
-		var backgroundImg = new Image();
 		var ready = 0;
 
 		function createCanvases(){
 			ready++;
-			if(ready > array.length/2){
+			if(ready > array.length/3){
 				
 				
-				for(var j = 0; j<canvasList.length; j+=2){
+				for(var j = 0; j<canvasList.length; j+=3){
 					newCanvas = canvasList[j];
 					newImg = canvasList[j+1];
+					backgroundImg = canvasList[j+2];
 
 					context = newCanvas.getContext('2d');
 					newCanvas.width = 200;
@@ -175,24 +176,17 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 
 		$(document).bind('pageinit', function() {
 			array = new Array(<?php 
-				for ($i=0; $i< count($arr); $i+=2)
+				for ($i=0; $i< count($arr); $i+=3)
 				{
-					echo "'".$arr[$i]."','".$arr[$i+1]."'";
-					if($i!= count($arr)-2){
+					echo "'".$arr[$i]."','".$arr[$i+1]."','".$arr[$i+2]."'";
+					if($i!= count($arr)-3){
 						echo ",";
 					}
 				}
 
 				?>);
-
-				backgroundImg.src = <?php echo "'".$image."'"; ?>;
-
-				backgroundImg.onload = createCanvases;
-				backgroundImg.onerror = createCanvases;
-				backgroundImg.onabort = createCanvases;
-				
-				
-				for (var i=0;i<array.length;i+=2)
+							
+				for (var i=0;i<array.length;i+=3)
 				{ 
 					newCanvas = $(".canvas-"+array[i]+':last')[0]
 					
@@ -204,11 +198,16 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 					newImg.onload = createCanvases;
 					newImg.onerror = createCanvases;
 					newImg.onabort = createCanvases;
-
-
+				
+					backgroundImg = new Image();
+					backgroundImg.src = array[i+2];	
+					canvasList.push(backgroundImg);
+					backgroundImg.onload = createCanvases;
+					backgroundImg.onerror = createCanvases;
+					backgroundImg.onabort = createCanvases;
 				}
 
-
+				
 			});
 
 
@@ -234,6 +233,13 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
       				FB.getLoginStatus(handleStatusChange)
     			};
   			</script>
+			
+			<?php
+				if(!$fb_user) {
+					echo "<p style='margin-left:25px;font-family: Courier; font-size: 15px;'>Please login to view your comments!</p>";
+				}
+			?>
+
 
 				<div class="show_when_connected">
 					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
