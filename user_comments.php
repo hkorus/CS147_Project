@@ -47,7 +47,7 @@
 
 		include("config.php");
 				$id = $_GET["id"];
-				$query = "SELECT * FROM comments where user_id = ".$fb_user;
+				$query = "SELECT * FROM comments where user_id = ".$fb_user." ORDER BY rating DESC";
 				
 				$result = mysql_query($query);				
 				
@@ -108,10 +108,19 @@
 				echo "<tr>";
 				?>
 				
+				<td style="border-collapse:collapse; border-bottom:1px dotted black; padding-left:15px; padding-right:15px; font-size:18px; font-weight:bold; width:10%;"> <?php echo $row["rating"]; ?></td>
+				
+				<td style="border-collapse:collapse; border-bottom:1px dotted black; font-size:15px; width:20%;"> 
+				<?php 
+				echo "<b>";
+				echo$artPiece["title"]."</b> <br>(". $artPiece["year"].") <br> ".$artPiece["artist"];
+				?>
+				</td>
+				
 				<td style="border-collapse:collapse; border-bottom:1px dotted black;padding:5px;">
 					<?php
 
-				echo "<canvas onclick = 'see_comment(".$row["comment_id"].")' class = 'canvas-".$row["comment_id"]."' width = '30%'></canvas>";
+				echo "<canvas onclick = 'see_comment(".$row["comment_id"].")' class = 'canvas-".$row["comment_id"]."' width = '25%'></canvas>";
 				array_push($arr, $row["comment_id"]);
 				array_push($arr, $row["annotation"]);
 				array_push($arr, $artPiece["image_source"]);
@@ -120,7 +129,7 @@
 
 
 			</td>
-			<td style = "width:40%; border-collapse:collapse; border-bottom:1px dotted black;padding:5px;"> 
+			<td style = "width:30%; border-collapse:collapse; border-bottom:1px dotted black;padding:5px;"> 
 				<?php
 			echo $row["comment"];
 
