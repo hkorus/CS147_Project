@@ -57,7 +57,15 @@ if($result!=false){
 <body>
 	
 	
-
+<script type = "text/javascript">
+	function saveComment(){
+		if(<?php echo $fb_user?>){
+			save();
+		}else {
+			alert("You must be logged in to comment!");
+		}
+	};
+</script>
 
 	<div data-role="page">
 		<div data-role="header">
@@ -107,7 +115,7 @@ if($result!=false){
 							</textarea>
 							</td>
 							<td style = "width:70px;background-color:#B0B0B0;vertical-align:center;text-align:center">	
-								<img src = "icons/post.png" style="width:60px;height:60px" onclick="save()">
+								<img src = "icons/post.png" style="width:60px;height:60px" onclick="saveComment()">
 						</td>
 						</tr>
 				</table>
@@ -126,6 +134,8 @@ if($result!=false){
 
 					?>
 				});
+				
+				
 				</script>
 				
 			<div id="fb-root"></div>
