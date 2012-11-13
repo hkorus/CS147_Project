@@ -165,15 +165,18 @@
 	<div data-role="content">
 		
 		<div>
-		<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 25px;'>Favorites
-		<a href="./user_comments.php" rel="external" data-role="button" data-theme="a" style="float:right; margin:0px;">My Comments</a></p>
+		<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 25px;'>Favorites</p>
 		</div>
-			<div data-role="controlgroup" data-type="horizontal">
-
+		<table>
+			<tr>
+				<td><div data-role="controlgroup" data-type="horizontal">
   					<a href="#time_stamp" onclick="sortByTime()" data-role="button" data-theme="a">Sort by Date Added</a>
  					<a href="#title" onclick="sortByTitle()" data-role="button" data-theme="a">Sort by Title</a>
  					<a href="#artist" onclick="sortByArtist()" data-role="button" data-theme="a">Sort by Artist</a>	
-			</div>	
+				</div></td>
+				<td> <a href="./user_comments.php" rel="external" data-role="button" data-theme="a" style="float:right; margin:0px;">My Comments</a></td>	
+			</tr>
+		</table>
 			<div id="container">
 					<?php
 						include("config.php");
