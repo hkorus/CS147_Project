@@ -35,13 +35,17 @@
 
 		<div data-role="header">
 			<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
-			<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
-     			<div class="show_when_not_connected">
-        			<a onclick="promptLogin()" class="login-button"> 
-       					<span>Login</span>
-      				</a>
-    			</div>
-      		</div>
+			<?php
+				if(!$fb_user){
+					echo "<div style='position: absolute; right: 0px; top: 0; margin: 11px;'>";
+     				//<div class="show_when_not_connected">
+        			echo "<a onclick='promptLogin()' class='login-button'>"; 
+       				echo "<span>Login</span>";
+      				echo "</a>";
+    				//</div>
+    				echo "</div>";
+				}
+    		?>
 			
 			<?php
 
@@ -235,16 +239,16 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
     			};
   			</script>
 
-				<div class="show_when_connected">
-					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
-						<a class="login-button" onclick="logout()">
-							<span>Logout</span>
-						</a>
-						<?php
-							$facebook->destroySession();
-						?>
-					</div>
-				</div>
+			<?php
+				if($fb_user) {
+					echo "<div style='position: absolute; right: 0px; top: 0; margin: 11px;'>";
+					echo "<a class='login-button' onclick='logout()'>";
+					echo "<span>Logout</span>";
+					echo "</a>";
+					$facebook->destroySession();
+					echo "</div>";
+				}
+			?>
 
 
 </div><!-- /content -->

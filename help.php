@@ -34,13 +34,17 @@
 		<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
 		<a href="javascript:history.go(-1)" id="goback" data-icon="custom" rel = "external">Back</a>
 
-		<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
-     		<div class="show_when_not_connected">
-        		<a onclick="promptLogin()" class="login-button"> 
-       				<span>Login</span>
-      			</a>
-    		</div>
-      	</div>
+			<?php
+				if(!$fb_user){
+					echo "<div style='position: absolute; right: 0px; top: 0; margin: 11px;'>";
+     				//<div class="show_when_not_connected">
+        			echo "<a onclick='promptLogin()' class='login-button'>"; 
+       				echo "<span>Login</span>";
+      				echo "</a>";
+    				//</div>
+    				echo "</div>";
+				}
+    		?>
 	</div><!-- /header -->
 	
 	<div data-role="content">
@@ -55,8 +59,8 @@
 		<p><center>Login and keep track of artwork that interests you on your favorites page.
 		<br>Add art to your favorites by clicking the heart icon when on the art viewing page.</center></p>
 		<br>
-		<h3><center>Art</center></h3>
-		<p><center>View art! Art that you searched for or art picked at random.</center></p>
+		<h3><center>Art and Random Art</center></h3>
+		<p><center>View art! Art that you searched for or art selected randomly.</center></p>
 		<br>
 		<h3><center>Comments</h3>
 		<p><center>Read other viewers' comments and annotations on a particular piece.
@@ -87,16 +91,16 @@
     		};
   		</script>
 
-				<div class="show_when_connected">
-					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
-						<a class="login-button" onclick="logout()">
-							<span>Logout</span>
-						</a>
-						<?php
-							$facebook->destroySession();
-						?>
-					</div>
-				</div>
+			<?php
+				if($fb_user) {
+					echo "<div style='position: absolute; right: 0px; top: 0; margin: 11px;'>";
+					echo "<a class='login-button' onclick='logout()'>";
+					echo "<span>Logout</span>";
+					echo "</a>";
+					$facebook->destroySession();
+					echo "</div>";
+				}
+			?>
 
 	</div><!-- /content -->
 
