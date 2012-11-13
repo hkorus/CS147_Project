@@ -117,7 +117,7 @@
 					} 
 					echo "' width = '30' height = '30' onclick = 'send_favorite(".$row['id'].")'>";
 			
-				}else {echo "<img class = 'fav_button' src= 'icons/heart-grey.png' width = '30' height = '30' onclick = 'send_favorite(".$row['id'].")'>";}
+				}else {echo "<img class = 'fav_button' src= 'icons/heart_grey.png' width = '30' height = '30' onclick = 'send_favorite(".$row['id'].")'>";}
 			
 			?>
 			</td></tr></table>
