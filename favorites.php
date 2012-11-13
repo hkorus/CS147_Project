@@ -228,7 +228,7 @@
 		<ul>
 			<li><a href="./home.php" id="home" data-icon="custom" rel = "external">Home</a></li>
 			<li><a href="./art.php" id="art" data-icon="custom" rel = "external">Random Art</a></li>
-			<li><a onclick = "window.location.reload()" id="favorites" data-icon="custom" rel = "external">Favorites</a></li>
+			<li><a onclick = "window.location.reload()" id="favorites" data-icon="custom" rel = "external">My Folio</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom" rel = "external">Help</a></li>
 		</ul>
 		</div><!-- /navbar -->

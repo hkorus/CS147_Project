@@ -34,14 +34,14 @@
 			if(<?php echo $fb_user ?>) {
 				var button = $(".fav_button:last")[0]
 				var src =button.src;
-				if(src.indexOf('icons/heart_grey.png')!=-1){				
-					button.src = 'icons/heart.png';
+				if(src.indexOf('icons/folio-grey-small.png')!=-1){				
+					button.src = 'icons/folio-grey-red-small.png';
 					var request = new XMLHttpRequest();
 					request.open('POST', 'mark_favorite.php', false);
 					request.setRequestHeader("Content-type", "application/upload")
 					request.send(id); // because of "false" above, will block until the request is done
 				}else {
-					button.src = 'icons/heart_grey.png';
+					button.src = 'icons/folio-grey-small.png';
 					var request = new XMLHttpRequest();
 					request.open('POST', 'undo_favorite.php', false);
 					request.setRequestHeader("Content-type", "application/upload")
@@ -111,13 +111,13 @@
 					$result = mysql_query($query);
 					$numRows = mysql_num_rows($result);
 					if($numRows == 0){
-						echo "icons/heart_grey.png";
+						echo "icons/folio-grey-small.png";
 					}else {
-						echo "icons/heart.png";
+						echo "icons/folio-grey-red-small.png";
 					} 
-					echo "' width = '30' height = '30' onclick = 'send_favorite(".$row['id'].")'>";
+					echo "'  onclick = 'send_favorite(".$row['id'].")'>";
 			
-				}else {echo "<img class = 'fav_button' src= 'icons/heart_grey.png' width = '30' height = '30' onclick = 'send_favorite(".$row['id'].")'>";}
+				}else {echo "<img class = 'fav_button' src= 'icons/folio-grey-small.png' onclick = 'send_favorite(".$row['id'].")'>";}
 			
 			?>
 			</td></tr></table>
@@ -200,7 +200,7 @@
 		<ul>
 			<li><a href="./home.php" id="home" data-icon="custom" rel="external">Home</a></li>
 			<li><a onclick = "refresh()" id="art" data-icon="custom" rel="external">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel = "external">Favorites</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel = "external">My Folio</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
 		</ul>
 		</div><!-- /navbar -->

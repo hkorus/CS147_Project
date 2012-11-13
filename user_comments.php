@@ -279,7 +279,7 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 		<ul>
 			<li><a href="./home.php" id="home" data-icon="custom" rel="external">Home</a></li>
 			<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">My Folio</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom" rel="external" >Help</a></li>
 		</ul>
 	</div><!-- /navbar -->

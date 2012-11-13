@@ -10,7 +10,7 @@
 
 <!DOCTYPE html>
 <head>
-	<title>Home Page</title>
+	<title>Home</title>
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
  	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -159,7 +159,7 @@
 				<ul>
 					<li><a onclick = "window.location.reload()" id="home" data-icon="custom" rel="external">Home</a></li>
 					<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
-					<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
+					<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">My Folio</a></li>
 					<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
 				</ul>
 			</div><!-- /navbar -->
