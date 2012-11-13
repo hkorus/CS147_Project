@@ -90,10 +90,6 @@
 
 	
 	<script type = "text/javascript">
-	function yscale(width, img){
-		var ratio = width/img.width;
-		return ratio * img.height;
-	}
 	
 	$( function(){
 		var $container = $('#container');
@@ -101,8 +97,8 @@
 			var backgroundImg = $('#artPiece')[0]
 			var img = $('#annotation')[0]
 			var canvas = $(".displayCanvas:last")[0];
-			canvas.width = "600";			
-			canvas.height = yscale(canvas.width, img);
+			canvas.width = img.width;			
+			canvas.height = img.height;
 			var context = canvas.getContext("2d");	
 			context.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height)
 			context.drawImage(img, 0, 0, canvas.width, canvas.height)			
