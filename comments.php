@@ -85,10 +85,10 @@
 			var prevVal = innerTable.rows[1].firstChild.innerHTML;
 			var curRow = table.rows[rowNum];
 			if(num.innerHTML > prevVal){
-				var parent = curRow.parentNode;
-				var prevParent = prevRow.parentNode;
-				parent.removeChild(curRow);
-				prevParent.removeChild(prevRow);
+			//	var parent = curRow.parentNode;
+			//	var prevParent = prevRow.parentNode;
+			//	parent.removeChild(curRow);
+			//	prevParent.removeChild(prevRow);
 				//prevParent.appendChild(prevRow);
 				//parent.appendChild(curRow);
 				//alert("hey")
