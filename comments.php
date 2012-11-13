@@ -47,7 +47,7 @@
 			<?php
 
 		include("config.php");
-		$query = "SELECT * FROM comments, art WHERE art_id = id and art_id = ".$_GET['id']." ORDER BY rating DESC";
+		$query = "SELECT * FROM comments, art WHERE art_id = id and art_id = ".$_GET['id']." ORDER BY rating DESC, comment_id DESC";
 		$result = mysql_query($query);
 
 		?>				
@@ -61,7 +61,6 @@
 
 		var up = $(".up-"+comment+':last')[0]
 		var down = $(".down-"+comment+':last')[0]
-
 		if(amount > 0){
 			up.src = "icons/selected_up_arrow.png"
 		}else{
@@ -77,24 +76,27 @@
 		request.setRequestHeader("Content-type", "application/upload")
 		request.send(comment+"&"+amount); // because of "false" above, will block until the request is done
 		// and status is available. Not recommended, however it works for simple cases.
-		if(amount > 0){
-			if(rowNum  == 0) return;
-			var table = document.getElementById("commentTable");
-			var prevRow = table.rows[rowNum-1];
-			var innerTable = prevRow.firstChild.firstChild.nextSibling;
-			var prevVal = innerTable.rows[1].firstChild.innerHTML;
-			var curRow = table.rows[rowNum];
-			if(num.innerHTML > prevVal){
-				var parent = curRow.parentNode;
-				var prevParent = prevRow.parentNode;
-				parent.removeChild(curRow);
-				prevParent.removeChild(prevRow);
-				//prevParent.appendChild(prevRow);
-				//parent.appendChild(curRow);
-				//alert("hey")
+		
+		var table = document.getElementById("commentTable");
+		var curRow = table.rows[rowNum];
+		inserted = false;
+		
+		var parent = curRow.parentNode;
+		parent.removeChild(curRow)
+			
+		for(i = 0; i<table.rows.length-1; i++){
+			var nextRow = table.rows[i+1];
+			var innerTable = nextRow.firstChild.firstChild.nextSibling;
+			var rowVal = innerTable.rows[1].firstChild.innerHTML;	
+			if(num.innerHTML >= rowVal){
+				parent.insertBefore(curRow, nextRow);
+				inserted = true;
+				break;
 			}
 		}
-	       	
+		if(!inserted){
+			parent.appendChild(curRow);
+		}
 
 	}
 	</script>
@@ -122,10 +124,10 @@
 			echo "<th>Comment</th>";
 			echo "<th>Check it out!</th>";
 			echo "</tr>";
+			$rowNum = 1;
 			
 			while($row = mysql_fetch_assoc($result)) {
 				
-				$rowNum = 1;
 				$image = $row['image_source'];
 				
 						
@@ -160,6 +162,8 @@
 				<?php
 			echo $row["comment"];
 			$rowNum++;
+			
+			
 			?> 
 
 		</td>
