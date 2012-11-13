@@ -24,6 +24,7 @@
 
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="drawing_canvas.js"></script>
+	<script src="isotope-master/jquery.isotope.min.js"></script>
 	
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script src="auth.js"></script>
@@ -49,15 +50,11 @@
 				$id = $_GET["id"];
 				$query = "SELECT * FROM comments where user_id = ".$fb_user;
 				
-				$result = mysql_query($query);
-				$row = mysql_fetch_assoc($result);
+				$result = mysql_query($query);				
 				
-				$artQuery = "SELECT * FROM art where id = ".$row["art_id"];
-				
-				$artResult = mysql_query($artQuery);
-				$artPiece = mysql_fetch_assoc($artResult);
 
-		?>				
+		?>
+						
 
 		<h1 style="font-family: Courier; font-size: 18px;">motif</h1>
 
@@ -86,37 +83,40 @@
 		// and status is available. Not recommended, however it works for simple cases.
 
 	}
+	
+	function see_comment(commentId){
+		window.location="./show_comment?id="+commentId;
+	}
 	</script>
 
 
 	<div data-role="content">
 
 		<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 25px;'>My Comments</p>
-		<table class="bottomBorder" style="text-align:center; width:100%;">
+		<table class="bottomBorder" style="text-align:center; width:100%;" id = "commentTable">
 		
 			<?php
 		$arr = array();
 		if(mysql_num_rows($result)>0){	
+			
 			while($row = mysql_fetch_assoc($result)) {
-				echo "<tr><td style='border-collapse:collapse; border-bottom:1px dotted black;padding:5px;'>";
+				
+				$artQuery = "SELECT * FROM art where id = ".$row["art_id"];
+				
+				$artResult = mysql_query($artQuery);
+				$artPiece = mysql_fetch_assoc($artResult);
+				
+				echo "<tr>";
 				?>
 				
-				<table class="noBorder" style="width:20%"><tr>
-					<td style="padding-left:15px; padding-right:15px;"><img class = "up-<?php echo $row["comment_id"] ?>" src = "icons/up_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)"></td></tr>
-
-					<tr><td class = "number-<?php echo $row["comment_id"] ?>" style="padding-left:15px; padding-right:15px;"><?php echo $row["rating"]; ?></td></tr>
-
-					<tr><td style="padding-left:15px; padding-right:15px;"><img class = "down-<?php echo $row["comment_id"] ?>" src = "icons/down_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1)"></td></tr>
-					</table>
-
-				</td>
 				<td style="border-collapse:collapse; border-bottom:1px dotted black;padding:5px;">
 					<?php
 
-				echo "<canvas class = 'canvas-".$row["comment_id"]."' width = '30%'></canvas>";
+				echo "<canvas onclick = 'see_comment(".$row["comment_id"].")' class = 'canvas-".$row["comment_id"]."' width = '30%'></canvas>";
 				array_push($arr, $row["comment_id"]);
-				array_push($arr, $row["annotation"]);
-				array_push($arr, $artPiece["image_source"]);
+				
+					echo "<img class = 'background-".$row["comment_id"]."' src = '".$artPiece["image_source"]."' style = 'display:none' ></img>";
+					echo "<img class = 'image-".$row["comment_id"]."' src = '".$row["annotation"]."' style = 'display:none' ></img>";
 
 				?>
 
@@ -137,8 +137,12 @@
 
 	</table>
 	<?php 
-echo "<br/>";
-echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }?>
+	if($fb_user) {
+	
+		echo "<br/>";
+		echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; 
+	}
+		}?>
 
 
 <script type = 'text/javascript'>
@@ -148,64 +152,39 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 			return ratio * img.height;
 		}
 
-		var canvasList = new Array();
-		var ready = 0;
-
-		function createCanvases(){
-			ready++;
-			if(ready > array.length/3){
-				
-				
-				for(var j = 0; j<canvasList.length; j+=3){
-					newCanvas = canvasList[j];
-					newImg = canvasList[j+1];
-					backgroundImg = canvasList[j+2];
-
-					context = newCanvas.getContext('2d');
-					newCanvas.width = 200;
-					newCanvas.height = yscale(newCanvas.width, newImg)
-
-					context.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
-					context.drawImage(newImg, 0, 0,  newCanvas.width, newCanvas.height);
-				}
-				ready = 0;
-			}
+	
 			
-		}
-
-
-		$(document).bind('pageinit', function() {
-			array = new Array(<?php 
-				for ($i=0; $i< count($arr); $i+=3)
-				{
-					echo "'".$arr[$i]."','".$arr[$i+1]."','".$arr[$i+2]."'";
-					if($i!= count($arr)-3){
-						echo ",";
+			$( function(){
+				var $container = $('#commentTable');
+				array = new Array(<?php 
+					for ($i=0; $i< count($arr); $i++)
+					{
+						echo "'".$arr[$i]."'";
+						if($i!= count($arr)-1){
+							echo ",";
+						}
 					}
-				}
 
-				?>);
-							
-				for (var i=0;i<array.length;i+=3)
-				{ 
-					newCanvas = $(".canvas-"+array[i]+':last')[0]
-					
-					canvasList.push(newCanvas);
-
-					newImg = new Image();
-					newImg.src = array[i+1];
-					canvasList.push(newImg);
-					newImg.onload = createCanvases;
-					newImg.onerror = createCanvases;
-					newImg.onabort = createCanvases;
+					?>);
+				$container.imagesLoaded( function(){	
 				
-					backgroundImg = new Image();
-					backgroundImg.src = array[i+2];	
-					canvasList.push(backgroundImg);
-					backgroundImg.onload = createCanvases;
-					backgroundImg.onerror = createCanvases;
-					backgroundImg.onabort = createCanvases;
-				}
+					
+					for (var i=0;i<array.length;i++){
+						var newCanvas = $(".canvas-"+array[i]+':last')[0]
+						var backgroundImg = $(".background-"+array[i]+':last')[0]
+						var img = $(".image-"+array[i]+':last')[0]
+												
+						context = newCanvas.getContext('2d');
+						newCanvas.width = 300;
+						newCanvas.height = yscale(newCanvas.width, img)
+						
+						context.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
+						context.drawImage(img, 0, 0,  newCanvas.width, newCanvas.height);
+						
+						
+						
+					}
+					});		
 
 				
 			});
@@ -233,6 +212,8 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
       				FB.getLoginStatus(handleStatusChange)
     			};
   			</script>
+
+
 			
 			<?php
 				if(!$fb_user) {

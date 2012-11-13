@@ -85,7 +85,7 @@ if($result!=false){
 						<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
 						<a  id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external" style = "background:#B0B0B0">Annotate</a>
 					</div><!-- /controlgroup -->
-					<table style = "width:600px;border-collapse:collapse;">
+					<table style = "width:99%;border-collapse:collapse;">
 						<tr>
 							<td>
 							<canvas class="drawingCanvas"></canvas>

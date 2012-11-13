@@ -61,7 +61,7 @@
 	</div><!-- /header -->
 
 	<script type = "text/javascript">
-	function send_rating(comment, amount){
+	function send_rating(comment, amount, rowNum){
 
 		var up = $(".up-"+comment+':last')[0]
 		var down = $(".down-"+comment+':last')[0]
@@ -81,6 +81,24 @@
 		request.setRequestHeader("Content-type", "application/upload")
 		request.send(comment+"&"+amount); // because of "false" above, will block until the request is done
 		// and status is available. Not recommended, however it works for simple cases.
+		if(amount > 0){
+			if(rowNum  == 0) return;
+			var table = document.getElementById("commentTable");
+			var prevRow = table.rows[rowNum-1];
+			var innerTable = prevRow.firstChild.firstChild.nextSibling;
+			var prevVal = innerTable.rows[1].firstChild.innerHTML;
+			var curRow = table.rows[rowNum];
+			if(num.innerHTML > prevVal){
+			//	var parent = curRow.parentNode;
+			//	var prevParent = prevRow.parentNode;
+			//	parent.removeChild(curRow);
+			//	prevParent.removeChild(prevRow);
+				//prevParent.appendChild(prevRow);
+				//parent.appendChild(curRow);
+				//alert("hey")
+			}
+		}
+	       	
 
 	}
 	</script>
@@ -94,31 +112,33 @@
 			<a href="./annotate.php?id=<?php echo $_GET["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
 		</div><!-- /controlgroup -->
 		<p></p>
-		<table id = "commentTable" class="bottomBorder" style="text-align:center; width:100%;">
+		<table id = "commentTable" class="bottomBorder" style="text-align:center; width:100%;height:100%">
 		
 			<?php
 		$arr = array();
 		$image = "";
 		if(mysql_num_rows($result)>0){	
 			while($row = mysql_fetch_assoc($result)) {
+				
+				$rowNum = 1;
 				$image = $row['image_source'];
-				echo "<tr><td style='border-collapse:collapse; border-bottom:1px dotted black;padding:5px;'>";
+				echo "<tr id = '".$row["comment_id"]."'><td style='border-collapse:collapse; border-bottom:1px dotted black;padding:5px;'>";
+
 
 				?>
 				<table class="noBorder" style="width:20%"><tr>
-					<td style="padding-left:15px; padding-right:15px;"><img class = "up-<?php echo $row["comment_id"] ?>" src = "icons/up_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)"></td></tr>
+					<td style="padding-left:15px; padding-right:15px;"><img class = "up-<?php echo $row["comment_id"] ?>" src = "icons/up_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1, <?php echo $rowNum ?>)"></td></tr>
 
 					<tr><td class = "number-<?php echo $row["comment_id"] ?>" style="padding-left:15px; padding-right:15px;"><?php echo $row["rating"]; ?></td></tr>
 
-					<tr><td style="padding-left:15px; padding-right:15px;"><img class = "down-<?php echo $row["comment_id"] ?>" src = "icons/down_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1)"></td></tr>
+					<tr><td style="padding-left:15px; padding-right:15px;"><img class = "down-<?php echo $row["comment_id"] ?>" src = "icons/down_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1, <?php echo $rowNum ?>)"></td></tr>
 					</table>
 
 				</td>
 				<td style="border-collapse:collapse; border-bottom:1px dotted black;padding:5px;">
 					<?php
 
-				echo "<canvas class = 'canvas-".$row["comment_id"]."' width = '30%'></canvas>
-					";
+				echo "<a href = 'show_comment.php?id=".$row["comment_id"]."' rel='external'><canvas class = 'canvas-".$row["comment_id"]."' ></canvas></a>";
 				array_push($arr, $row["comment_id"]);
 				array_push($arr, $row["annotation"]);
 				
@@ -132,7 +152,7 @@
 			<td style = "width:40%; border-collapse:collapse; border-bottom:1px dotted black;padding:5px;"> 
 				<?php
 			echo $row["comment"];
-
+			$rowNum++;
 			?> 
 
 		</td>
@@ -177,13 +197,14 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 						var newCanvas = $(".canvas-"+array[i]+':last')[0]
 						
 						var img = $(".image-"+array[i]+':last')[0]
-						
 												
 						context = newCanvas.getContext('2d');
-						newCanvas.width = 200;
-						newCanvas.height = yscale(newCanvas.width, backgroundImg)
+						newCanvas.width = 300;
+						newCanvas.height = yscale(newCanvas.width, img)
+						
 						context.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
 						context.drawImage(img, 0, 0,  newCanvas.width, newCanvas.height);
+						
 						
 						
 					}		
