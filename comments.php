@@ -36,17 +36,13 @@
 
 		<div data-role="header">
 			<a href="javascript:history.go(-1)" id="goback" data-icon="custom">Back</a>
-			<?php
-				if(!$fb_user){
-					echo "<div style='position: absolute; right: 0px; top: 0; margin: 11px;'>";
-     				//<div class="show_when_not_connected">
-        			echo "<a onclick='promptLogin()' class='login-button'>"; 
-       				echo "<span>Login</span>";
-      				echo "</a>";
-    				//</div>
-    				echo "</div>";
-				}
-    		?>
+			<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
+     			<div class="show_when_not_connected">
+        			<a onclick="promptLogin()" class="login-button"> 
+       					<span>Login</span>
+      				</a>
+    			</div>
+      		</div>
 			
 			<?php
 
@@ -89,10 +85,10 @@
 			var prevVal = innerTable.rows[1].firstChild.innerHTML;
 			var curRow = table.rows[rowNum];
 			if(num.innerHTML > prevVal){
-			//	var parent = curRow.parentNode;
-			//	var prevParent = prevRow.parentNode;
-			//	parent.removeChild(curRow);
-			//	prevParent.removeChild(prevRow);
+				var parent = curRow.parentNode;
+				var prevParent = prevRow.parentNode;
+				parent.removeChild(curRow);
+				prevParent.removeChild(prevRow);
 				//prevParent.appendChild(prevRow);
 				//parent.appendChild(curRow);
 				//alert("hey")
@@ -113,7 +109,12 @@
 		</div><!-- /controlgroup -->
 		<p></p>
 		<table id = "commentTable" class="bottomBorder" style="text-align:center; width:100%;height:100%">
-		
+			<tr>
+			<th>Rate!</th>
+			<th>Annotation</th>
+			<th>Comment</th>
+			<th>Check it out!</th>
+			</tr>
 			<?php
 		$arr = array();
 		$image = "";
@@ -129,7 +130,7 @@
 				<table class="noBorder" style="width:20%"><tr>
 					<td style="padding-left:15px; padding-right:15px;"><img class = "up-<?php echo $row["comment_id"] ?>" src = "icons/up_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1, <?php echo $rowNum ?>)"></td></tr>
 
-					<tr><td class = "number-<?php echo $row["comment_id"] ?>" style="padding-left:15px; padding-right:15px;"><?php echo $row["rating"]; ?></td></tr>
+					<tr><td class = "number-<?php echo $row["comment_id"] ?>" style="padding-left:15px; padding-right:15px; font-size:18px;"><?php echo $row["rating"]; ?></td></tr>
 
 					<tr><td style="padding-left:15px; padding-right:15px;"><img class = "down-<?php echo $row["comment_id"] ?>" src = "icons/down_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1, <?php echo $rowNum ?>)"></td></tr>
 					</table>
@@ -236,16 +237,16 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
     			};
   			</script>
 
-			<?php
-				if($fb_user) {
-					echo "<div style='position: absolute; right: 0px; top: 0; margin: 11px;'>";
-					echo "<a class='login-button' onclick='logout()'>";
-					echo "<span>Logout</span>";
-					echo "</a>";
-					$facebook->destroySession();
-					echo "</div>";
-				}
-			?>
+				<div class="show_when_connected">
+					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
+						<a class="login-button" onclick="logout()">
+							<span>Logout</span>
+						</a>
+						<?php
+							$facebook->destroySession();
+						?>
+					</div>
+				</div>
 
 
 </div><!-- /content -->
