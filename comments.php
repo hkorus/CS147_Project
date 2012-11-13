@@ -134,11 +134,11 @@
 
 				?>
 				<table class="noBorder" style="width:20%"><tr>
-					<td style="padding-left:15px; padding-right:15px;"><img class = "up-<?php echo $row["comment_id"] ?>" src = "icons/up_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1, <?php echo $rowNum ?>)"></td></tr>
+					<td style="padding-left:15px; padding-right:15px;"><img class = "up-<?php echo $row["comment_id"] ?>" src = "icons/up_arrow.png" width = "40px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1, <?php echo $rowNum ?>)"></td></tr>
 
 					<tr><td class = "number-<?php echo $row["comment_id"] ?>" style="padding-left:15px; padding-right:15px; font-size:18px;"><?php echo $row["rating"]; ?></td></tr>
 
-					<tr><td style="padding-left:15px; padding-right:15px;"><img class = "down-<?php echo $row["comment_id"] ?>" src = "icons/down_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1, <?php echo $rowNum ?>)"></td></tr>
+					<tr><td style="padding-left:15px; padding-right:15px;"><img class = "down-<?php echo $row["comment_id"] ?>" src = "icons/down_arrow.png" width = "40px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1, <?php echo $rowNum ?>)"></td></tr>
 					</table>
 
 				</td>
