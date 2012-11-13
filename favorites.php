@@ -39,8 +39,9 @@
     			$container.isotope({
     				itemSelector : '.image',
     				sortAscending : false,
+    				sortBy : 'time_stamp',
     				masonryHorizontal: {
-    					columnWidth: 240
+    					columnWidth: 240,
     				},
     				getSortData : {
     					time_stamp : function ( $elem ) {
@@ -52,8 +53,11 @@
     					title : function ( $elem ) {
     						return $elem.find('.title').text();
     					},
-    					artist : function ( $elem ) {
-    						return $elem.find('.artist').text();
+    					artist_display_name : function ( $elem ) {
+    						return $elem.find('.artist_display_name').text();
+    					},
+    					artist_sort_name : function ( $elem ) {
+    						return $elem.find('.artist_sort_name').text();
     					}
     				}
     			});
@@ -129,7 +133,7 @@
 	<script>
 		function sortByArtist() {
   			$('#container').isotope({ 
-  				sortBy : 'artist',
+  				sortBy : 'artist_sort_name',
   				sortAscending : true
   			 });
 		}
@@ -143,13 +147,19 @@
 	<div data-role="header">
 		<h1 style="font-family: Courier; font-size: 18px;">motif</h1>
 		<a href="javascript:history.go(-1)" id="goback" data-icon="custom" rel = "external">Back</a>
-		<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
-     		<div class="show_when_not_connected">
-        		<a onclick="promptLogin()" class="login-button"> 
-       				<span>Login</span>
-      			</a>
-    		</div>
-      	</div>
+		
+			<?php
+				if(!$fb_user){
+					echo "<div style='position: absolute; right: 0px; top: 0; margin: 11px;'>";
+     				//<div class="show_when_not_connected">
+        			echo "<a onclick='promptLogin()' class='login-button'>"; 
+       				echo "<span>Login</span>";
+      				echo "</a>";
+    				//</div>
+    				echo "</div>";
+				}
+    		?>
+      	
 	
 	</div><!-- /header -->
 
@@ -162,7 +172,6 @@
 			<div data-role="controlgroup" data-type="horizontal">
 
   					<a href="#time_stamp" onclick="sortByTime()" data-role="button" data-theme="a">Sort by Date Added</a>
- 					<!--<a href="#art_id" onclick="sortByArtId()" data-role="button" data-theme="a">Sort by ArtId</a>-->
  					<a href="#title" onclick="sortByTitle()" data-role="button" data-theme="a">Sort by Title</a>
  					<a href="#artist" onclick="sortByArtist()" data-role="button" data-theme="a">Sort by Artist</a>	
 			</div>	
@@ -179,14 +188,16 @@
 								$query2 = "SELECT * FROM art where id = ".$row['art_id'];
 								$result2 = mysql_query($query2);
 								$row2 = mysql_fetch_assoc($result2);
+
 								$datetime = strtotime($row['time_stamp']);
 								$date = date("m/d/y", $datetime);
-								echo "<div class='image'><a href='./art.php?id=".$row['art_id']."' rel='external'><img width='100' src='".$row['image_source']."'></a>";
-
+								
+								echo "<div class='image' style='background: black; margin: 12px 12px 12px 12px; padding: 3px 3px 3px 3px; display: inline-block;'><a href='./art.php?id=".$row['art_id']."' rel='external'><img width='100' src='".$row['image_url']."'></a>";
 								echo "<div class='time_stamp' style='display:none'>".$row['time_stamp']."</div>";
 								echo "<div class='art_id' style='display:none'>".$row['art_id']."</div>";
-								echo "<div class='title' style = 'width:100px;overflow:auto'>".$row2['title']."</div>";
-								echo "<div class='artist' style = 'width:100px;overflow:auto'>".$row2['artist']."</div>";
+								echo "<div class='artist_sort_name' style='display:none'>".$row2['artist_last_name'].$row2['artist_first_name']."</div>";
+								echo "<div class='title' style = 'color: white; font-size: larger; width:100px;overflow:auto;'><center>".$row2['title']."</center></div>";
+								echo "<div class='artist_display_name' style = 'color: white; width:100px;overflow:auto;'><center>".$row2['artist']."</center></div>";
 								echo "</div>";
 							} 
 						}
@@ -198,17 +209,17 @@
 					echo "<p style='margin-left:25px;font-family: Courier; font-size: 15px;'>Please login to view favorites!</p>";
 				}
 			?>
-
-				<div class="show_when_connected">
-					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
-						<a class="login-button" onclick="logout()">
-							<span>Logout</span>
-						</a>
-						<?php
-							$facebook->destroySession();
-						?>
-					</div>
-				</div>
+			
+			<?php
+				if($fb_user) {
+					echo "<div style='position: absolute; right: 0px; top: 0; margin: 11px;'>";
+					echo "<a class='login-button' onclick='logout()'>";
+					echo "<span>Logout</span>";
+					echo "</a>";
+					$facebook->destroySession();
+					echo "</div>";
+				}
+			?>
 
 	</div><!-- /content -->
 	
