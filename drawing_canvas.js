@@ -64,9 +64,10 @@ function prepareCanvas(url, photo_id){
 	img.src = url;
 	img.onload = function(){
 		canvas.style = "border:1px solid black;"
-    	canvas.width = 600;
-		//resetDimensions();
+    	canvas.style.width = "100%";
+		resetDimensions();
 		canvas.height = yscale(canvas.width, img)
+		
 		
 		canvas.style.backgroundImage = "url("+url+")";
 		canvas.style.backgroundSize = "100% Auto";

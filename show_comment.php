@@ -1,3 +1,13 @@
+<?php
+	require './facebook.php';
+	$facebook = new Facebook(array(
+		'appId'  => '291103611004949',
+  		'secret' => '226db60e672abf202f1424b1084fc38e',
+      	'cookie' => true));
+      	
+    $fb_user = $facebook->getUser();
+?>
+
 <!DOCTYPE html>
 <head>
 	<title>Comment</title>
@@ -41,7 +51,7 @@
 				$artPiece = mysql_fetch_assoc($artResult);
 
 						?>
-			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
+			<h1 style="font-family: Courier; font-size: 18px;">motif</h1>
 
 	</div><!-- /header -->
 			
@@ -54,7 +64,7 @@
 		</div><!-- /controlgroup -->
 			
 			<?php
-					echo "<p style = 'font-family: Andale Mono; font-size: 18px;'>".$row["comment"]."</p>";
+					echo "<p style = 'font-family: Courier; font-size: 18px;'>".$row["comment"]."</p>";
 					
 			?>
 			<canvas class="displayCanvas" ></canvas>

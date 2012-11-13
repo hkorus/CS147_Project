@@ -61,7 +61,7 @@ if($result!=false){
 
 	<div data-role="page">
 		<div data-role="header">
-			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
+			<h1 style="font-family: Courier; font-size: 18px;">motif</h1>
 			<a href="javascript:history.go(-1)" id="goback" data-icon="custom" rel = "external">Back</a>
 			<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
      			<div class="show_when_not_connected">
@@ -81,7 +81,7 @@ if($result!=false){
 						<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
 						<a  id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external" style = "background:#B0B0B0">Annotate</a>
 					</div><!-- /controlgroup -->
-					<table style = "width:600px;border-collapse:collapse;">
+					<table style = "width:99%;border-collapse:collapse;">
 						<tr>
 							<td>
 							<canvas class="drawingCanvas"></canvas>

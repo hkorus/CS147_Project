@@ -84,7 +84,7 @@
     			</div>
       	</div>
 		
-			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
+			<h1 style="font-family: Courier; font-size: 18px;">motif</h1>
 
 	</div><!-- /header -->
 			
@@ -119,7 +119,7 @@
 			</td></tr></table>
 			
 		
-			<p style="font-family: Andale Mono; font-size: 16px;"><b><?php echo $row["title"]; ?> </b> 
+			<p style="font-family: Courier; font-size: 16px;"><b><?php echo $row["title"]; ?> </b> 
 					(<?php echo $row["year"]; ?>)	
 					- 
  				  <?php	echo $row["artist"]; ?></p>

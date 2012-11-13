@@ -10,7 +10,7 @@
 
 <!DOCTYPE html>
 <head>
-	<title>Comments</title>
+	<title>My Comments</title>
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -24,7 +24,6 @@
 
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="drawing_canvas.js"></script>
-	<script src="isotope-master/jquery.isotope.min.js"></script>
 	
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script src="auth.js"></script>
@@ -47,17 +46,21 @@
 			<?php
 
 		include("config.php");
-		$query = "SELECT * FROM comments, art WHERE art_id = id and art_id = ".$_GET['id']." ORDER BY rating DESC";
-		$result = mysql_query($query);
+				$id = $_GET["id"];
+				$query = "SELECT * FROM comments where user_id = ".$fb_user;
+				
+				$result = mysql_query($query);				
+				
 
-		?>				
+		?>
+						
 
 		<h1 style="font-family: Courier; font-size: 18px;">motif</h1>
 
 	</div><!-- /header -->
 
 	<script type = "text/javascript">
-	function send_rating(comment, amount, rowNum){
+	function send_rating(comment, amount){
 
 		var up = $(".up-"+comment+':last')[0]
 		var down = $(".down-"+comment+':last')[0]
@@ -77,70 +80,42 @@
 		request.setRequestHeader("Content-type", "application/upload")
 		request.send(comment+"&"+amount); // because of "false" above, will block until the request is done
 		// and status is available. Not recommended, however it works for simple cases.
-		if(amount > 0){
-			if(rowNum  == 0) return;
-			var table = document.getElementById("commentTable");
-			var prevRow = table.rows[rowNum-1];
-			var innerTable = prevRow.firstChild.firstChild.nextSibling;
-			var prevVal = innerTable.rows[1].firstChild.innerHTML;
-			var curRow = table.rows[rowNum];
-			if(num.innerHTML > prevVal){
-				var parent = curRow.parentNode;
-				var prevParent = prevRow.parentNode;
-				parent.removeChild(curRow);
-				prevParent.removeChild(prevRow);
-				//prevParent.appendChild(prevRow);
-				//parent.appendChild(curRow);
-				//alert("hey")
-			}
-		}
-	       	
 
+	}
+	
+	function see_comment(commentId){
+		window.location="./show_comment?id="+commentId;
 	}
 	</script>
 
 
 	<div data-role="content">
 
-		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
-			<a href="./art.php?id=<?php echo $_GET["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
-			<a  id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external" style = "background:#B0B0B0">Comments</a>
-			<a href="./annotate.php?id=<?php echo $_GET["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
-		</div><!-- /controlgroup -->
-		<p></p>
-		<table id = "commentTable" class="bottomBorder" style="text-align:center; width:100%;height:100%">
+		<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 25px;'>My Comments</p>
+		<table class="bottomBorder" style="text-align:center; width:100%;">
 		
 			<?php
 		$arr = array();
-		$image = "";
 		if(mysql_num_rows($result)>0){	
+			
 			while($row = mysql_fetch_assoc($result)) {
 				
-				$rowNum = 1;
-				$image = $row['image_source'];
-				echo "<tr id = '".$row["comment_id"]."'><td style='border-collapse:collapse; border-bottom:1px dotted black;padding:5px;'>";
-
-
+				$artQuery = "SELECT * FROM art where id = ".$row["art_id"];
+				
+				$artResult = mysql_query($artQuery);
+				$artPiece = mysql_fetch_assoc($artResult);
+				
+				echo "<tr>";
 				?>
-				<table class="noBorder" style="width:20%"><tr>
-					<td style="padding-left:15px; padding-right:15px;"><img class = "up-<?php echo $row["comment_id"] ?>" src = "icons/up_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1, <?php echo $rowNum ?>)"></td></tr>
-
-					<tr><td class = "number-<?php echo $row["comment_id"] ?>" style="padding-left:15px; padding-right:15px;"><?php echo $row["rating"]; ?></td></tr>
-
-					<tr><td style="padding-left:15px; padding-right:15px;"><img class = "down-<?php echo $row["comment_id"] ?>" src = "icons/down_arrow.png" width = "20px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1, <?php echo $rowNum ?>)"></td></tr>
-					</table>
-
-				</td>
+				
 				<td style="border-collapse:collapse; border-bottom:1px dotted black;padding:5px;">
 					<?php
 
-				echo "<a href = 'show_comment.php?id=".$row["comment_id"]."' rel='external'><canvas class = 'canvas-".$row["comment_id"]."' ></canvas></a>";
+				echo "<canvas onclick = 'see_comment(".$row["comment_id"].")' class = 'canvas-".$row["comment_id"]."' width = '30%'></canvas>";
 				array_push($arr, $row["comment_id"]);
 				array_push($arr, $row["annotation"]);
-				
-				echo "<img class = 'background' src = '".$image."' style = 'display:none' ></img>";
-				echo "<img class = 'image-".$row["comment_id"]."' src = '".$row["annotation"]."' style = 'display:none' ></img>";
-				
+				array_push($arr, $artPiece["image_source"]);
+
 				?>
 
 
@@ -148,7 +123,7 @@
 			<td style = "width:40%; border-collapse:collapse; border-bottom:1px dotted black;padding:5px;"> 
 				<?php
 			echo $row["comment"];
-			$rowNum++;
+
 			?> 
 
 		</td>
@@ -171,41 +146,66 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 			return ratio * img.height;
 		}
 
-	
+		var canvasList = new Array();
+		var ready = 0;
+
+		function createCanvases(){
+			ready++;
+			if(ready > array.length/3){
+				
+				
+				for(var j = 0; j<canvasList.length; j+=3){
+					newCanvas = canvasList[j];
+					newImg = canvasList[j+1];
+					backgroundImg = canvasList[j+2];
+
+					context = newCanvas.getContext('2d');
+					newCanvas.width = 200;
+					newCanvas.height = yscale(newCanvas.width, newImg)
+
+					context.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
+					context.drawImage(newImg, 0, 0,  newCanvas.width, newCanvas.height);
+				}
+				ready = 0;
+			}
 			
-			$( function(){
-				var $container = $('#commentTable');
-				array = new Array(<?php 
-					for ($i=0; $i< count($arr); $i+=2)
-					{
-						echo "'".$arr[$i]."'";
-						if($i!= count($arr)-2){
-							echo ",";
-						}
+		}
+
+
+		$(document).bind('pageinit', function() {
+			array = new Array(<?php 
+				for ($i=0; $i< count($arr); $i+=3)
+				{
+					echo "'".$arr[$i]."','".$arr[$i+1]."','".$arr[$i+2]."'";
+					if($i!= count($arr)-3){
+						echo ",";
 					}
+				}
 
-					?>);
-				$container.imagesLoaded( function(){
-					var backgroundImg = $('.background:last')[0]
+				?>);
+							
+				for (var i=0;i<array.length;i+=3)
+				{ 
+					newCanvas = $(".canvas-"+array[i]+':last')[0]
 					
-					
-					for (var i=0;i<array.length;i++){
-						var newCanvas = $(".canvas-"+array[i]+':last')[0]
-						
-						var img = $(".image-"+array[i]+':last')[0]
-												
-						context = newCanvas.getContext('2d');
-						newCanvas.width = 300;
-						newCanvas.height = yscale(newCanvas.width, img)
-						
-						context.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
-						context.drawImage(img, 0, 0,  newCanvas.width, newCanvas.height);
-						
-						
-						
-					}		
+					canvasList.push(newCanvas);
 
-				});
+					newImg = new Image();
+					newImg.src = array[i+1];
+					canvasList.push(newImg);
+					newImg.onload = createCanvases;
+					newImg.onerror = createCanvases;
+					newImg.onabort = createCanvases;
+				
+					backgroundImg = new Image();
+					backgroundImg.src = array[i+2];	
+					canvasList.push(backgroundImg);
+					backgroundImg.onload = createCanvases;
+					backgroundImg.onerror = createCanvases;
+					backgroundImg.onabort = createCanvases;
+				}
+
+				
 			});
 
 
@@ -231,6 +231,15 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
       				FB.getLoginStatus(handleStatusChange)
     			};
   			</script>
+
+
+			
+			<?php
+				if(!$fb_user) {
+					echo "<p style='margin-left:25px;font-family: Courier; font-size: 15px;'>Please login to view your comments!</p>";
+				}
+			?>
+
 
 				<div class="show_when_connected">
 					<div style="position: absolute; right: 0px; top: 0; margin: 11px;">
