@@ -137,8 +137,12 @@
 
 	</table>
 	<?php 
-echo "<br/>";
-echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }?>
+	if($fb_user) {
+	
+		echo "<br/>";
+		echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; 
+	}
+		}?>
 
 
 <script type = 'text/javascript'>
