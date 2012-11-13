@@ -155,7 +155,6 @@
         			echo "<a onclick='promptLogin()' class='login-button'>"; 
        				echo "<span>Login</span>";
       				echo "</a>";
-    				//</div>
     				echo "</div>";
 				}
     		?>
