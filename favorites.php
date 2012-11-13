@@ -35,6 +35,7 @@
 			var $container = $('#container');
   			
   			$container.imagesLoaded( function(){
+	
     			$container.isotope({
     				itemSelector : '.image',
     				sortAscending : false,
@@ -171,13 +172,13 @@
 							//$query = "SELECT * FROM art, fave_art where id = art_id";
 							$result = mysql_query($query);
 							while ($row = mysql_fetch_assoc($result)) {
-								//echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_url']."'></a></div>";
+								//echo "<div class='image'><a href='./art.php?id=".$row['art_id']."'><img width='100' src='".$row['image_source']."'></a></div>";
 								$query2 = "SELECT * FROM art where id = ".$row['art_id'];
 								$result2 = mysql_query($query2);
 								$row2 = mysql_fetch_assoc($result2);
 								$datetime = strtotime($row['time_stamp']);
 								$date = date("m/d/y", $datetime);
-								echo "<div class='image'><a href='./art.php?id=".$row['art_id']."' rel='external'><img width='100' src='".$row['image_url']."'></a>";
+								echo "<div class='image'><a href='./art.php?id=".$row['art_id']."' rel='external'><img width='100' src='".$row['image_source']."'></a>";
 
 								echo "<div class='time_stamp' style='display:none'>".$row['time_stamp']."</div>";
 								echo "<div class='art_id' style='display:none'>".$row['art_id']."</div>";
