@@ -23,7 +23,14 @@
 	<link rel="apple-touch-startup-image" href="images/logo.png">
 	<style type="text/css">
 		a:link {
-			COLOR: #FFFFFF;
+			COLOR: #FFFFFF; 
+			text-decoration: none;
+		}
+		a:visited {  
+			COLOR: BLACK; 
+		}
+		a:hover {
+			COLOR: grey;
 		}
 	</style>
 	
@@ -77,7 +84,7 @@
 	
 	<div data-role="page" id="homepage">
 		<div data-role="header">
-			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
+			<h1 style="font-family: Courier; font-size: 18px;">motif</h1>
 			<a href="javascript:history.go(-1)" id="goback" data-icon="custom" rel = "external">Back</a>
 			
 			<?php
@@ -96,7 +103,7 @@
 		<div data-role="content">
 			<br/><br/><br/><br/><br/><br/>
 			<p style="text-align:center"><img src="images/logo_crop.png"></p>
-			<p style="font-family: Andale Mono; font-size: 18px; text-align: center;">discover art, draw your commentary</p>
+			<p style="font-family: Courier; font-size: 18px; text-align: center;">discover art, draw your commentary</p>
 			<br></br>
 			
 			<div class="search" style="width:100%;margin-left:auto; margin-right:auto;">
@@ -104,7 +111,7 @@
 						<input type="text" id = "term" name="term" class = "term" onkeyup = "isEnter()" style="width:400px;"/></td><td>	
 							<input type="submit" name="submit" value="Search!" onclick = "search()"/></td></tr>
 					</table>
-					<div class = "results" style="width:500px;height:120px;font:16px/26px Georgia, Garamond, Serif;overflow:auto;margin-left:auto; margin-right:auto">
+					<div class = "results" style="width:500px;height:120px;font:14px Courier; overflow:auto;margin-left:auto; margin-right:auto">
 
 					</div>
 			</div><!-- /search -->

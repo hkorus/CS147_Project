@@ -1,3 +1,13 @@
+<?php
+	require './facebook.php';
+	$facebook = new Facebook(array(
+		'appId'  => '291103611004949',
+  		'secret' => '226db60e672abf202f1424b1084fc38e',
+      	'cookie' => true));
+      	
+    $fb_user = $facebook->getUser();
+?>
+
 <!DOCTYPE html>
 <head>
 	<title>Comment</title>
@@ -13,6 +23,7 @@
 
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="jquery.mobile-1.2.0.js"></script>
+	<script src="isotope-master/jquery.isotope.min.js"></script>
 	
 	<script src = "drawing_canvas.js"></script>
 	
@@ -40,7 +51,7 @@
 				$artPiece = mysql_fetch_assoc($artResult);
 
 						?>
-			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
+			<h1 style="font-family: Courier; font-size: 18px;">motif</h1>
 
 	</div><!-- /header -->
 			
@@ -53,10 +64,14 @@
 		</div><!-- /controlgroup -->
 			
 			<?php
-					echo "<p style = 'font-family: Andale Mono; font-size: 18px;'>".$row["comment"]."</p>";
+					echo "<p style = 'font-family: Courier; font-size: 18px;'>".$row["comment"]."</p>";
 					
 			?>
 			<canvas class="displayCanvas" ></canvas>
+			<div id = "container" style = "display:none">
+				<img id = "artPiece" src = <?php echo "'".$artPiece["image_source"]."'" ?> ></img>
+				<img id = "annotation" src = <?php echo "'".$row["annotation"]."'" ?> ></img>
+			</div>
 			
 			
 		
@@ -75,26 +90,27 @@
 
 	
 	<script type = "text/javascript">
-	$(document).ready(function() {
- 			var canvas = $(".displayCanvas:last")[0];
-			img = new Image();
-			img.src = <?php echo "'".$row["annotation"]."'" ?>;
-			
-			img.onload = function(){
-				canvas.width = img.width;
-				canvas.height = img.height;
-				var context = canvas.getContext("2d");
-			
-				backgroundImg = new Image();
-				backgroundImg.src = <?php echo "'".$artPiece["image_source"]."'" ?>;
+	function yscale(width, img){
+		var ratio = width/img.width;
+		return ratio * img.height;
+	}
+	
+	$( function(){
+		var $container = $('#container');
+		$container.imagesLoaded( function(){
+			var backgroundImg = $('#artPiece')[0]
+			var img = $('#annotation')[0]
+			var canvas = $(".displayCanvas:last")[0];
+			canvas.width = "600";			
+			canvas.height = yscale(canvas.width, img);
+			var context = canvas.getContext("2d");	
+			context.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height)
+			context.drawImage(img, 0, 0, canvas.width, canvas.height)			
 				
-				backgroundImg.onload = new function(){
-				
-					context.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height)
-					context.drawImage(img, 0, 0, canvas.width, canvas.height)
-				}
-			}
 		});
+	});
+			
+	
 
 	
 	</script>

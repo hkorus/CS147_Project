@@ -61,7 +61,7 @@ if($result!=false){
 
 	<div data-role="page">
 		<div data-role="header">
-			<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
+			<h1 style="font-family: Courier; font-size: 18px;">motif</h1>
 			<a href="javascript:history.go(-1)" id="goback" data-icon="custom" rel = "external">Back</a>
 			<?php
 				if(!$fb_user){
@@ -90,7 +90,7 @@ if($result!=false){
 							<td>
 							<canvas class="drawingCanvas"></canvas>
 							</td>
-						<td style = "padding:2px;background-color:#E0E0E0;vertical-align;text-align: center;">	
+						<td style = "background-color:#E0E0E0;vertical-align;text-align: center;">	
 								<p></p>
 								<div><img src = "icons/undo.png" width = "50px" onclick = "undo()"></div>
 								<div><canvas class="extralarge" height = "60px" width = "70px"  onclick = "changeSize(50)"></canvas></div>

@@ -140,7 +140,7 @@
 	
 <div data-role="page">
 	<div data-role="header">
-		<h1 style="font-family: Andale Mono; font-size: 18px;">motif</h1>
+		<h1 style="font-family: Courier; font-size: 18px;">motif</h1>
 		<a href="javascript:history.go(-1)" id="goback" data-icon="custom" rel = "external">Back</a>
 		
 			<?php
@@ -160,17 +160,21 @@
 
 	<div data-role="content">
 		
-		<p style='margin-left:10px;font-family: Andale Mono, san-serif; font-size: 25px;'>Favorites</p>
+		<div>
+		<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 25px;'>Favorites
+		<a href="./user_comments.php" rel="external" data-role="button" data-theme="a" style="float:right; margin:0px;">My Comments</a></p>
+		</div>
 			<div data-role="controlgroup" data-type="horizontal">
+
   					<a href="#time_stamp" onclick="sortByTime()" data-role="button" data-theme="a">Sort by Date Added</a>
  					<a href="#title" onclick="sortByTitle()" data-role="button" data-theme="a">Sort by Title</a>
- 					<a href="#artist" onclick="sortByArtist()" data-role="button" data-theme="a">Sort by Artist</a>
-			</div>
-
+ 					<a href="#artist" onclick="sortByArtist()" data-role="button" data-theme="a">Sort by Artist</a>	
+			</div>	
 			<div id="container">
 					<?php
 						include("config.php");
 						if ($fb_user) {
+							
 							$query = "SELECT * FROM art, fave_art where id = art_id and user_id =".$fb_user;
 							//$query = "SELECT * FROM art, fave_art where id = art_id";
 							$result = mysql_query($query);
@@ -179,11 +183,15 @@
 								$query2 = "SELECT * FROM art where id = ".$row['art_id'];
 								$result2 = mysql_query($query2);
 								$row2 = mysql_fetch_assoc($result2);
-								echo "<div class='image'><center><a href='./art.php?id=".$row['art_id']."' rel='external'><img width='100' src='".$row['image_url']."'></center></a>";
+
+								$datetime = strtotime($row['time_stamp']);
+								$date = date("m/d/y", $datetime);
+								echo "<div class='image'><a href='./art.php?id=".$row['art_id']."' rel='external'><img width='100' src='".$row['image_url']."'></a>";
+
 								echo "<div class='time_stamp' style='display:none'>".$row['time_stamp']."</div>";
 								echo "<div class='art_id' style='display:none'>".$row['art_id']."</div>";
-								echo "<div class='title'><center>".$row2['title']."</center></div>";
-								echo "<div class='artist'><center>".$row2['artist']."</center></div>";
+								echo "<div class='title' style = 'width:100px;overflow:auto'>".$row2['title']."</div>";
+								echo "<div class='artist' style = 'width:100px;overflow:auto'>".$row2['artist']."</div>";
 								echo "</div>";
 							} 
 						}
@@ -192,7 +200,7 @@
 				
 			<?php
 				if(!$fb_user) {
-					echo "<p style='margin-left:25px;font-family: Andale Mono; font-size: 15px;'>Please login to view favorites!</p>";
+					echo "<p style='margin-left:25px;font-family: Courier; font-size: 15px;'>Please login to view favorites!</p>";
 				}
 			?>
 			
@@ -213,10 +221,10 @@
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" class="menubar" data-grid="c">
 		<ul>
-			<li><a href="./home.php" id="home" data-icon="custom">Home</a></li>
-			<li><a href="./art.php" id="art" data-icon="custom">Random Art</a></li>
-			<li><a onclick = "window.location.reload()" id="favorites" data-icon="custom">Favorites</a></li>
-			<li><a href="./help.php" id="help" data-icon="custom">Help</a></li>
+			<li><a href="./home.php" id="home" data-icon="custom" rel = "external">Home</a></li>
+			<li><a href="./art.php" id="art" data-icon="custom" rel = "external">Random Art</a></li>
+			<li><a onclick = "window.location.reload()" id="favorites" data-icon="custom" rel = "external">Favorites</a></li>
+			<li><a href="./help.php" id="help" data-icon="custom" rel = "external">Help</a></li>
 		</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
