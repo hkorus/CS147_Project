@@ -18,6 +18,7 @@
 
 	<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="fbstyle.css" />
 	<link rel="apple-touch-icon" href="icons/icon2.png" />
 	<link rel="apple-touch-startup-image" href="images/logo.png">
 
@@ -26,16 +27,46 @@
 	<script src="isotope-master/jquery.isotope.min.js"></script>
 	
 	<script src = "drawing_canvas.js"></script>
+	<script src="auth.js"></script>
 	
-
+		<div id="fb-root"></div>
+		<script>
+			$(document).bind('pageinit', function() {
+    				var e = document.createElement('script'); e.async = true;
+       				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+        			document.getElementById("fb-root").appendChild(e);
+        		}());
+			</script>
+  	
+			<script>
+    			window.fbAsyncInit = function() {
+      				FB.init({ appId: '291103611004949',
+      					status: true,
+      					cookie: true,
+      					xfbml: true,
+      					oauth: true});
+ 
+      				FB.getLoginStatus(handleStatusChange)
+    			};
+  			</script>
 </head>
 <body>
 
 <div data-role="page">
 
 	<div data-role="header">
+	
 		<a href="javascript:history.go(-1)" id="goback" data-icon="custom" rel = "external">Back</a>
-		
+	<?php
+				if(!$fb_user){
+					echo "<div style='position: absolute; right: 0px; top: 0; margin: 11px;'>";
+     				//<div class="show_when_not_connected">
+        			echo "<a onclick='promptLogin()' class='login-button'>"; 
+       				echo "<span>Login</span>";
+      				echo "</a>";
+    				echo "</div>";
+				}
+    		?>
 				<?php
 
 				include("config.php");
@@ -88,7 +119,6 @@
 
 	?>
 
-	
 	<script type = "text/javascript">
 	
 	$( function(){
@@ -104,12 +134,19 @@
 			context.drawImage(img, 0, 0, canvas.width, canvas.height)			
 				
 		});
-	});
-			
-	
-
-	
+	});	
 	</script>
+	
+	<?php
+				if($fb_user) {
+					echo "<div style='position: absolute; right: 0px; top: 0; margin: 11px;'>";
+					echo "<a class='login-button' onclick='logout()'>";
+					echo "<span>Logout</span>";
+					echo "</a>";
+					$facebook->destroySession();
+					echo "</div>";
+				}
+			?>
 
 	<div data-role="footer" data-id="samebar" class="menubar" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" class="menubar" data-grid="c">
