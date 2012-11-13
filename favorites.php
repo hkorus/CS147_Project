@@ -38,6 +38,7 @@
     			$container.isotope({
     				itemSelector : '.image',
     				sortAscending : false,
+    				sortBy : 'time_stamp',
     				masonryHorizontal: {
     					columnWidth: 240,
     				},
@@ -51,8 +52,11 @@
     					title : function ( $elem ) {
     						return $elem.find('.title').text();
     					},
-    					artist : function ( $elem ) {
-    						return $elem.find('.artist').text();
+    					artist_display_name : function ( $elem ) {
+    						return $elem.find('.artist_display_name').text();
+    					},
+    					artist_sort_name : function ( $elem ) {
+    						return $elem.find('.artist_sort_name').text();
     					}
     				}
     			});
@@ -128,7 +132,7 @@
 	<script>
 		function sortByArtist() {
   			$('#container').isotope({ 
-  				sortBy : 'artist',
+  				sortBy : 'artist_sort_name',
   				sortAscending : true
   			 });
 		}
@@ -186,12 +190,12 @@
 
 								$datetime = strtotime($row['time_stamp']);
 								$date = date("m/d/y", $datetime);
-								echo "<div class='image'><a href='./art.php?id=".$row['art_id']."' rel='external'><img width='100' src='".$row['image_url']."'></a>";
-
+								echo "<div class='image' style='background: black; margin: 12px 12px 12px 12px; padding: 3px 3px 3px 3px; display: inline-block;'><a href='./art.php?id=".$row['art_id']."' rel='external'><img width='100' src='".$row['image_url']."'></a>";
 								echo "<div class='time_stamp' style='display:none'>".$row['time_stamp']."</div>";
 								echo "<div class='art_id' style='display:none'>".$row['art_id']."</div>";
-								echo "<div class='title' style = 'width:100px;overflow:auto'>".$row2['title']."</div>";
-								echo "<div class='artist' style = 'width:100px;overflow:auto'>".$row2['artist']."</div>";
+								echo "<div class='artist_sort_name' style='display:none'>".$row2['artist_last_name'].$row2['artist_first_name']."</div>";
+								echo "<div class='title' style = 'color: white; font-size: larger; width:100px;overflow:auto;'><center>".$row2['title']."</center></div>";
+								echo "<div class='artist_display_name' style = 'color: white; width:100px;overflow:auto;'><center>".$row2['artist']."</center></div>";
 								echo "</div>";
 							} 
 						}
