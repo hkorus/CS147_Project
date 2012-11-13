@@ -24,7 +24,6 @@
 
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="drawing_canvas.js"></script>
-	<script src="isotope-master/jquery.isotope.min.js"></script>
 	
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script src="auth.js"></script>
@@ -93,11 +92,19 @@
 	<div data-role="content">
 
 		<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 25px;'>My Comments</p>
-		<table class="bottomBorder" style="text-align:center; width:100%;" id = "commentTable">
-		
+		<table class="bottomBorder" style="text-align:center; width:100%;">
+			
 			<?php
 		$arr = array();
 		if(mysql_num_rows($result)>0){	
+			
+			echo "<tr>";
+			echo "<th>Rating</th>";
+			echo "<th>Title, Year, Artist</th>";
+			echo "<th>Annotation</th>";
+			echo "<th>Comment</th>";
+			echo "<th>Check it out!</th>";
+			echo "</tr>";
 			
 			while($row = mysql_fetch_assoc($result)) {
 				
@@ -123,9 +130,8 @@
 
 				echo "<canvas onclick = 'see_comment(".$row["comment_id"].")' class = 'canvas-".$row["comment_id"]."' width = '25%'></canvas>";
 				array_push($arr, $row["comment_id"]);
-				
-					echo "<img class = 'background-".$row["comment_id"]."' src = '".$artPiece["image_source"]."' style = 'display:none' ></img>";
-					echo "<img class = 'image-".$row["comment_id"]."' src = '".$row["annotation"]."' style = 'display:none' ></img>";
+				array_push($arr, $row["annotation"]);
+				array_push($arr, $artPiece["image_source"]);
 
 				?>
 
@@ -146,12 +152,8 @@
 
 	</table>
 	<?php 
-	if($fb_user) {
-	
-		echo "<br/>";
-		echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; 
-	}
-		}?>
+echo "<br/>";
+echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }?>
 
 
 <script type = 'text/javascript'>
@@ -161,39 +163,64 @@
 			return ratio * img.height;
 		}
 
-	
-			
-			$( function(){
-				var $container = $('#commentTable');
-				array = new Array(<?php 
-					for ($i=0; $i< count($arr); $i++)
-					{
-						echo "'".$arr[$i]."'";
-						if($i!= count($arr)-1){
-							echo ",";
-						}
-					}
+		var canvasList = new Array();
+		var ready = 0;
 
-					?>);
-				$container.imagesLoaded( function(){	
+		function createCanvases(){
+			ready++;
+			if(ready > array.length/3){
 				
-					
-					for (var i=0;i<array.length;i++){
-						var newCanvas = $(".canvas-"+array[i]+':last')[0]
-						var backgroundImg = $(".background-"+array[i]+':last')[0]
-						var img = $(".image-"+array[i]+':last')[0]
-												
-						context = newCanvas.getContext('2d');
-						newCanvas.width = 300;
-						newCanvas.height = yscale(newCanvas.width, img)
-						
-						context.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
-						context.drawImage(img, 0, 0,  newCanvas.width, newCanvas.height);
-						
-						
-						
+				
+				for(var j = 0; j<canvasList.length; j+=3){
+					newCanvas = canvasList[j];
+					newImg = canvasList[j+1];
+					backgroundImg = canvasList[j+2];
+
+					context = newCanvas.getContext('2d');
+					newCanvas.width = 200;
+					newCanvas.height = yscale(newCanvas.width, newImg)
+
+					context.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
+					context.drawImage(newImg, 0, 0,  newCanvas.width, newCanvas.height);
+				}
+				ready = 0;
+			}
+			
+		}
+
+
+		$(document).bind('pageinit', function() {
+			array = new Array(<?php 
+				for ($i=0; $i< count($arr); $i+=3)
+				{
+					echo "'".$arr[$i]."','".$arr[$i+1]."','".$arr[$i+2]."'";
+					if($i!= count($arr)-3){
+						echo ",";
 					}
-					});		
+				}
+
+				?>);
+							
+				for (var i=0;i<array.length;i+=3)
+				{ 
+					newCanvas = $(".canvas-"+array[i]+':last')[0]
+					
+					canvasList.push(newCanvas);
+
+					newImg = new Image();
+					newImg.src = array[i+1];
+					canvasList.push(newImg);
+					newImg.onload = createCanvases;
+					newImg.onerror = createCanvases;
+					newImg.onabort = createCanvases;
+				
+					backgroundImg = new Image();
+					backgroundImg.src = array[i+2];	
+					canvasList.push(backgroundImg);
+					backgroundImg.onload = createCanvases;
+					backgroundImg.onerror = createCanvases;
+					backgroundImg.onabort = createCanvases;
+				}
 
 				
 			});
