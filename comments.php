@@ -109,20 +109,26 @@
 		</div><!-- /controlgroup -->
 		<p></p>
 		<table id = "commentTable" class="bottomBorder" style="text-align:center; width:100%;height:100%">
-			<tr>
-			<th>Rate!</th>
-			<th>Annotation</th>
-			<th>Comment</th>
-			<th>Check it out!</th>
-			</tr>
+			
+
 			<?php
 		$arr = array();
 		$image = "";
-		if(mysql_num_rows($result)>0){	
+		if(mysql_num_rows($result)>0){	 
+			
+			echo "<tr>";
+			echo "<th>Rate!</th>";
+			echo "<th>Annotation</th>";
+			echo "<th>Comment</th>";
+			echo "<th>Check it out!</th>";
+			echo "</tr>";
+			
 			while($row = mysql_fetch_assoc($result)) {
 				
 				$rowNum = 1;
 				$image = $row['image_source'];
+				
+						
 				echo "<tr id = '".$row["comment_id"]."'><td style='border-collapse:collapse; border-bottom:1px dotted black;padding:5px;'>";
 
 

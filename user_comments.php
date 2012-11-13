@@ -93,16 +93,18 @@
 
 		<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 25px;'>My Comments</p>
 		<table class="bottomBorder" style="text-align:center; width:100%;">
-			<tr>
-			<th>Rating</th>
-			<th>Title, Year, Artist</th>
-			<th>Annotation</th>
-			<th>Comment</th>
-			<th>Check it out!</th>
-			</tr>
+			
 			<?php
 		$arr = array();
 		if(mysql_num_rows($result)>0){	
+			
+			echo "<tr>";
+			echo "<th>Rating</th>";
+			echo "<th>Title, Year, Artist</th>";
+			echo "<th>Annotation</th>";
+			echo "<th>Comment</th>";
+			echo "<th>Check it out!</th>";
+			echo "</tr>";
 			
 			while($row = mysql_fetch_assoc($result)) {
 				
@@ -114,7 +116,7 @@
 				echo "<tr>";
 				?>
 				
-				<td style="border-collapse:collapse; border-bottom:1px dotted black; padding-left:15px; padding-right:15px; font-size:18px; width:10%;"> <?php echo $row["rating"]; ?></td>
+				<td style="border-collapse:collapse; border-bottom:1px dotted black; padding-left:15px; padding-right:15px; font-size:18px; font-weight:bold; width:10%;"> <?php echo $row["rating"]; ?></td>
 				
 				<td style="border-collapse:collapse; border-bottom:1px dotted black; font-size:15px; width:20%;"> 
 				<?php 
