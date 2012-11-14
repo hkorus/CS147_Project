@@ -32,11 +32,12 @@
 	
 	<script>	
 		$( function(){
-			var $container = $('#container');
+			var container = $('#container');
   			
-  			$container.imagesLoaded( function(){
+  			container.imagesLoaded( function(){
+			container[0].style.visibility = 'visible'
 	
-    			$container.isotope({
+    			container.isotope({
     				itemSelector : '.image',
     				sortAscending : false,
     				sortBy : 'time_stamp',
@@ -185,7 +186,7 @@
 				</div></td>	
 			</tr>
 		</table>
-			<div id="container">
+			<div id="container" style = "visibility:hidden">
 					<?php
 						include("config.php");
 						if ($fb_user) {
