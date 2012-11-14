@@ -27,6 +27,21 @@
 	
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script src="auth.js"></script>
+	
+	<script>
+		function deleteComment(id){
+			if(<?php echo $fb_user ?>) {
+				var confirmDelete = confirm("Are you sure you want to delete this comment?");
+				if (confirmDelete) {
+					var request = new XMLHttpRequest();
+					request.open('POST', 'delete_comment.php', false);
+					request.setRequestHeader("Content-type", "application/upload")
+					request.send(id); // because of "false" above, will block until the request is done
+					window.location.reload();
+				}
+			}
+		}
+	</script>
 
 </head>
 <body>
@@ -99,6 +114,7 @@
 		if(mysql_num_rows($result)>0){	
 			
 			echo "<tr>";
+			echo "<th>Manage</th>";
 			echo "<th>Rating</th>";
 			echo "<th>Title, Year, Artist</th>";
 			echo "<th>Annotation</th>";
@@ -115,7 +131,7 @@
 				
 				echo "<tr>";
 				?>
-				
+				<td style="border-collapse:collapse; border-bottom:1px dotted black; padding-left:15px; padding-right:15px; font-size:18px; font-weight:bold; width:10%;"> <a data-role="button" data-theme="a" style="float:right; margin:0px;" onclick=<?php echo "deleteComment(".$row["comment_id"].")"?>>delete</a></td>
 				<td style="border-collapse:collapse; border-bottom:1px dotted black; padding-left:15px; padding-right:15px; font-size:18px; font-weight:bold; width:10%;"> <?php echo $row["rating"]; ?></td>
 				
 				<td style="border-collapse:collapse; border-bottom:1px dotted black; font-size:15px; width:20%;"> 
