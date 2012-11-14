@@ -92,8 +92,9 @@
                     "</div>",
                     "<div class='sp-initial sp-thumb sp-cf'></div>",
                     "<div class='sp-button-container sp-cf'>",
-                        "<a class='sp-cancel' href='#'></a>",
-                        "<button class='sp-choose'></button>",
+                    	"<table><tr><td><button class='sp-choose'></button></td>",
+						"<td width = '15px'></td>",
+                        "<td><a class='sp-cancel' href='#'></a></td></tr></table>",
                     "</div>",
                 "</div>",
             "</div>"
@@ -572,11 +573,11 @@
             var dragX = s * dragWidth;
             var dragY = dragHeight - (v * dragHeight);
             dragX = Math.max(
-                -dragHelperHeight,
+                -dragHelperHeight/2,
                 Math.min(dragWidth - dragHelperHeight, dragX - dragHelperHeight)
             );
             dragY = Math.max(
-                -dragHelperHeight,
+                -dragHelperHeight/2,
                 Math.min(dragHeight - dragHelperHeight, dragY - dragHelperHeight)
             );
             dragHelper.css({

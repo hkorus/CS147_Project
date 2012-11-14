@@ -32,11 +32,12 @@
 	
 	<script>	
 		$( function(){
-			var $container = $('#container');
+			var container = $('#container');
   			
-  			$container.imagesLoaded( function(){
+  			container.imagesLoaded( function(){
+			container[0].style.visibility = 'visible'
 	
-    			$container.isotope({
+    			container.isotope({
     				itemSelector : '.image',
     				sortAscending : false,
     				sortBy : 'time_stamp',
@@ -163,21 +164,29 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
-		
-		<div>
-		<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 25px;'>Favorites</p>
-		</div>
+		<table>
+			<tr>
+				<td>
+					<div>
+						<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 30px;text-decoration:underline;font-weight:bold;'>Favorites</p>
+					</div>
+				</td>
+				<td width = '40px'></td>
+				<td> 
+					<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 20px;'><a href="./user_comments.php" rel="external" style = 'text-decoration:none;font-weight:normal;color:#000000'>My Comments</a></p>
+					</td>
+			</tr>
+		</table>
 		<table>
 			<tr>
 				<td><div data-role="controlgroup" data-type="horizontal">
   					<a href="#time_stamp" onclick="sortByTime()" data-role="button" data-theme="a">Sort by Date Added</a>
  					<a href="#title" onclick="sortByTitle()" data-role="button" data-theme="a">Sort by Title</a>
  					<a href="#artist" onclick="sortByArtist()" data-role="button" data-theme="a">Sort by Artist</a>	
-				</div></td>
-				<td> <a href="./user_comments.php" rel="external" data-role="button" data-theme="a" style="float:right; margin:0px;">My Comments</a></td>	
+				</div></td>	
 			</tr>
 		</table>
-			<div id="container">
+			<div id="container" style = "visibility:hidden">
 					<?php
 						include("config.php");
 						if ($fb_user) {

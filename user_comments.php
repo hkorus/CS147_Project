@@ -24,6 +24,7 @@
 
 	<script src="jquery-1.8.2.min.js"></script>
 	<script src="drawing_canvas.js"></script>
+	<script src="isotope-master/jquery.isotope.min.js"></script>
 	
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script src="auth.js"></script>
@@ -106,9 +107,21 @@
 
 	<div data-role="content">
 
-		<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 25px;'>My Comments</p>
-		<table class="bottomBorder" style="text-align:center; width:100%;">
-			
+		<table>
+			<tr>
+				<td>
+					<div>
+						<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 20px;'><a href="./favorites.php" rel="external" style = 'text-decoration:none;font-weight:normal;color:#000000'>Favorites</a></p>
+					</div>
+				</td>
+				<td width = '40px'></td>
+				<td> 
+					<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 30px;text-decoration:underline;font-weight:bold;'>My Comments</p>
+					</td>
+			</tr>
+		</table>
+		<table class="bottomBorder" style="text-align:center; width:100%;" id = "commentTable">
+			 
 			<?php
 		$arr = array();
 		if(mysql_num_rows($result)>0){	
@@ -121,7 +134,7 @@
 			echo "<th>Comment</th>";
 			echo "<th>Check it out!</th>";
 			echo "</tr>";
-			
+
 			while($row = mysql_fetch_assoc($result)) {
 				
 				$artQuery = "SELECT * FROM art where id = ".$row["art_id"];
@@ -131,36 +144,39 @@
 				
 				echo "<tr>";
 				?>
+
 				<td style="border-collapse:collapse; border-bottom:1px dotted black; padding-left:15px; padding-right:15px; font-size:18px; font-weight:bold; width:10%;"> <a data-role="button" data-theme="a" style="float:right; margin:0px;" onclick=<?php echo "deleteComment(".$row["comment_id"].")"?>>delete</a></td>
 				<td style="border-collapse:collapse; border-bottom:1px dotted black; padding-left:15px; padding-right:15px; font-size:18px; font-weight:bold; width:10%;"> <?php echo $row["rating"]; ?></td>
 				
-				<td style="border-collapse:collapse; border-bottom:1px dotted black; font-size:15px; width:20%;"> 
-				<?php 
-				echo "<b>";
-				echo$artPiece["title"]."</b> <br>(". $artPiece["year"].") <br> ".$artPiece["artist"];
-				?>
-				</td>
+				       <td style="border-collapse:collapse; border-bottom:1px dotted black; font-size:15px; width:20%;"> 
+				 		
+				     <?php 
+				        echo "<b>";
+				        echo $artPiece["title"]."</b> <br>(". $artPiece["year"].") <br> ".$artPiece["artist"];
+				        ?>
+				       </td>
 				
 				<td style="border-collapse:collapse; border-bottom:1px dotted black;padding:5px;">
 					<?php
 
 				echo "<canvas onclick = 'see_comment(".$row["comment_id"].")' class = 'canvas-".$row["comment_id"]."' width = '25%'></canvas>";
 				array_push($arr, $row["comment_id"]);
-				array_push($arr, $row["annotation"]);
-				array_push($arr, $artPiece["image_source"]);
+				
+					echo "<img class = 'background-".$row["comment_id"]."' src = '".$artPiece["image_source"]."' style = 'display:none' ></img>";
+					echo "<img class = 'image-".$row["comment_id"]."' src = '".$row["annotation"]."' style = 'display:none' ></img>";
 
 				?>
 
 
 			</td>
-			<td style = "width:30%; border-collapse:collapse; border-bottom:1px dotted black;padding:5px;"> 
+			<td style = "width:40%; border-collapse:collapse; border-bottom:1px dotted black;padding:5px;"> 
 				<?php
 			echo $row["comment"];
 
 			?> 
 
 		</td>
-		<td style = "width:10%; border-collapse:collapse; border-bottom:1px dotted black;padding:5px;">
+		<td style = "width:30%; border-collapse:collapse; border-bottom:1px dotted black;padding:5px;"> 
 			<a href = "show_comment.php?id=<?php echo $row["comment_id"] ?>" rel="external"> <img src = "icons/side_arrow.png" width = "50" height = "50" ></img> </a>
 		</td>
 	</tr>	
@@ -168,8 +184,12 @@
 
 	</table>
 	<?php 
-echo "<br/>";
-echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }?>
+	if($fb_user) {
+	
+		echo "<br/>";
+		echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; 
+	}
+		}?>
 
 
 <script type = 'text/javascript'>
@@ -179,64 +199,39 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 			return ratio * img.height;
 		}
 
-		var canvasList = new Array();
-		var ready = 0;
-
-		function createCanvases(){
-			ready++;
-			if(ready > array.length/3){
-				
-				
-				for(var j = 0; j<canvasList.length; j+=3){
-					newCanvas = canvasList[j];
-					newImg = canvasList[j+1];
-					backgroundImg = canvasList[j+2];
-
-					context = newCanvas.getContext('2d');
-					newCanvas.width = 200;
-					newCanvas.height = yscale(newCanvas.width, newImg)
-
-					context.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
-					context.drawImage(newImg, 0, 0,  newCanvas.width, newCanvas.height);
-				}
-				ready = 0;
-			}
+	
 			
-		}
-
-
-		$(document).bind('pageinit', function() {
-			array = new Array(<?php 
-				for ($i=0; $i< count($arr); $i+=3)
-				{
-					echo "'".$arr[$i]."','".$arr[$i+1]."','".$arr[$i+2]."'";
-					if($i!= count($arr)-3){
-						echo ",";
+			$( function(){
+				var $container = $('#commentTable');
+				array = new Array(<?php 
+					for ($i=0; $i< count($arr); $i++)
+					{
+						echo "'".$arr[$i]."'";
+						if($i!= count($arr)-1){
+							echo ",";
+						}
 					}
-				}
 
-				?>);
-							
-				for (var i=0;i<array.length;i+=3)
-				{ 
-					newCanvas = $(".canvas-"+array[i]+':last')[0]
-					
-					canvasList.push(newCanvas);
-
-					newImg = new Image();
-					newImg.src = array[i+1];
-					canvasList.push(newImg);
-					newImg.onload = createCanvases;
-					newImg.onerror = createCanvases;
-					newImg.onabort = createCanvases;
+					?>);
+				$container.imagesLoaded( function(){	
 				
-					backgroundImg = new Image();
-					backgroundImg.src = array[i+2];	
-					canvasList.push(backgroundImg);
-					backgroundImg.onload = createCanvases;
-					backgroundImg.onerror = createCanvases;
-					backgroundImg.onabort = createCanvases;
-				}
+					
+					for (var i=0;i<array.length;i++){
+						var newCanvas = $(".canvas-"+array[i]+':last')[0]
+						var backgroundImg = $(".background-"+array[i]+':last')[0]
+						var img = $(".image-"+array[i]+':last')[0]
+												
+						context = newCanvas.getContext('2d');
+						newCanvas.width = 300;
+						newCanvas.height = yscale(newCanvas.width, img)
+						
+						context.drawImage(backgroundImg, 0, 0, newCanvas.width, newCanvas.height);
+						context.drawImage(img, 0, 0,  newCanvas.width, newCanvas.height);
+						
+						
+						
+					}
+					});		
 
 				
 			});
@@ -295,7 +290,7 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 		<ul>
 			<li><a href="./home.php" id="home" data-icon="custom" rel="external">Home</a></li>
 			<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
-			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">My Folio</a></li>
+			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">Favorites</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom" rel="external" >Help</a></li>
 		</ul>
 	</div><!-- /navbar -->

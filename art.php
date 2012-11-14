@@ -26,38 +26,40 @@
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script src="drawing_canvas.js"></script>
 	
+	<script src="favorite.js"></script>
 	
 	<script src="auth.js"></script>
 	
-	<script type = "text/javascript">
-		function send_favorite(id){
-			if(<?php echo $fb_user ?>) {
-				var button = $(".fav_button:last")[0]
-				var src =button.src;
-				if(src.indexOf('icons/folio-grey-small.png')!=-1){				
-					button.src = 'icons/folio-grey-red-small.png';
-					var request = new XMLHttpRequest();
-					request.open('POST', 'mark_favorite.php', false);
-					request.setRequestHeader("Content-type", "application/upload")
-					request.send(id); // because of "false" above, will block until the request is done
-				}else {
-					button.src = 'icons/folio-grey-small.png';
-					var request = new XMLHttpRequest();
-					request.open('POST', 'undo_favorite.php', false);
-					request.setRequestHeader("Content-type", "application/upload")
-					request.send(id); // because of "false" above, will block until the request is done
-				}
-			                // and status is available. Not recommended, however it works for simple cases.
-			} else {
-				alert("Please login to add art to Favorites");
-			}
-			
-		}
-	</script>
 
 
 </head>
 <body>
+	
+	<script type = "text/javascript" >
+	function send_favorite(id){
+		if(<?php echo $fb_user ?>) {
+			var button = $(".fav_button:last")[0]
+			var src =button.src;
+			if(src.indexOf('icons/folio-grey-small.png')!=-1){				
+				button.src = 'icons/folio-grey-red-small.png';
+				var request = new XMLHttpRequest();
+				request.open('POST', 'mark_favorite.php', false);
+				request.setRequestHeader("Content-type", "application/upload")
+				request.send(id); // because of "false" above, will block until the request is done
+			}else {
+				button.src = 'icons/folio-grey-small.png';
+				var request = new XMLHttpRequest();
+				request.open('POST', 'undo_favorite.php', false);
+				request.setRequestHeader("Content-type", "application/upload")
+				request.send(id); // because of "false" above, will block until the request is done
+			}
+		                // and status is available. Not recommended, however it works for simple cases.
+		} else {
+			alert("Please login to add art to Favorites");
+		}
+		
+	};
+	</script>
 	<?php include("config.php");
 	$id = $_GET["id"];
 	$query = "SELECT * FROM art";
