@@ -61,10 +61,17 @@ if($result!=false){
 	function saveComment(){
 		if(<?php echo $fb_user?>){
 			save();
+			window.location = "./comments?id=<?php echo $row['id']?>";
 		}else {
 			alert("You must be logged in to comment!");
 		}
 	};
+	
+	function clearComment(element) {
+	  element.value = '';
+	
+	}
+	
 </script>
 
 	<div data-role="page">
@@ -115,8 +122,8 @@ if($result!=false){
 					</tr>
 					<tr>
 						<td style = "background-color:#B0B0B0;padding:7px">
-							<textarea class="commentBox" cols="100" rows="100">
-							</textarea>
+							
+							<textarea class="commentBox" cols="100" rows="100" onclick = "clearComment(this)">Type comments here!</textarea>
 							</td>
 							<td style = "width:70px;background-color:#B0B0B0;vertical-align:center;text-align:center">	
 								<img src = "icons/post.png" style="width:60px;height:60px" onclick="saveComment()">
