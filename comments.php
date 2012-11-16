@@ -57,7 +57,7 @@
 	</div><!-- /header -->
 
 	<script type = "text/javascript">
-	function send_rating(comment, amount, rowNum){
+	function send_rating(comment, amount){
 
 		var up = $(".up-"+comment+':last')[0]
 		var down = $(".down-"+comment+':last')[0]
@@ -78,12 +78,19 @@
 		// and status is available. Not recommended, however it works for simple cases.
 		
 		var table = document.getElementById("commentTable");
+		var rowNum = -1;
+		for(var i = 0; i<table.rows.length; i++){
+			if(table.rows[i].id == comment) {
+				rowNum = i;
+				break;
+			}
+		}
 		var curRow = table.rows[rowNum];
 		inserted = false;
 		
 		var parent = curRow.parentNode;
 		parent.removeChild(curRow)
-			
+					
 		for(i = 0; i<table.rows.length-1; i++){
 			var nextRow = table.rows[i+1];
 			var innerTable = nextRow.firstChild.firstChild.nextSibling;
@@ -135,12 +142,12 @@
 
 
 				?>
-				<table class="noBorder" style="width:20%"><tr>
-					<td style="padding-left:15px; padding-right:15px;"><img class = "up-<?php echo $row["comment_id"] ?>" src = "icons/up_arrow.png" width = "40px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1, <?php echo $rowNum ?>)"></td></tr>
+				<table class="noBorder" style="width:20%">
+					<td style="padding-left:15px; padding-right:15px;"><img class = "up-<?php echo $row["comment_id"] ?>" src = "icons/up_arrow.png" width = "40px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)"></td></tr>
 
 					<tr><td class = "number-<?php echo $row["comment_id"] ?>" style="padding-left:15px; padding-right:15px; font-size:18px;"><?php echo $row["rating"]; ?></td></tr>
 
-					<tr><td style="padding-left:15px; padding-right:15px;"><img class = "down-<?php echo $row["comment_id"] ?>" src = "icons/down_arrow.png" width = "40px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1, <?php echo $rowNum ?>)"></td></tr>
+					<tr><td style="padding-left:15px; padding-right:15px;"><img class = "down-<?php echo $row["comment_id"] ?>" src = "icons/down_arrow.png" width = "40px" onclick = "send_rating(<?php echo $row["comment_id"] ?>,-1)"></td></tr>
 					</table>
 
 				</td>
