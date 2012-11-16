@@ -74,7 +74,7 @@
 	$numRows = mysql_num_rows($result);
 	
 	$selectedRow = rand(0, $numRows-1);
-	while($selectedRow==intval($prev)){
+	while($prev!=NULL && $selectedRow==intval($prev)){
 		$selectedRow = rand(0, $numRows-1);
 	}
 	while ($row = mysql_fetch_assoc($result)) {

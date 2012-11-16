@@ -48,7 +48,6 @@ function resetDimensions(){
 }
 
 function prepareCanvas(url, photo_id){
-	
 	paths = new Array();
 	drawing = false;
 	curColor = "#000000"
@@ -84,6 +83,7 @@ function prepareCanvas(url, photo_id){
 
 		window.onresize = function(event){
 			resetDimensions();
+			redraw();
 		}
 		
 	}
