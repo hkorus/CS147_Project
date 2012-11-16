@@ -160,12 +160,17 @@ function clearComment(element) {
 			</td>
 			<td style = "background-color:#E0E0E0;vertical-align;text-align: center;">	
 				<p></p>
+				<div style = 'padding-bottom:10px'>Undo</div>
 				<div><img src = "icons/undo.png" width = "50px" onclick = "undo()"></div>
+				<div style = 'padding-bottom:10px;padding-top:10px'>Brush Size</div>
+				
 				<div><canvas class="extralarge" height = "60px" width = "70px"  onclick = "changeSize(50)"></canvas></div>
 				<div ><canvas class="large" height = "50px" width = "70px"  onclick = "changeSize(20)"></canvas></div>
 				<div><canvas style = "background-color:#B0B0B0;" class="medium" height = "40px" width = "70px"  onclick = "changeSize(10)" ></canvas></div>
 				<div><canvas class="small" height = "30px" width = "70px" onclick = "changeSize(3)"></canvas></div>
-					<div style = "text-align: center;"><input type='color' name='color' class = "colorPicker" onchange = "changeColor()"/></div>
+				<div style = 'padding-bottom:10px;padding-top:10px'>Color</div>
+				
+					<div style = "text-align: center;"><input name='color' class = "colorPicker" id = 'colorPicker' onchange = "changeColor()"/></div>
 				</div>
 
 
