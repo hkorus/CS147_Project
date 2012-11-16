@@ -82,7 +82,9 @@ function prepareCanvas(url, photo_id){
 		$('.drawingCanvas:last').touchmove(onTouchMove, false);
 		$('.drawingCanvas:last').touchend(onMouseUp, false);
 
-
+		window.onresize = function(event){
+			resetDimensions();
+		}
 		
 	}
 
@@ -175,8 +177,12 @@ function getSizeString(size){
 function changeSize(size){
 	var curId = getSizeString(lineWidth);
 	$('.'+curId+':last')[0].style.backgroundColor = "#E0E0E0";
+	$('.'+curId+':last')[0].parentNode.style.backgroundColor = "#E0E0E0";
+	
 	
 	$('.'+getSizeString(size)+':last')[0].style.backgroundColor = "#B0B0B0";
+	$('.'+getSizeString(size)+':last')[0].parentNode.style.backgroundColor = "#B0B0B0";
+	
 
 	lineWidth = size;
 }

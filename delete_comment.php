@@ -9,5 +9,5 @@ include("config.php");
     $fb_user = $facebook->getUser();
     
 	$imageData=$GLOBALS['HTTP_RAW_POST_DATA'];
-	$query = "DELETE FROM comments WHERE user_id =  ".$fb_user." and art_id = ".$imageData;
+	$query = "DELETE FROM comments WHERE user_id =  ".$fb_user." and comment_id = ".$imageData;
 	$result = mysql_query($query);

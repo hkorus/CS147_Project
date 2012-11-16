@@ -127,7 +127,7 @@
 		if(mysql_num_rows($result)>0){	
 			
 			echo "<tr>";
-			echo "<th>Manage</th>";
+			echo "<th>Delete</th>";
 			echo "<th>Rating</th>";
 			echo "<th>Title, Year, Artist</th>";
 			echo "<th>Annotation</th>";
@@ -145,7 +145,7 @@
 				echo "<tr>";
 				?>
 
-				<td style="border-collapse:collapse; border-bottom:1px dotted black; padding-left:15px; padding-right:15px; font-size:18px; font-weight:bold; width:10%;"> <a data-role="button" data-theme="a" style="float:right; margin:0px;" onclick=<?php echo "deleteComment(".$row["comment_id"].")"?>>delete</a></td>
+				<td style="border-collapse:collapse; border-bottom:1px dotted black; padding-left:15px; padding-right:15px; font-size:18px; font-weight:bold; width:10%;text-align:center"> <img src = "icons/delete.png" style="margin:0px;" width = "20px" height = "20px" onclick=<?php echo "deleteComment(".$row["comment_id"].")"?>></img></td>
 				<td style="border-collapse:collapse; border-bottom:1px dotted black; padding-left:15px; padding-right:15px; font-size:18px; font-weight:bold; width:10%;"> <?php echo $row["rating"]; ?></td>
 				
 				       <td style="border-collapse:collapse; border-bottom:1px dotted black; font-size:15px; width:20%;"> 
@@ -169,11 +169,13 @@
 
 
 			</td>
-			<td style = "width:40%; border-collapse:collapse; border-bottom:1px dotted black;padding:5px;"> 
-				<?php
+			<td style = "width:40%; border-collapse:collapse; border-bottom:1px dotted black;padding:5px;" > 
+				<a href = "show_comment.php?id=<?php echo $row["comment_id"] ?>" rel="external" style = 'text-decoration:none;font-weight:normal;color:#000000'>
+									<?php
 			echo $row["comment"];
 
 			?> 
+			</a>
 
 		</td>
 		<td style = "width:30%; border-collapse:collapse; border-bottom:1px dotted black;padding:5px;"> 

@@ -80,6 +80,7 @@
 				
 				$artResult = mysql_query($artQuery);
 				$artPiece = mysql_fetch_assoc($artResult);
+				$art_id = $row['art_id']
 
 						?>
 			<h1 style="font-family: Courier; font-size: 18px;">motif</h1>
@@ -90,7 +91,8 @@
 
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
 			<a href="./art.php?id=<?php echo $row["art_id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
-			<a href="./comments.php?id=<?php echo $row["art_id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
+			<a  href="./comments.php?id=<?php echo $row["art_id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">View Comments</a>
+			
 			<a href="./annotate.php?id=<?php echo $row["art_id"]?>" id="annotate" data-icon="custom" data-role="button"  data-theme="a" rel="external">Annotate</a>
 		</div><!-- /controlgroup -->
 			
@@ -152,7 +154,7 @@
 		<div data-role="navbar" class="menubar" data-grid="c">
 		<ul>
 			<li><a href="./home.php" id="home" data-icon="custom" rel="external">Home</a></li>
-			<li><a href = "./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
+			<li><a href="./art.php?prev=<?php echo $art_id?>" id="art" data-icon="custom" rel="external">Random Art</a></li>
 			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">My Folio</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
 		</ul>

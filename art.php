@@ -62,14 +62,21 @@
 	</script>
 	<?php include("config.php");
 	$id = $_GET["id"];
+	$prev = $_GET["prev"];
+		
 	$query = "SELECT * FROM art";
 
 	if($id != NULL){
 		$query = "SELECT * FROM art where id = ".$id;
+		
 	}
 	$result = mysql_query($query);
 	$numRows = mysql_num_rows($result);
+	
 	$selectedRow = rand(0, $numRows-1);
+	while($selectedRow==intval($prev)){
+		$selectedRow = rand(0, $numRows-1);
+	}
 	while ($row = mysql_fetch_assoc($result)) {
 		if($selectedRow == 0){
 	?>
@@ -98,17 +105,17 @@
 		<table><tr><td>
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
 			<a  id="art" data-icon="custom" data-role="button" data-theme="a" rel="external" style = "background:#B0B0B0">Art</a></li>
-			<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
+			<a  href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">View Comments</a>
+			
 			<a href="./annotate.php?id=<?php echo $row["id"]?>" id="annotate" data-icon="custom" data-role="button"  data-theme="a" rel="external">Annotate</a>
 		</div><!-- /controlgroup -->
 		</td>
 		<td style = "text-align:right;width:50px">
 			
 			<?php 
-			
+				$id = $row["id"];
 				if($fb_user){ 
 					echo "<img class = 'fav_button' src= '";
-					$id = $row["id"];
 					$query = "SELECT * FROM fave_art where user_id = ".$fb_user." and art_id = ".$id;
 					$result = mysql_query($query);
 					$numRows = mysql_num_rows($result);
@@ -165,6 +172,7 @@
   			</script>
 			
 			<?php
+			
 				if($fb_user) {
 					echo "<div style='position: absolute; right: 0px; top: 0; margin: 11px;'>";
 					echo "<a class='login-button' onclick='logout()'>";
@@ -178,7 +186,6 @@
 	</div><!-- /content -->
 	
 	<?php
-
 	if($numRows > 1 ){
 		$rand = $numRows;
 	}else{
@@ -193,7 +200,7 @@
 	<script type = "text/javascript">
 		function refresh(){
 			var num = Math.floor(Math.random() * <?php echo $rand ?>) + 1;
-			window.location="art.php?id="+num;
+			window.location="art.php?id="+num+"&prev=<?php echo $id?>";
 		}
 	</script>
 

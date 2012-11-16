@@ -135,7 +135,6 @@
     }
 
     function spectrum(element, o) {
-
         var opts = instanceOptions(o, element),
             flat = opts.flat,
             showPaletteOnly = opts.showPaletteOnly,
@@ -197,7 +196,7 @@
         cancelButton.text(opts.cancelText);
 
         function initialize() {
-
+			
             if (IE) {
                 container.find("*:not(input)").attr("unselectable", "on");
             }
@@ -229,7 +228,7 @@
 
                 }
             }
-
+			
             offsetElement.bind("click.spectrum touchstart.spectrum", function (e) {
                 toggle();
 
@@ -239,7 +238,6 @@
                     e.preventDefault();
                 }
             });
-
             // Prevent clicks from bubbling up to document.  This would cause it to be hidden.
             container.click(stopPropagation);
 
@@ -288,6 +286,7 @@
 
             if (!!initialColor) {
                 set(initialColor);
+				
 
                 // In case color was black - update the preview UI and set the format
                 // since the set function will not run (default color is black).
@@ -404,6 +403,7 @@
         }
 
         function show() {
+	
             if (visible) {
                 reflow();
                 return;
@@ -821,13 +821,15 @@
     */
     var dataID = "spectrum.id";
     $.fn.spectrum = function (opts, extra) {
+		
         if (typeof opts == "string") {
+		
             if (opts == "get") {
                 return spectrums[this.eq(0).data(dataID)].get();
             } else if (opts == "container") {
                 return spectrums[$(this).data(dataID)].container;
             }
-
+			
             return this.each(function () {
                 var spect = spectrums[$(this).data(dataID)];
                 if (spect) {
@@ -857,14 +859,16 @@
     $.fn.spectrum.defaults = defaultOpts;
 
     $.fn.spectrum.processNativeColorInputs = function () {
+	
         var colorInput = $("<input type='color' value='!' />")[0];
-        var supportsColor = colorInput.type === "color" && colorInput.value != "!";
+        var supportsColor =  colorInput.value != "!";
 
-        if (!supportsColor) {
-            $("input[type=color]").spectrum({
+       // if (!supportsColor) {
+			
+            $("#colorPicker").spectrum({
                 preferredFormat: "hex6"
             });
-        }
+        //}
     };
 
     // TinyColor.js - <https://github.com/bgrins/TinyColor> - 2011 Brian Grinstead - v0.5

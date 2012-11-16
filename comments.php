@@ -106,7 +106,7 @@
 
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
 			<a href="./art.php?id=<?php echo $_GET["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
-			<a  id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external" style = "background:#B0B0B0">Comments</a>
+			<a  id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external" style = "background:#B0B0B0">View Comments</a>
 			<a href="./annotate.php?id=<?php echo $_GET["id"]?>" id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external">Annotate</a>
 		</div><!-- /controlgroup -->
 		<p></p>
@@ -159,12 +159,13 @@
 
 			</td>
 			<td style = "width:40%; border-collapse:collapse; border-bottom:1px dotted black;padding:5px;"> 
+				<a href = "show_comment.php?id=<?php echo $row["comment_id"] ?>" rel="external" style = 'text-decoration:none;font-weight:normal;color:#000000'>
 				<?php
 			echo $row["comment"];
 			$rowNum++;
 			
 			
-			?> 
+			?> </a>
 
 		</td>
 		<td style = "width:10%; border-collapse:collapse; border-bottom:1px dotted black;padding:5px;">
@@ -267,7 +268,7 @@ echo "<div style = 'padding-left:15px;font-size:15px'>No comments yet!</div>"; }
 	<div data-role="navbar" class="menubar" data-grid="c">
 		<ul>
 			<li><a href="./home.php" id="home" data-icon="custom" rel="external">Home</a></li>
-			<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
+			<li><a href="./art.php?prev=<?php echo $_GET['id']?>" id="art" data-icon="custom" rel="external">Random Art</a></li>
 			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">My Folio</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom" rel="external" >Help</a></li>
 		</ul>
