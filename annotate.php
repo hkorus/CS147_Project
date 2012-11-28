@@ -102,7 +102,6 @@ function clearComment(element) {
 
 <div data-role="page">
 
-<script src="//cdn.optimizely.com/js/141302022.js"></script><!-- For optimizely A/B testing -->
 
 	<div data-role="header">
 		<h1 style="font-family: Courier; font-size: 18px;">motif</h1>
@@ -184,7 +183,7 @@ function clearComment(element) {
 				<textarea class="commentBox" cols="100" rows="100" onclick = "clearComment(this)">Type comments here!</textarea>
 			</td>
 			<td style = "width:70px;background-color:#B0B0B0;vertical-align:center;text-align:center">	
-				<img src = "icons/post.png" style="width:60px;height:60px" onclick="saveComment()">
+				<img src = "icons/post-to-motif.png" style="width:60px;height:60px" onclick="saveComment()">
 			</td>
 		</tr>
 	</table>

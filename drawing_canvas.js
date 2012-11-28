@@ -194,6 +194,7 @@ function changeColor(){
 
 function save(){
 	var val = $('.commentBox:last')[0].value;
+	if(val == "Type comments here!") val = "";
 	var dataURL = canvas.toDataURL();
 	var request = new XMLHttpRequest();
 	request.open('POST', 'save_image.php', false);

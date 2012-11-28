@@ -102,7 +102,6 @@ function clearComment(element) {
 
 <div data-role="page">
 
-<script src="//cdn.optimizely.com/js/141302022.js"></script><!-- For optimizely A/B testing -->
 
 	<div data-role="header">
 		<h1 style="font-family: Courier; font-size: 18px;">motif</h1>

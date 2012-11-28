@@ -91,11 +91,7 @@
                         "<input class='sp-input' type='text' spellcheck='false'  />",
                     "</div>",
                     "<div class='sp-initial sp-thumb sp-cf'></div>",
-                    "<div class='sp-button-container sp-cf'>",
-                    	"<table><tr><td><button class='sp-choose'></button></td>",
-						"<td width = '15px'></td>",
-                        "<td><a class='sp-cancel' href='#'></a></td></tr></table>",
-                    "</div>",
+                   
                 "</div>",
             "</div>"
         ].join("");
@@ -179,8 +175,6 @@
             textInput = container.find(".sp-input"),
             paletteContainer = container.find(".sp-palette"),
             initialColorContainer = container.find(".sp-initial"),
-            cancelButton = container.find(".sp-cancel"),
-            chooseButton = container.find(".sp-choose"),
             isInput = boundElement.is("input"),
             shouldReplace = isInput && !flat,
             replacer = (shouldReplace) ? $(replaceInput).addClass(theme) : $([]),
@@ -192,8 +186,6 @@
             currentPreferredFormat = preferredFormat,
             clickoutFiresChange = !opts.showButtons || opts.clickoutFiresChange;
 
-        chooseButton.text(opts.chooseText);
-        cancelButton.text(opts.cancelText);
 
         function initialize() {
 			
@@ -248,21 +240,7 @@
             });
             textInput.keydown(function (e) { if (e.keyCode == 13) { setFromTextInput(); } });
 
-            cancelButton.bind("click.spectrum", function (e) {
-                e.stopPropagation();
-                e.preventDefault();
-                hide("cancel");
-            });
-
-            chooseButton.bind("click.spectrum", function (e) {
-                e.stopPropagation();
-                e.preventDefault();
-
-                if (isValid()) {
-                    updateOriginalInput(true);
-                    hide();
-                }
-            });
+            
 
             draggable(alphaSlider, function (dragX, dragY, e) {
                 currentAlpha = (dragX / alphaWidth);
@@ -414,6 +392,7 @@
             visible = true;
 
             $(doc).bind("click.spectrum", hide);
+			window.onmousedown = hide;
             $(window).bind("resize.spectrum", resize);
             replacer.addClass("sp-active");
             container.show();
@@ -431,12 +410,14 @@
         }
 
         function hide(e) {
-
             // Return on right click
             if (e && e.type == "click" && e.button == 2) { return; }
 
             // Return if hiding is unnecessary
             if (!visible || flat) { return; }
+			
+			choose(e);
+
             visible = false;
 
             $(doc).unbind("click.spectrum", hide);
@@ -486,6 +467,14 @@
         function get() {
             return tinycolor.fromRatio({ h: currentHue, s: currentSaturation, v: currentValue, a: Math.round(currentAlpha * 100) / 100 });
         }
+		function choose(e){
+			 e.stopPropagation();
+		        e.preventDefault();
+		        if (isValid()) {
+		            updateOriginalInput(true);
+		        }
+
+		}
 
         function isValid() {
             return !textInput.hasClass("sp-validation-error");
@@ -713,6 +702,9 @@
             return func.apply(obj, args.concat(slice.call(arguments)));
         }
     }
+
+
+
 
     /**
     * Lightweight drag helper.  Handles containment within the element, so that
