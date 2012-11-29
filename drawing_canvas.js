@@ -6,6 +6,8 @@ var lineWidth = 10;
 var img;
 var curColor = "#000000"
 var id;
+var width;
+var height;
 
 
 function Point(x, y, size, color){
@@ -47,12 +49,45 @@ function resetDimensions(){
 	canvas.height = rect.bottom-rect.top;
 }
 
-function prepareCanvas(url, photo_id){
+function recreatePaths(){
 	paths = new Array();
-	drawing = false;
-	curColor = "#000000"
-	lineWidth = 10;
+	pathString = localStorage["path"];
+	tokens = pathString.split(" ");
+
+	tokenNum = 0;
+	data = new Array();
 	
+	for(var i = 0; i<tokens.length; i++){
+		if(tokens[i] == "PATH"){
+			paths.push(new Array());
+		}else{
+			if(tokenNum == 3){
+				newPoint = new Point(data[0], data[1], data[2], tokens[i])
+				
+				paths[paths.length-1].push(newPoint);
+				data = new Array();
+			}else{
+				data.push(parseInt(tokens[i]))
+			}
+			tokenNum = (tokenNum+1)%4;
+		}
+	}
+	
+}
+
+function prepareCanvas(url, photo_id){
+	
+	drawing = false;
+	
+	if(localStorage["path"] == "undefined"){
+		paths = new Array();
+		curColor = "#000000"
+		lineWidth = 10;
+	}else{
+		recreatePaths();
+		localStorage["path"] = undefined;
+	}
+
 	id = photo_id;
 	canvas = $('.drawingCanvas:last')[0]
 	if(typeof canvas === 'undefined') return;
@@ -67,7 +102,8 @@ function prepareCanvas(url, photo_id){
 		resetDimensions();
 		canvas.height = yscale(canvas.width, img)
 		
-		
+		width = canvas.width;
+		height = canvas.height;
 		canvas.style.backgroundImage = "url("+url+")";
 		canvas.style.backgroundSize = "100% Auto";
 	  	
@@ -82,13 +118,32 @@ function prepareCanvas(url, photo_id){
 		$('.drawingCanvas:last').touchend(onMouseUp, false);
 
 		window.onresize = function(event){
+			
 			resetDimensions();
+			scaleDrawing();
 			redraw();
 		}
+		redraw();
 		
 	}
 
 
+}
+
+function scaleDrawing(){
+	widthRatio = canvas.width/width;
+	heightRatio = canvas.height/height;
+	for(var i=0; i < paths.length; i++){
+		for(var j = 0; j< paths[i].length ; j++){
+			paths[i][j].x = paths[i][j].x*widthRatio;
+			paths[i][j].y = paths[i][j].y*widthRatio;
+			
+		}
+	}
+  
+	
+	width = canvas.width;
+	height = canvas.height;
 }
 
 function onTouchMove(e){	

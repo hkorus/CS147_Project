@@ -85,7 +85,6 @@
 	<div data-role="page" id="homepage">
 		<div data-role="header">
 			<h1 style="font-family: Courier; font-size: 18px;">motif</h1>
-			<a href="javascript:history.go(-1)" id="goback" data-icon="custom" rel = "external">Back</a>
 			
 			<?php
 				if(!$fb_user){

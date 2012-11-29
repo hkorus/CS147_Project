@@ -123,14 +123,22 @@
 
 	<script type = "text/javascript">
 	
+	function yscale(width, img){
+		var ratio = width/img.width;
+		return ratio * img.height;
+	}
+	
 	$( function(){
 		var $container = $('#container');
 		$container.imagesLoaded( function(){
 			var backgroundImg = $('#artPiece')[0]
 			var img = $('#annotation')[0]
 			var canvas = $(".displayCanvas:last")[0];
-			canvas.width = img.width;			
-			canvas.height = img.height;
+			var width = document.width-50;
+			
+			canvas.width = (width>img.width)? img.width : width;			
+			canvas.height = (width>img.width)? img.height : yscale(width, img);
+						
 			var context = canvas.getContext("2d");	
 			context.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height)
 			context.drawImage(img, 0, 0, canvas.width, canvas.height)			

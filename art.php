@@ -111,7 +111,7 @@
 		</div><!-- /controlgroup -->
 		</td>
 		<td style = "text-align:right;width:50px">
-			
+			<table style = "text-align:center"><tr><td>
 			<?php 
 				$id = $row["id"];
 				if($fb_user){ 
@@ -129,6 +129,10 @@
 				}else {echo "<img class = 'fav_button' src= 'icons/folio-grey-small.png' onclick = 'send_favorite(".$row['id'].")'>";}
 			
 			?>
+			</td></tr>
+			<tr><td>Favorite!</td></tr>
+			</table>
+			
 			</td></tr></table>
 			
 		

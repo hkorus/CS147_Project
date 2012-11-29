@@ -393,6 +393,8 @@
 
             $(doc).bind("click.spectrum", hide);
 			window.onmousedown = hide;
+			window.ontouchstart = hide;
+			
             $(window).bind("resize.spectrum", resize);
             replacer.addClass("sp-active");
             container.show();

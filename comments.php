@@ -138,11 +138,11 @@
 				$image = $row['image_source'];
 				
 						
-				echo "<tr id = '".$row["comment_id"]."'><td style='border-collapse:collapse; border-bottom:1px dotted black;padding:5px;'>";
+				echo "<tr id = '".$row["comment_id"]."' ><td style='border-collapse:collapse; border-bottom:1px dotted black;padding:5px;'>";
 
 
 				?>
-				<table class="noBorder" style="width:20%">
+				<table class="noBorder" style="width:20%;margin:auto">
 					<td style="padding-left:15px; padding-right:15px;"><img class = "up-<?php echo $row["comment_id"] ?>" src = "icons/up_arrow.png" width = "40px" onclick = "send_rating(<?php echo $row["comment_id"] ?>, 1)"></td></tr>
 
 					<tr><td class = "number-<?php echo $row["comment_id"] ?>" style="padding-left:15px; padding-right:15px; font-size:18px;"><?php echo $row["rating"]; ?></td></tr>

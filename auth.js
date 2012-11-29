@@ -85,11 +85,27 @@ function checkUserPermissions(permissionToCheck) {
   });
 }
 
+function createLocalStorage(){
+		if(paths != undefined){
+			storage = "";
+			for(var i=0; i < paths.length; i++)
+	  		{	
+				storage+="PATH "
+				for(var j = 0; j< paths[i].length ; j++){
+					storage+=paths[i][j].x+" "+paths[i][j].y+" "+paths[i][j].size+" "+paths[i][j].color+" ";
+				}
+	  		}
+			localStorage["path"] = storage;
+	}
+	
+}
+
 //Prompt the user to login and ask for the 'email' permission
 function promptLogin() {
   //FB.login(null, {scope: 'email'});
   FB.login(function(response) {
   	if (response.authResponse) {
+		createLocalStorage();
   		window.location.reload();
   	}
   });
@@ -118,6 +134,7 @@ function uninstallApp() {
 //See https://developers.facebook.com/docs/reference/javascript/FB.logout/
 function logout() {
   FB.logout(function(response) {
+	createLocalStorage();
     window.location.reload();
   });
 }
