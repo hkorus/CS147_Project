@@ -101,10 +101,13 @@
    		</div><!-- /header -->
 	
 		<div data-role="content">
-			<br/><br/><br/><br/><br/><br/>
+			<br/><br/>
 			<p style="text-align:center"><img src="images/logo_crop.png"></p>
 			<p style="font-family: Courier; font-size: 18px; text-align: center;">discover art, draw your commentary</p>
-			<br></br>
+			<br/>
+			<p style="font-size: 14px; overflow:auto; text-align: center;">Art demands participation. Motif lets you participate. <br/> 
+			Find art through search and random discovery. Learn from the insight, ideas, <br/> and reactions of peers as you read their comments and annotations. Through <br> annotation, you can add your own perspective and share what you notice. <br/> Go on! Peruse. Interact.</p>
+			<br>
 			
 			<div class="search" style="width:100%;margin-left:auto; margin-right:auto;">
    				<table style = "text-align:center;margin-left:auto; margin-right:auto"><tr><td>
