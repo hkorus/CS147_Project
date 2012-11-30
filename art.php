@@ -26,7 +26,6 @@
 	<script src="jquery.mobile-1.2.0.js"></script>
 	<script src="drawing_canvas.js"></script>
 	
-	<script src="favorite.js"></script>
 	
 	<script src="auth.js"></script>
 	

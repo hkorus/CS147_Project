@@ -66,6 +66,7 @@
 					text = text.substring(loc+1);
 					loc = text.indexOf("|")
 				}
+				if(html == "") html = " No results!"
 				results.innerHTML = html;
 			}
 		}

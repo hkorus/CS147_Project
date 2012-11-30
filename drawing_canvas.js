@@ -79,7 +79,7 @@ function prepareCanvas(url, photo_id){
 	
 	drawing = false;
 	
-	if(localStorage["path"] == "undefined"){
+	if(localStorage["path"] == "undefined" || localStorage["path"] === undefined ||  localStorage["path"] === null ){
 		paths = new Array();
 		curColor = "#000000"
 		lineWidth = 10;

@@ -13,8 +13,7 @@ $fb_user = $facebook->getUser();
 	<title>Annotation</title>
 
 	<script type="text/javascript" src="drawing_canvas.js"></script>
-	<script src="favorite.js"></script>
-
+ 
 
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -51,6 +50,7 @@ if($result!=false){
 		padding:0px;
 		border-collapse:collapse;
 	}
+	
 
 	</style>
 
@@ -126,14 +126,13 @@ function clearComment(element) {
 
 		<div data-role="controlgroup" data-type="horizontal" class="art-buttons">
 			<a href="./art.php?id=<?php echo $row["id"]?>" id="art" data-icon="custom" data-role="button" data-theme="a" rel="external">Art</a></li>
-			<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">View Comments</a>
+			<a href="./comments.php?id=<?php echo $row["id"]?>" id="comments" data-icon="custom" data-role="button" data-theme="a" rel="external">Comments</a>
 			<a  id="annotate" data-icon="custom" data-role="button" data-theme="a" rel="external" style = "background:#B0B0B0">Annotate</a>
 		</div><!-- /controlgroup -->
 
 	</td>
-	<td style = "text-align:right;width:50px;padding:5px">
-		<table style = "text-align:center"><tr><td>
-		
+	<td style = "text-align:right;width:50px">
+
 		<?php 
 
 	if($fb_user){ 
@@ -152,44 +151,65 @@ function clearComment(element) {
 		}else {echo "<img class = 'fav_button' src= 'icons/folio-grey-small.png' onclick = 'send_favorite(".$row['id'].")'>";}
 
 		?>
-		</td></tr>
-		<tr><td>Favorite!</td></tr>
-		</table>
 	</td></tr></table>
-	<table style = "width:99%;border-collapse:collapse;">
+	<br/><br/>
+	<table style = "margin:auto; width:94%;border-collapse:collapse;border:2px solid #B0B0B0;vertical-align:center;text-align:center;">
+		
+		<tr style = 'border-bottom:2px solid #B0B0B0;'>
+			
+			<td style = "background-color:#E0E0E0;vertical-align;text-align: center;">	
+							<table width = '100%' style= 'font-size:15px;vertical-align:center;text-align:center;' >
+							<tr>
+								<td style = "border-right:2px solid #B0B0B0;" onclick = "undo()"><div style = 'padding-top:7px;padding-bottom:7px'>Undo</div></td>
+								<td style = "border-right:2px solid #B0B0B0;border-bottom:2px solid #B0B0B0;"><div style = 'padding-top:7px;padding-bottom:7px'>Brush Size</div></td>
+								<td><div style = 'padding-top:7px;padding-bottom:7px'>Color</div></td>
+								
+							</tr>	
+								
+								<tr>
+							<td style = "border-right:2px solid #B0B0B0;" onclick = "undo()"><img src = "icons/undo.png" width = "50px" ></td>
+
+							<td width = '320px' style = "border-right:2px solid #B0B0B0;">
+								
+								<table style = 'vertical-align:center;text-align:center;'><tr>
+									<td><canvas width = '70px' height = '70px' class="extralarge"  onclick = "changeSize(50)"></canvas></td>
+									<td ><canvas width = '70px' height = '70px' class="large" onclick = "changeSize(20)"></canvas></td>
+									<td style = "background-color:#B0B0B0;"><canvas width = '70px' height = '70px'  class="medium" onclick = "changeSize(10)" ></canvas></td>
+									<td><canvas width = '70px' height = '70px' class="small"  onclick = "changeSize(3)"></canvas></td>
+									
+								</tr></table>
+								</td>
+							<td>
+								<div style = "text-align: center;padding-bottom:20px;"><input name='color' class = "colorPicker" id = 'colorPicker' onchange = "changeColor()"/></div></td></tr></table>
+
+
+
+
+						</td>
+		</tr>
 		<tr>
+			
+			
 			<td>
 				<canvas class="drawingCanvas"></canvas>
 			</td>
-			<td style = "background-color:#E0E0E0;vertical-align;text-align: center;">	
-				<p></p>
-				<div style = 'padding-bottom:10px'>Undo</div>
-				<div><img src = "icons/undo.png" width = "50px" onclick = "undo()"></div>
-				<div style = 'padding-bottom:10px;padding-top:10px'>Brush Size</div>
-				
-				<div><canvas class="extralarge" height = "60px" width = "70px"  onclick = "changeSize(50)"></canvas></div>
-				<div ><canvas class="large" height = "50px" width = "70px"  onclick = "changeSize(20)"></canvas></div>
-				<div><canvas style = "background-color:#B0B0B0;" class="medium" height = "40px" width = "70px"  onclick = "changeSize(10)" ></canvas></div>
-				<div><canvas class="small" height = "30px" width = "70px" onclick = "changeSize(3)"></canvas></div>
-				<div style = 'padding-bottom:10px;padding-top:10px'>Color</div>
-				
-					<div style = "text-align: center;"><input name='color' class = "colorPicker" id = 'colorPicker' onchange = "changeColor()"/></div>
-				</div>
-
-
-
-
-			</td>
+			
 		</tr>
 		<tr>
-			<td style = "background-color:#B0B0B0;padding:7px">
+			<td>
+				<table  width = '100%' style= 'font-size:15px;vertical-align:center;text-align:center;'><tr>
+				<td style = "background-color:#B0B0B0;padding:7px;">
 
-				<textarea class="commentBox" cols="100" rows="100" onclick = "clearComment(this)">Type comments here!</textarea>
-			</td>
-			<td style = "width:70px;background-color:#B0B0B0;vertical-align:center;text-align:center">	
-				<img src = "icons/post-to-motif.png" style="width:60px;height:60px" onclick="saveComment()">
+					<textarea class="commentBox" onclick = "clearComment(this)" style="height:100%;width:100%">Type comments here!</textarea>
+				</td>
+				<td style = "width:90px;background-color:#E0E0E0;vertical-align:center;text-align:center;">	
+					<img src = "icons/post-to-motif.png" style="width:70px;height:70px" onclick="saveComment()">
+				</td>
+				</tr></table>
+			
 			</td>
 		</tr>
+		
 	</table>
 
 	<?php
@@ -250,7 +270,7 @@ if($fb_user) {
 	<div data-role="navbar" class="menubar" data-grid="c">
 		<ul>
 			<li><a href="./home.php" id="home" data-icon="custom" rel="external">Home</a></li>
-			<li><a href="./art.php?prev=<?php echo $_GET['id']?>" id="art" data-icon="custom" rel="external">Random Art</a></li>
+			<li><a href="./art.php" id="art" data-icon="custom" rel="external">Random Art</a></li>
 			<li><a href="./favorites.php" id="favorites" data-icon="custom" rel="external">My Folio</a></li>
 			<li><a href="./help.php" id="help" data-icon="custom" rel="external">Help</a></li>
 		</ul>
