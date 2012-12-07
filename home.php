@@ -23,7 +23,7 @@
 	<link rel="apple-touch-startup-image" href="images/logo.png">
 	<style type="text/css">
 		a:link {
-			COLOR: #FFFFFF; 
+			COLOR: #000000; 
 			text-decoration: none;
 		}
 		a:visited {  
