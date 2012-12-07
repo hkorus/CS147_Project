@@ -80,7 +80,7 @@ function send_favorite(id){
 		}
 		// and status is available. Not recommended, however it works for simple cases.
 	} else {
-		alert("Please login to add art to Favorites");
+		alert("Please login to add art to Favorites!");
 	}
 
 };
@@ -94,7 +94,9 @@ function saveComment(){
 };
 
 function clearComment(element) {
-	element.value = '';
+	if(element.value == "Type comments here!"){ 
+		element.value = '';
+	}
 
 }
 
@@ -131,7 +133,8 @@ function clearComment(element) {
 		</div><!-- /controlgroup -->
 
 	</td>
-	<td style = "text-align:right;width:50px">
+	<td style = "text-align:right;width:50px;">
+		<table style = "text-align:center;margin-left:10px"><tr><td>
 
 		<?php 
 
@@ -151,6 +154,9 @@ function clearComment(element) {
 		}else {echo "<img class = 'fav_button' src= 'icons/folio-grey-small.png' onclick = 'send_favorite(".$row['id'].")'>";}
 
 		?>
+		</td></tr>
+		<tr><td>Favorite!</td></tr>
+		</table>
 	</td></tr></table>
 	<br/><br/>
 	<table style = "margin:auto; width:94%;border-collapse:collapse;border:2px solid #B0B0B0;vertical-align:center;text-align:center;">

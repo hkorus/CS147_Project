@@ -23,6 +23,10 @@
 	<link rel="apple-touch-startup-image" href="images/logo.png">
 	<style type="text/css">
 		a:link {
+			COLOR: #FFFFFF; 
+			text-decoration: none;
+		}
+		.results a:link {
 			COLOR: #000000; 
 			text-decoration: none;
 		}
@@ -32,6 +36,7 @@
 		a:hover {
 			COLOR: grey;
 		}
+	
 	</style>
 	
 	<script src="jquery-1.8.2.min.js"></script>
@@ -53,6 +58,7 @@
 				results.style.border = "1px solid #ccc";
 				var text = request.responseText;
 				var loc = text.indexOf('|');
+				var odd = 0;
 				while(loc!=-1){
 					var one = text.substring(0, loc)
 					var andloc = text.indexOf("&");
@@ -61,12 +67,17 @@
 					}
 					var id = one.substring(0, andloc);
 					var info = one.substring(andloc+1);
-					html+= "<a href= 'art.php?id="+id+"' rel='external'><div style = 'background:#D8D8D8'>"+info+"<br/></div></a>";
+					var color = "#D8D8D8"
+					if(odd%2==1){
+					   color = "#F0F0F0"
+					}
+					html+= "<a href= 'art.php?id="+id+"' rel='external'><div style = 'background:"+color+";font-size:20px'>"+info+"<br/></div></a>";
 					
 					text = text.substring(loc+1);
 					loc = text.indexOf("|")
+					odd++;
 				}
-				if(html == "") html = " No results!"
+				if(html == "") html = "<div style = 'font-size:20px'>No results!</div>"
 				results.innerHTML = html;
 			}
 		}
@@ -114,7 +125,7 @@
 						<input type="text" id = "term" name="term" class = "term" onkeyup = "isEnter()" style="width:400px;"/></td><td>	
 							<input type="submit" name="submit" value="Search!" onclick = "search()"/></td></tr>
 					</table>
-					<div class = "results" style="width:500px;height:120px;font:14px Courier; overflow:auto;margin-left:auto; margin-right:auto">
+					<div class = "results" style="width:500px;height:120px;font:14px Courier; overflow:auto;margin-left:auto; margin-right:auto;">
 
 					</div>
 			</div><!-- /search -->

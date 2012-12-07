@@ -168,12 +168,12 @@
 			<tr>
 				<td>
 					<div>
-						<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 30px;text-decoration:underline;font-weight:bold;'>Favorites</p>
+						<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 30px;font-weight:bold;'>Favorites</p>
 					</div>
 				</td>
 				<td width = '40px'></td>
 				<td> 
-					<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 20px;'><a href="./user_comments.php" rel="external" style = 'text-decoration:none;font-weight:normal;color:#000000'>My Comments</a></p>
+					<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 20px;'><a href="./user_comments.php" rel="external" style = 'text-decoration:none;font-weight:normal;color:#0000FF;text-decoration:underline;'>My Comments</a></p>
 					</td>
 			</tr>
 		</table>

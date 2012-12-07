@@ -111,12 +111,12 @@
 			<tr>
 				<td>
 					<div>
-						<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 20px;'><a href="./favorites.php" rel="external" style = 'text-decoration:none;font-weight:normal;color:#000000'>Favorites</a></p>
+						<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 20px;'><a href="./favorites.php" rel="external" style = 'text-decoration:none;font-weight:normal;color:#0000FF;text-decoration:underline;'>Favorites</a></p>
 					</div>
 				</td>
 				<td width = '40px'></td>
 				<td> 
-					<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 30px;text-decoration:underline;font-weight:bold;'>My Comments</p>
+					<p style='margin-left:10px;font-family: Courier, san-serif; font-size: 30px;font-weight:bold;'>My Comments</p>
 					</td>
 			</tr>
 		</table>
